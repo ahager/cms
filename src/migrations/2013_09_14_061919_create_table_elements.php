@@ -19,7 +19,7 @@ class CreateTableElements extends Migration {
 			$table->string('name', 50);
 			$table->string('label', 50);
 			$table->text('text');
-			$table->integer('zone');
+			$table->string('zone', 10);
 			$table->integer('author_id');
 			$table->boolean('is_valid');
 			$table->timestamps();

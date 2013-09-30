@@ -89,7 +89,12 @@ return array(
 
 		'page' => array(
 
-			'bar_title' => 'Page manager',
+			'bar_title' 		=> 'Page manager',
+			'layout_title' 		=> 'Layout',
+			'seo_title'		 	=> 'Seo',
+			'media_title' 		=> 'Media',
+			'linked_title' 		=> 'Linked pages',
+			'settings_title' 	=> 'Settings',
 
 		),
 
@@ -108,7 +113,25 @@ return array(
 				'may_contain'	=> 'What can contain?',
 				'name' 			=> 'Page name',
 				'set_hp' 		=> 'Home Page',
-				'slug' 			=> 'Url slug',
+				'slug' 			=> 'Page slug',
+				'slug_preview'	=> 'Slug preview',
+
+			),
+
+			'layout' => array(
+
+				'template'		=> 'Page template',
+				'header'		=> 'Page header',
+				'layout'		=> 'Page layout',
+				'footer'		=> 'Page footer',
+
+			),
+
+			'seo'	=> array(
+
+				'title'	=> 'Titolo della pagina',
+				'keyw'	=> 'Keywords della pagina',
+				'descr'	=> 'Descrizione della pagina',
 
 			),
 

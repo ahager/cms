@@ -2,7 +2,8 @@
 
 use Pongo\Cms\Support\Repositories\PageRepositoryEloquent as Page;
 use Pongo\Cms\Support\Repositories\RoleRepositoryEloquent as Role;
-use Config, Render;
+
+use Config, Theme, Render;
 
 class PageController extends BaseController {
 
@@ -21,9 +22,32 @@ class PageController extends BaseController {
 		return Render::view('sections.page.deleted');
 	}
 
-	public function layoutPage()
+	public function layoutPage($id)
 	{
+		// Share page id with all views
+		\View::share('pageid', $id);
 
+		$page = $this->page->getPage($id);
+
+		$n_elements = $this->page->countPageElements($page);
+
+		$view = Render::view('sections.page.layout');
+		$view['section']	= 'layout';
+		$view['id'] 		= $id;
+		$view['name'] 		= $page->name;
+		$view['templates']	= Theme::config('template');
+		$view['headers']	= Theme::config('header');
+		$view['layouts']	= Theme::config('layout');
+		$view['footers']	= Theme::config('footer');
+
+		$view['n_elements'] = $n_elements;
+
+		$view['template_selected'] 	= $page->template;
+		$view['header_selected'] 	= $page->header;
+		$view['layout_selected'] 	= $page->layout;
+		$view['footer_selected'] 	= $page->footer;
+
+		return $view;
 	}
 
 	public function linkPage()
@@ -36,9 +60,26 @@ class PageController extends BaseController {
 		
 	}
 
-	public function seoPage()
+	public function seoPage($id)
 	{
-		
+		// Share page id with all views
+		\View::share('pageid', $id);
+
+		$page = $this->page->getPage($id);
+
+		$n_elements = $this->page->countPageElements($page);
+
+		$view = Render::view('sections.page.seo');
+		$view['section']	= 'seo';
+		$view['id'] 		= $id;
+		$view['name'] 		= $page->name;
+		$view['title']		= $page->title;
+		$view['keyw']		= $page->keyw;
+		$view['descr']		= $page->descr;
+
+		$view['n_elements'] = $n_elements;
+
+		return $view;
 	}
 
 	/**
@@ -49,10 +90,12 @@ class PageController extends BaseController {
 	 */
 	public function settingsPage($id)
 	{
+		// Share page id with all views
+		\View::share('pageid', $id);
+
 		$page = $this->page->getPage($id);
 
 		// Available roles
-		// $roles = Role::orderBy('level', 'asc')->get();
 		$roles = $this->role->orderBy('level', 'asc');
 
 		// Role admin array
@@ -60,9 +103,6 @@ class PageController extends BaseController {
 
 		// Count element per page
 		$n_elements = $this->page->countPageElements($page);
-
-		// Share page id with all views
-		\View::share('pageid', $id);
 
 		$view = Render::view('sections.page.settings');
 		$view['section']	= 'settings';

@@ -10,19 +10,19 @@
 		
 		<ul class="options list-unstyled">
 			<li{{active('settings', $section)}}>
-				<a href="{{route('page.settings', array('id' => $id))}}">Settings</a>
+				<a href="{{route('page.settings', array('id' => $id))}}">{{t('heading.page.settings_title')}}</a>
 			</li>
 			<li{{active('layout', $section)}}>
-				<a href="{{route('page.layout', array('id' => $id))}}">Layout</a>
+				<a href="{{route('page.layout', array('id' => $id))}}">{{t('heading.page.layout_title')}}</a>
 			</li>
 			<li{{active('seo', $section)}}>
-				<a href="{{route('page.seo', array('id' => $id))}}">Seo</a>
+				<a href="{{route('page.seo', array('id' => $id))}}">{{t('heading.page.seo_title')}}</a>
 			</li>
 			<li{{active('media', $section)}}>
-				<a href="{{route('page.media', array('id' => $id))}}">Media</a>
+				<a href="{{route('page.media', array('id' => $id))}}">{{t('heading.page.media_title')}}</a>
 			</li>
 			<li{{active('link', $section)}}>
-				<a href="{{route('page.link', array('id' => $id))}}">Linked pages</a>
+				<a href="{{route('page.link', array('id' => $id))}}">{{t('heading.page.linked_title')}}</a>
 			</li>
 		</ul>
 

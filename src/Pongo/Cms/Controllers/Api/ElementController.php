@@ -29,7 +29,7 @@ class ElementController extends ApiController {
 				'name' => snake_case($label),
 				'label' => $label,
 				'text' => '',
-				'zone' => 0,
+				'zone' => 'ZONE1',
 				'author_id' => USERID,
 				'is_valid' => 0
 			);

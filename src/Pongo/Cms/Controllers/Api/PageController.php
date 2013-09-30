@@ -299,6 +299,86 @@ class PageController extends ApiController {
 		return true;
 	}
 
+	public function pageLayoutSave()
+	{
+		$input = Input::all();
+
+		if(!is_empty($input)) {
+
+			extract($input);
+			
+			$page = $this->page->getPage($page_id);
+
+			// Author can edit the page
+			if(is_array($unauth = Pongo::grantEdit($page->role_level)))
+				return json_encode($unauth);
+
+			$page->template = $template;
+			$page->header 	= $header;
+			$page->layout 	= $layout;
+			$page->footer 	= $footer;
+
+			$this->page->savePage($page);
+
+			$response = array(
+				'status' 	=> 'success',
+				'msg'		=> t('alert.success.save'),
+			);
+
+		} else {
+
+			$response = array(
+				'status' 	=> 'error',
+				'msg'		=> t('alert.error.save'),
+			);
+
+		}
+
+		return json_encode($response);
+	}
+
+	/**
+	 * Save page SEO form
+	 * 
+	 * @return string json encoded object
+	 */
+	public function pageSeoSave()
+	{
+		$input = Input::all();
+
+		if(!is_empty($input)) {
+
+			extract($input);
+			
+			$page = $this->page->getPage($page_id);
+
+			// Author can edit the page
+			if(is_array($unauth = Pongo::grantEdit($page->role_level)))
+				return json_encode($unauth);
+
+			$page->title 	= $title;
+			$page->keyw 	= $keyw;
+			$page->descr 	= $descr;
+
+			$this->page->savePage($page);
+
+			$response = array(
+				'status' 	=> 'success',
+				'msg'		=> t('alert.success.save'),
+			);
+
+		} else {
+
+			$response = array(
+				'status' 	=> 'error',
+				'msg'		=> t('alert.error.save'),
+			);
+
+		}
+
+		return json_encode($response);
+	}
+
 	/**
 	 * Save page settings form
 	 * 

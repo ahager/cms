@@ -14,28 +14,35 @@
 
 @section('footer-js')
 	@parent
-	{{Render::asset('scripts/viewmodels/page/settings.js')}}
+	{{Render::asset('scripts/vm/page/settings.js')}}
 @stop
 
 @section('content')
+	
+	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
 
 	<form role="form" id="page-settings-form">
 		<input type="hidden" name="page_id" value="{{$id}}">
 		<div class="form-group" rel="name">
 			<label for="name" class="control-label">{{t('label.page.settings.name')}}</label>
-			<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: pageName, valueUpdate: 'keyup'">
+			<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: pageName, valueUpdate: 'afterkeydown'">
 		</div>
 		<div class="form-group" rel="slug_last">
 			<label for="slug_last" class="control-label">{{t('label.page.settings.slug')}}</label>
 			<div class="input-group">
-				<span class="input-group-addon">/</span>
-				<input type="text" name="slug_last" class="form-control" id="slug_last" value="{{$slug_last}}" data-bind="value: slugLast, valueUpdate: 'keyup'">
+				<input type="text" name="slug_last" class="form-control" id="slug_last" value="{{$slug_last}}" data-bind="value: slugLast, valueUpdate: 'afterkeydown'">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default button" data-bind="click: createSlug">{{t('label.page.settings.create_slug')}}</button>
 				</span>
 			</div>
 			<input type="hidden" name="slug_base" id="slug_base" value="{{$slug_base}}">
 		</div>
+
+		<div class="form-group">
+			<label for="slug_last" class="control-label">{{t('label.page.settings.slug_preview')}}</label>
+			<input type="text" name="slug_last" class="form-control" id="slug_last" data-bind="value: slugFull" disabled>
+		</div>
+
 		<div class="form-group">
 			<label for="wrapper_id" class="control-label">{{t('label.page.settings.may_contain')}}</label>
 			<select name="wrapper_id" class="form-control" id="wrapper_id">

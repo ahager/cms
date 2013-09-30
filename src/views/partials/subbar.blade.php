@@ -5,7 +5,6 @@
 
 			<h2>
 				<span data-bind="text: pageName">{{$name}}</span>
-				<div>URL:<span class="slug-full" data-bind="text: slugFull"></span></div>
 			</h2>
 
 		</div>

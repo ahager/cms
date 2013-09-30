@@ -89,7 +89,8 @@ return array(
 
 		'page' => array(
 
-			'bar_title' => 'Gestione pagine',
+			'bar_title' 		=> 'Gestione pagine',
+			'settings_title' 	=> 'Impostazioni',
 
 		),
 
@@ -108,7 +109,25 @@ return array(
 				'may_contain'	=> 'Cosa potrà contenere?',
 				'name' 			=> 'Nome pagina',
 				'set_hp' 		=> 'Home Page',
-				'slug' 			=> 'Slug indirizzo',
+				'slug' 			=> 'Indirizzo pagina',
+				'slug_preview'	=> 'Indirizzo completo',
+
+			),
+
+			'layout' => array(
+
+				'template'		=> 'Template di pagina',
+				'header'		=> 'Header di pagina',
+				'layout'		=> 'Layout di pagina',
+				'footer'		=> 'Footer di pagina',
+
+			),
+
+			'seo'	=> array(
+
+				'title'	=> 'Page title',
+				'keyw'	=> 'Page keywords',
+				'descr'	=> 'Page decription',
 
 			),
 

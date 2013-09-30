@@ -75,6 +75,27 @@ if ( ! function_exists('t'))
 	}
 }
 
+if ( ! function_exists('st'))
+{
+	/**
+	 * Translate the given message accordingly with active locale in Site Theme
+	 *
+	 * @param  string  $id
+	 * @param  array   $parameters
+	 * @return string
+	 */
+	function st($id, $parameters = array(), $locale = null)
+	{
+		$domain = 'messages';
+		
+		$locale = is_null($locale) ? Config::get('cms::settings.language') : $locale;
+
+		$str = "site::lang.{$id}";
+
+		return app('translator')->trans($str, $parameters, $domain, $locale);
+	}
+}
+
 /**
  * SYSTEM
  */

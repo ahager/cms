@@ -49,6 +49,7 @@
 	{{Render::asset('scripts/pongo.js')}}
 	@section('footer-js')
 	{{Render::asset('scripts/main.js')}}
+	{{Render::asset('scripts/vm/pongovm.js')}}
 	@show
 	{{Render::scripts('footer')}}
 	{{Render::asset('bower_components/bootstrap/js/affix.js')}}

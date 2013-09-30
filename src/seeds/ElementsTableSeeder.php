@@ -17,7 +17,7 @@ class ElementsTableSeeder extends Seeder {
 				'name' => 'element_1',
 				'label' => 'Element name 1',
 				'text' => 'Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Maecenas faucibus mollis interdum.',
-				'zone' => 1,
+				'zone' => 'ZONE1',
 				'author_id' => 1,
 				'is_valid' => 1
 			),
@@ -28,7 +28,7 @@ class ElementsTableSeeder extends Seeder {
 				'name' => 'element_2',
 				'label' => 'Element name 2',
 				'text' => 'Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Maecenas faucibus mollis interdum.',
-				'zone' => 1,
+				'zone' => 'ZONE1',
 				'author_id' => 1,
 				'is_valid' => 1
 			),
@@ -39,7 +39,7 @@ class ElementsTableSeeder extends Seeder {
 				'name' => 'element_3',
 				'label' => 'Element name 3',
 				'text' => 'Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Maecenas faucibus mollis interdum.',
-				'zone' => 1,
+				'zone' => 'ZONE1',
 				'author_id' => 1,
 				'is_valid' => 1
 			),
@@ -50,7 +50,7 @@ class ElementsTableSeeder extends Seeder {
 				'name' => 'element_1_it',
 				'label' => 'Nome elemento 1',
 				'text' => 'Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam id dolor id nibh ultricies vehicula ut id elit. Nulla vitae elit libero, a pharetra augue.',
-				'zone' => 1,
+				'zone' => 'ZONE1',
 				'author_id' => 1,
 				'is_valid' => 1
 			),
@@ -61,7 +61,7 @@ class ElementsTableSeeder extends Seeder {
 				'name' => 'element_2_it',
 				'label' => 'Nome elemento 2',
 				'text' => 'Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam id dolor id nibh ultricies vehicula ut id elit. Nulla vitae elit libero, a pharetra augue.',
-				'zone' => 1,
+				'zone' => 'ZONE1',
 				'author_id' => 1,
 				'is_valid' => 1
 			),
@@ -72,7 +72,7 @@ class ElementsTableSeeder extends Seeder {
 				'name' => 'element_3_it',
 				'label' => 'Nome elemento 3',
 				'text' => 'Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam id dolor id nibh ultricies vehicula ut id elit. Nulla vitae elit libero, a pharetra augue.',
-				'zone' => 1,
+				'zone' => 'ZONE1',
 				'author_id' => 1,
 				'is_valid' => 1
 			)
