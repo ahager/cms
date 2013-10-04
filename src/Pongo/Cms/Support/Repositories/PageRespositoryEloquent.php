@@ -75,6 +75,11 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 		return $page->save();
 	}
 
+	public function savePageFile($page, $file)
+	{
+		return $page->files()->save($file);
+	}
+
 	public function savePageElement($page, $element, $order)
 	{
 		return $page->elements()->save($element, array('order_id' => $order));

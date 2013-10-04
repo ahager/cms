@@ -107,6 +107,18 @@ return array(
 
 		),
 
+		'Image' => array(
+
+			'class'	=> 'Pongo\Cms\Classes\Image',
+			'alias'	=> 'Pongo\Cms\Support\Facades\Image',
+			'repos' => array(
+				
+				'PHPImageWorkshop\ImageWorkshop',
+
+			),
+
+		),
+
 		'Marker' => array(
 
 			'class'	=> 'Pongo\Cms\Classes\Marker',
@@ -171,11 +183,19 @@ return array(
 	
 	'repositories' => array(
 
-		'user' => array(
+		'element' => array(
 
 			'method'		=> 'singleton',
-			'interface' 	=> 'Pongo\Cms\Support\Repositories\UserRepositoryInterface',
-			'repository' 	=> 'Pongo\Cms\Support\Repositories\UserRepositoryEloquent',
+			'interface' 	=> 'Pongo\Cms\Support\Repositories\ElementRepositoryInterface',
+			'repository' 	=> 'Pongo\Cms\Support\Repositories\ElementRepositoryEloquent',
+
+		),
+		
+		'file' => array(
+
+			'method'		=> 'singleton',
+			'interface' 	=> 'Pongo\Cms\Support\Repositories\FileRepositoryInterface',
+			'repository' 	=> 'Pongo\Cms\Support\Repositories\FileRepositoryEloquent',
 
 		),
 
@@ -185,21 +205,21 @@ return array(
 			'interface' 	=> 'Pongo\Cms\Support\Repositories\PageRepositoryInterface',
 			'repository' 	=> 'Pongo\Cms\Support\Repositories\PageRepositoryEloquent',
 
-		),
-
-		'element' => array(
-
-			'method'		=> 'singleton',
-			'interface' 	=> 'Pongo\Cms\Support\Repositories\ElementRepositoryInterface',
-			'repository' 	=> 'Pongo\Cms\Support\Repositories\ElementRepositoryEloquent',
-
-		),
+		),		
 
 		'role' => array(
 
 			'method'		=> 'singleton',
 			'interface' 	=> 'Pongo\Cms\Support\Repositories\RoleRepositoryInterface',
 			'repository' 	=> 'Pongo\Cms\Support\Repositories\RoleRepositoryEloquent',
+
+		),
+
+		'user' => array(
+
+			'method'		=> 'singleton',
+			'interface' 	=> 'Pongo\Cms\Support\Repositories\UserRepositoryInterface',
+			'repository' 	=> 'Pongo\Cms\Support\Repositories\UserRepositoryEloquent',
 
 		),
 

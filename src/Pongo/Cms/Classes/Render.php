@@ -1,6 +1,6 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Pongo\Cms\Support\Repositories\PageRepositoryEloquent as Page;
+use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 
 use Asset, HTML, View;
 

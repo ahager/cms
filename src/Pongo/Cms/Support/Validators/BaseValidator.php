@@ -1,6 +1,8 @@
 <?php namespace Pongo\Cms\Support\Validators;
 
-abstract class Validator {
+use Input, Validator;
+
+abstract class BaseValidator {
 
 	/**
 	 * Incoming POST data
@@ -17,15 +19,23 @@ abstract class Validator {
 	public $errors;
 
 	/**
+	 * Validation messages
+	 * 
+	 * @var array
+	 */
+	public static $messages;
+
+	/**
 	 * Validations rules
 	 * 
 	 * @var array
 	 */
 	public static $rules;
 
+
 	public function __construct($input = null)
 	{
-		$this->input = $input ?: \Input::all();
+		$this->input = $input ? $input : Input::all();
 	}
 
 	/**
@@ -47,7 +57,7 @@ abstract class Validator {
 
 		return array(
 			'status' 	=> 'error',
-			'msg'		=> t('alert.error.validator'),
+			'msg'		=> t('alert.error.input_validator'),
 			'errors'	=> $error_msg
 		);
 	}
@@ -69,13 +79,37 @@ abstract class Validator {
 	 */
 	public function passes()
 	{
-		$validation = \Validator::make($this->input, static::$rules);
+		$validation = Validator::make($this->input, static::$rules, static::$messages);
 
 		if ($validation->passes()) return true;
 
 		$this->errors = $validation->messages();
 
 		return false;
+	}
+
+	/**
+	 * Format upload errors array
+	 * 
+	 * @return array
+	 */
+	public function uploadErrors()
+	{
+		$errors = $this->errors;
+
+		foreach (static::$rules as $name => $rule) {
+
+			if($errors->has($name)) {
+				$error_msg[$name] = $errors->first($name);	
+			}			
+
+		}
+
+		return array(
+			'status' 	=> 'error',
+			'icon'		=> 'icon-remove error',
+			'errors'	=> $error_msg
+		);
 	}
 
 }

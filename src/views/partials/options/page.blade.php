@@ -18,8 +18,8 @@
 			<li{{active('seo', $section)}}>
 				<a href="{{route('page.seo', array('id' => $id))}}">{{t('heading.page.seo_title')}}</a>
 			</li>
-			<li{{active('media', $section)}}>
-				<a href="{{route('page.media', array('id' => $id))}}">{{t('heading.page.media_title')}}</a>
+			<li{{active('files', $section)}}>
+				<a href="{{route('page.files', array('id' => $id))}}">{{t('heading.page.files_title')}}</a>
 			</li>
 			<li{{active('link', $section)}}>
 				<a href="{{route('page.link', array('id' => $id))}}">{{t('heading.page.linked_title')}}</a>

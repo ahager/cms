@@ -24,6 +24,8 @@ interface PageRepositoryInterface {
 
 	public function savePage($page);
 
+	public function savePageFile($page, $file);
+
 	public function savePageElement($page, $element, $order);
 	
 }

@@ -22,7 +22,9 @@
 							<label for="password">Password</label>
 							<input type="password" class="form-control" name="password" placeholder="Enter your password">
 						</div>
-						<button type="button" class="btn btn-primary btn-block">login</button>
+						<div class="form-group">
+							<button type="button" class="btn btn-primary btn-block">login</button>
+						</div>
 					{{Form::close()}}
 
 				</div>

@@ -27,7 +27,7 @@ return array(
 			'save'				=> 'Unable to save',
 			'session_exp'		=> 'Session expired, please login!',
 			'unauthorized'		=> 'Unauthorized access, please login!',
-			'validator'			=> 'Check form fields!',
+			'input_validator'	=> 'Check form fields!',
 
 		),
 
@@ -49,12 +49,14 @@ return array(
 		'button' => array(
 
 			'cancel'	=> 'Cancel',
+			'choose'	=> 'Select file',
 			'clone'		=> 'Clone',
 			'element' 	=> 'Element',
 			'delete'	=> 'Delete',
 			'ok'		=> 'Ok',
 			'page' 		=> 'Page',
 			'save'		=> 'Save',
+			'upload'	=> 'Upload',
 
 		),
 
@@ -92,7 +94,7 @@ return array(
 			'bar_title' 		=> 'Page manager',
 			'layout_title' 		=> 'Layout',
 			'seo_title'		 	=> 'Seo',
-			'media_title' 		=> 'Media',
+			'files_title' 		=> 'Files',
 			'linked_title' 		=> 'Linked pages',
 			'settings_title' 	=> 'Settings',
 
@@ -135,6 +137,13 @@ return array(
 
 			),
 
+			'files'	=> array(
+
+				'max_upload' 	=> 'Maximum upload size',
+				'mimes' 		=> 'Allowed file formats',
+
+			),
+
 		),
 
 	),
@@ -160,6 +169,19 @@ return array(
 		'page' => array(
 
 			'new'			=> 'New page',
+
+		),
+
+	),
+
+	'validation' => array(
+
+		'errors' => array(
+
+			'file_mimes'	=> 'This file extension is not allowed.',
+			'unique_file' 	=> 'This file name is already present.',
+			'file_size'		=> 'The file size exceeds maximum allowed.',
+			'required' 		=> 'The :attribute field is required.',
 
 		),
 

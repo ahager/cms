@@ -1,8 +1,8 @@
 <?php namespace Pongo\Cms\Models;
 
-use LaravelBook\Ardent\Ardent;
+use Eloquent;
 
-class File extends Ardent {
+class File extends Eloquent {
 	
 	/**
 	 * The database table used by the model.
@@ -12,47 +12,28 @@ class File extends Ardent {
 	protected $table = 'files';
 
 	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	// protected $hidden = array('password');
-
-	/**
-	 * Allowed mass assignment columns
-	 * 
-	 * @var array
-	 */
-	// protected $fillable = array('username', 'email');
-
-	/**
-	 * Danied mass assignment columns
-	 * 
-	 * @var array
-	 */
-	// protected $guarded = array('id', 'password');
-
-	/* ARDENT */
-
-	/**
-	 * Ardent clear redundant attributes
+	 * Timestamp needed
 	 * 
 	 * @var boolean
 	 */
-	public $autoPurgeRedundantAttributes = true;
+	public $timestamps = true;
 
 	/**
-	 * Ardent validation rules
+	 * Guarded mass-assignment property
 	 * 
 	 * @var array
 	 */
-	public static $rules = array(
+	protected $guarded = array('id');
 
-		/*'username' 				=> 'required|between:4,16',
-		'email'					=> 'required|email',
-		'password'				=> 'required|alpha_num|between:4,8|confirmed',
-		'password_confirmation' => 'required|alpha_num|between:4,8'*/
-
-	);
+	/**
+	 * Pages relationship
+	 * Each file has many and belongs to many pages
+	 * 
+	 * @return mixed
+	 */
+	public function pages()
+	{
+		return $this->belongsToMany('Pongo\Cms\Models\Page');
+	}
 
 }

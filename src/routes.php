@@ -26,7 +26,7 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	Route::get('page/settings/{id}', array('uses' => $pongoControllers.'PageController@settingsPage', 'as' => 'page.settings'));
 	Route::get('page/layout/{id}', array('uses' => $pongoControllers.'PageController@layoutPage', 'as' => 'page.layout'));
 	Route::get('page/seo/{id}', array('uses' => $pongoControllers.'PageController@seoPage', 'as' => 'page.seo'));
-	Route::get('page/media/{id}', array('uses' => $pongoControllers.'PageController@mediaPage', 'as' => 'page.media'));
+	Route::get('page/files/{id}', array('uses' => $pongoControllers.'PageController@filesPage', 'as' => 'page.files'));
 	Route::get('page/link/{id}', array('uses' => $pongoControllers.'PageController@linkPage', 'as' => 'page.link'));
 	Route::get('page/deleted', array('uses' => $pongoControllers.'PageController@deletedPage', 'as' => 'page.deleted'));
 
@@ -60,6 +60,9 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 
 		// SEO
 		Route::any('page/seo/save', array('uses' => $apiControllers.'PageController@pageSeoSave', 'as' => 'api.page.seo.save'));
+
+		// FILES
+		Route::any('page/files/upload', array('uses' => $apiControllers.'UploadController@pageFilesUpload', 'as' => 'api.page.files.upload'));
 
 	// ELEMENT
 	Route::any('element/order', array('uses' => $apiControllers.'ElementController@orderElements', 'as' => 'api.element.order'));

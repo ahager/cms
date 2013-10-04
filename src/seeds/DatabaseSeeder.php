@@ -12,11 +12,15 @@ class DatabaseSeeder extends Seeder {
 		// Disable mass-assignment protection
 		Eloquent::unguard();
 
-		$this->call('UsersTableSeeder');
-		$this->call('RolesTableSeeder');
-		$this->call('PagesTableSeeder');
+		
 		$this->call('ElementsTableSeeder');
 		$this->call('ElementPageTableSeeder');
+		$this->call('FilesTableSeeder');
+		$this->call('FilePageTableSeeder');
+		$this->call('PagesTableSeeder');
+		$this->call('RolesTableSeeder');
+		$this->call('UsersTableSeeder');		
+		
 
 		$this->command->info('PongoCMS seeded!');
 	}

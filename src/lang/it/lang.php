@@ -27,7 +27,7 @@ return array(
 			'save'				=> 'Errore di salvataggio',
 			'session_exp'		=> 'Sessione scaduta, esegui login!',
 			'unauthorized'		=> 'Accesso non autorizzato, esegui login!',
-			'validator'			=> 'Verifica i dati inseriti!',
+			'input_validator'	=> 'Verifica i dati inseriti!',
 
 		),
 
@@ -49,12 +49,14 @@ return array(
 		'button' => array(
 
 			'cancel'	=> 'Annulla',
+			'choose'	=> 'Seleziona file',
 			'clone'		=> 'Clona',
 			'element' 	=> 'Elemento',
 			'delete'	=> 'Elimina',
 			'ok'		=> 'Ok',
 			'page' 		=> 'Pagina',
 			'save'		=> 'Salva',
+			'upload'	=> 'Carica',
 
 		),
 
@@ -90,6 +92,10 @@ return array(
 		'page' => array(
 
 			'bar_title' 		=> 'Gestione pagine',
+			'layout_title' 		=> 'Layout',
+			'seo_title'		 	=> 'Seo',
+			'files_title' 		=> 'Files',
+			'linked_title' 		=> 'Pagine collegate',
 			'settings_title' 	=> 'Impostazioni',
 
 		),
@@ -131,6 +137,13 @@ return array(
 
 			),
 
+			'files'	=> array(
+
+				'max_upload' => 'Dimensione massima',
+				'mimes' => 'Formati consentiti',
+
+			),	
+
 		),
 
 	),
@@ -156,6 +169,19 @@ return array(
 		'page' => array(
 
 			'new'			=> 'Nuova pagina',
+
+		),
+
+	),
+
+	'validation' => array(
+
+		'errors' => array(
+
+			'file_mimes'	=> 'Il formato del file non è consentito.',
+			'unique_file' 	=> 'Questo file è già presente nel sistema.',
+			'file_size'		=> 'Questo file è superiore al limite consentito.',
+			'required' 		=> 'Il campo :attribute è obbligatorio.',
 
 		),
 

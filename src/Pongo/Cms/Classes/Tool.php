@@ -4,11 +4,6 @@ use Config;
 
 class Tool {
 
-	public function __construct()
-	{
-
-	}
-
 	/**
 	 * Create array of admin roles
 	 * 
@@ -33,6 +28,69 @@ class Tool {
 	}
 
 	/**
+	 * Get file extension
+	 * 
+	 * @param  string $file
+	 * @return string
+	 */
+	public function fileExtension($filename)
+	{
+		$temp = explode('.', $filename);
+		return end($temp);
+	}
+
+	/**
+	 * Format a file name
+	 * 
+	 * @param  string $file
+	 * @return string
+	 */
+	public function formatFile($filename)
+	{
+		$temp = explode('.', $filename);
+		$extension = end($temp);
+		$temp_name = $temp[0];
+
+		return \Str::slug($temp_name, '_') . '.' . $extension;
+	}
+
+	/**
+	 * Format a thumb file name
+	 *
+	 * $thumb must be one of the site::theme.thumb keys
+	 * 
+	 * @param  string $file
+	 * @param  string $thumb
+	 * @return string
+	 */
+	public function formatFileThumb($filename, $thumb = 'cms')
+	{
+		$temp = explode('.', $filename);
+		$extension = end($temp);
+		$temp_name = $temp[0];
+
+		return \Str::slug($temp_name, '_') . '_' . $thumb . '.' . $extension;
+	}
+
+	/**
+	 * Get folder name where to copy uploaded file
+	 * 
+	 * @param  string $filename
+	 * @return string
+	 */
+	public function getFolderName($filename)
+	{
+		if($this->isImage($filename)) {
+
+			return 'img/';
+
+		} else {
+
+			return $this->fileExtension($filename) . '/';
+		}
+	}
+
+	/**
 	 * Print out class=active if true
 	 * 
 	 * @param  string $var 
@@ -54,6 +112,32 @@ class Tool {
 	public function isChecked($var, $fix)
 	{
 		return ($var == $fix) ? ' checked="checked"' : '';
+	}
+
+	/**
+	 * Check if file is not an Image
+	 * 
+	 * @param  string  $filename
+	 * @return boolean
+	 */
+	public function isFile($filename)
+	{
+		return ($this->isImage($filename)) ? false : true;
+	}
+
+	/**
+	 * Check if file is a Image
+	 * 
+	 * @param  string  $filename
+	 * @return boolean
+	 */
+	public function isImage($filename)
+	{
+		$images = array('bmp', 'gif', 'jpg', 'jpeg', 'png');
+
+		$ext = $this->fileExtension($filename);
+
+		return (in_array($ext, $images)) ? true : false;
 	}
 
 	/**

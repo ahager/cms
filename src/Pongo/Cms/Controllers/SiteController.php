@@ -1,7 +1,7 @@
 <?php namespace Pongo\Cms\Controllers;
 
 use Pongo\Cms\Classes\Pongo;
-use Pongo\Cms\Support\Repositories\PageRepositoryEloquent as Page;
+use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Config, Render, Theme;
 
 class SiteController extends BaseController {

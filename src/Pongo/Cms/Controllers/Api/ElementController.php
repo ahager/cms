@@ -1,7 +1,7 @@
 <?php namespace Pongo\Cms\Controllers\Api;
 
-use Pongo\Cms\Support\Repositories\PageRepositoryEloquent as Page;
-use Pongo\Cms\Support\Repositories\ElementRepositoryEloquent as Element;
+use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
+use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 use Config, DB, Input, Session, Str;
 
 class ElementController extends ApiController {

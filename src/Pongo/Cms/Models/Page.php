@@ -39,6 +39,17 @@ class Page extends Eloquent {
 	}
 
 	/**
+	 * Files relationship
+	 * Each page has many and belongs to many files
+	 * 
+	 * @return mixed
+	 */
+	public function files()
+	{
+		return $this->belongsToMany('Pongo\Cms\Models\File');
+	}
+
+	/**
 	 * Author relationship
 	 * Each page has one author
 	 * 

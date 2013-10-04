@@ -1,7 +1,7 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Pongo\Cms\Support\Repositories\PageRepositoryEloquent as Page;
-use Pongo\Cms\Support\Repositories\RoleRepositoryEloquent as Role;
+use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
+use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
 use Config, Theme, Render;
 
@@ -55,9 +55,25 @@ class PageController extends BaseController {
 		
 	}
 
-	public function mediaPage()
+	public function filesPage($id)
 	{
+		// Share page id with all views
+		\View::share('pageid', $id);
+
+		$page = $this->page->getPage($id);
+
+		$n_elements = $this->page->countPageElements($page);
+
+		$view = Render::view('sections.page.files');
+		$view['section']	= 'files';
+		$view['id'] 		= $id;
+		$view['name'] 		= $page->name;
 		
+
+
+		$view['n_elements'] = $n_elements;
+
+		return $view;
 	}
 
 	public function seoPage($id)
