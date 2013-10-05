@@ -1,7 +1,7 @@
 @extends('cms::layouts.base')
 
 @section('element-bar')
-	@include('cms::partials.elementbar')
+	@include('cms::partials.rightbars.elementbar')
 @stop
 
 @section('option-bar')
@@ -9,7 +9,7 @@
 @stop
 
 @section('subbar')
-	@include('cms::partials.subbar')
+	@include('cms::partials.subbars.element')
 @stop
 
 @section('footer-js')
@@ -23,7 +23,6 @@
 
 	<form role="form" id="page-layout-form">
 		<input type="hidden" name="page_id" value="{{$id}}">
-
 		<div class="form-group">
 			<label for="template" class="control-label">{{t('label.page.layout.template')}}</label>
 			<select name="template" class="form-control" id="template">

@@ -16,6 +16,7 @@ class CreateTableFiles extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 100);
+			$table->string('original', 100);
 			$table->string('ext', 10);
 			$table->integer('size');
 			$table->integer('w');

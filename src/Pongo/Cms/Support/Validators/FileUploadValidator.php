@@ -2,7 +2,7 @@
 
 use Pongo\Cms\Support\Validators\BaseValidator;
 
-class FileValidator extends BaseValidator {
+class FileUploadValidator extends BaseValidator {
 
 	/**
 	 * Validation rules
@@ -12,7 +12,7 @@ class FileValidator extends BaseValidator {
 	public static $rules = array(
 		"file_name" 	=> "unique_file",
 		"file_size"		=> "file_size",
-		"file_mimes"	=> "file_mimes"
+		"ext_mimes"		=> "ext_mimes"
 	);
 
 	/**
@@ -25,7 +25,7 @@ class FileValidator extends BaseValidator {
 		static::$messages = array(
 			'unique_file' 	=> t('validation.errors.unique_file'),
 			'file_size' 	=> t('validation.errors.file_size'),
-			'file_mimes' 	=> t('validation.errors.file_mimes'),
+			'ext_mimes' 	=> t('validation.errors.ext_mimes'),
 		);
 	}
 
@@ -43,7 +43,7 @@ class FileValidator extends BaseValidator {
 
 		$file_arr['file_name'] = \Tool::formatFile($file_name);
 		$file_arr['file_size'] = $input->getSize();
-		$file_arr['file_mimes'] = \Tool::fileExtension($file_name);
+		$file_arr['ext_mimes'] = \Tool::fileExtension($file_name);
 
 		return $file_arr;
 	}

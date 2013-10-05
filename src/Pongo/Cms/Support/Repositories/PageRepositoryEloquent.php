@@ -9,6 +9,11 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 		return $page->elements->count();
 	}
 
+	public function countPageFiles($page)
+	{
+		return $page->files->count();
+	}
+
 	public function createPage($page_arr)
 	{
 		return Page::create($page_arr);
@@ -34,6 +39,11 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 	public function getPageElements($page_id)
 	{
 		return Page::find($page_id)->elements;
+	}
+
+	public function getPageFiles($page_id)
+	{
+		return Page::find($page_id)->files;
 	}
 
 	public function getPageList($parent_id, $lang)

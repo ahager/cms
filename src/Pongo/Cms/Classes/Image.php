@@ -14,6 +14,13 @@ class Image {
 	private $image_quality;
 
 	/**
+	 * Theme's thumb settings
+	 * 
+	 * @var array
+	 */
+	private $thumb = array();
+
+	/**
 	 * Upload path
 	 * 
 	 * @var string
@@ -27,9 +34,12 @@ class Image {
 	 */
 	public function __construct(ImageWorkshop $imageWorkshop )
 	{
+		Tool::memoryLimitOff();
+		
 		$this->ImageWorkshop = $imageWorkshop;
 		$this->image_quality = Config::get('cms::settings.image_quality');
 		$this->upload_path = public_path(Config::get('cms::settings.upload_path').'img');
+		$this->thumb = Theme::config('thumb');
 	}
 
 	/**
@@ -44,12 +54,14 @@ class Image {
 	{
 		$w = Theme::config('thumb.'.$thumb.'.width');
 		$h = Theme::config('thumb.'.$thumb.'.height');
+		// $w = $this->thumb[$thumb]['width'];
+		// $h = $this->thumb[$thumb]['height'];
 
 		$image->cropMaximumInPixel(0, 0, "MM");
 		$image->resizeInPixel($w, $h);
 
 		$thumb_name = Tool::formatFileThumb($file_name);
-		
+
 		$this->save($image, $thumb_name);
 	}
 
@@ -66,6 +78,7 @@ class Image {
 
 	/**
 	 * Save thumb to /img path
+	 * 
 	 * @param  object $image
 	 * @param  string $thumb_name
 	 * @return void
@@ -74,5 +87,7 @@ class Image {
 	{
 		$image->save($this->upload_path, $thumb_name, true, null, $this->image_quality);
 	}
+
+
 
 }

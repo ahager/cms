@@ -63,6 +63,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 
 		// FILES
 		Route::any('page/files/upload', array('uses' => $apiControllers.'UploadController@pageFilesUpload', 'as' => 'api.page.files.upload'));
+		Route::any('page/files/create', array('uses' => $apiControllers.'UploadController@pageFilesCreate', 'as' => 'api.page.files.create'));
 
 	// ELEMENT
 	Route::any('element/order', array('uses' => $apiControllers.'ElementController@orderElements', 'as' => 'api.element.order'));

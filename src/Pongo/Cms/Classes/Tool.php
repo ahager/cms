@@ -73,6 +73,28 @@ class Tool {
 	}
 
 	/**
+	 * Format a number to Kb or Mb size
+	 * 
+	 * @param  int $size
+	 * @param  string $type
+	 * @return int
+	 */
+	public function formatFileSize($size, $type = 'kb')
+	{
+		switch ($type) {
+			case 'kb':
+				return $size * 1024;
+				break;
+			case 'mb':
+				return $size * 1024000;
+				break;
+			default:
+				return $size * 1024;
+				break;
+		}
+	}
+
+	/**
 	 * Get folder name where to copy uploaded file
 	 * 
 	 * @param  string $filename
@@ -88,6 +110,19 @@ class Tool {
 
 			return $this->fileExtension($filename) . '/';
 		}
+	}
+
+	/**
+	 * Get public folder http path
+	 * 
+	 * @param $path
+	 * @return string
+	 */
+	public function getFolderPublic($path = '')
+	{
+		$path_arr = explode('/', public_path());
+
+		return '/' . end($path_arr).($path ? '/'.$path : $path);;
 	}
 
 	/**
@@ -161,6 +196,16 @@ class Tool {
 	public function isHome($is_home)
 	{
 		return ($is_home) ? '<i class="icon-home" style="display: visible"></i>' : '<i class="icon-home" style="display: none"></i>';
+	}
+
+	/**
+	 * Turn off PHP memory limit
+	 * 
+	 * @return void
+	 */
+	public function memoryLimitOff()
+	{
+		ini_set('memory_limit', '-1');
 	}
 
 	/**

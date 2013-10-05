@@ -43,7 +43,7 @@ abstract class BaseValidator {
 	 * 
 	 * @return array
 	 */
-	public function formatErrors()
+	public function formatErrors($msg = 'alert.error.input_validator')
 	{
 		$errors = $this->errors;
 
@@ -57,7 +57,7 @@ abstract class BaseValidator {
 
 		return array(
 			'status' 	=> 'error',
-			'msg'		=> t('alert.error.input_validator'),
+			'msg'		=> t($msg),
 			'errors'	=> $error_msg
 		);
 	}

@@ -16,6 +16,7 @@ return array(
 
 			'element_created'	=> 'Impossibile creare l\'elemento!',
 			'element_order'		=> 'Impossibile salvare l\'ordinamento',
+			'input_validator'	=> 'Verifica i dati inseriti!',
 			'login' 			=> 'Accesso vietato, riprova nuovamente!',			
 			'not_granted'		=> 'Modifica non consentita',
 			'page_cant_delete'	=> 'Impossibile eliminare questa pagina',
@@ -27,7 +28,7 @@ return array(
 			'save'				=> 'Errore di salvataggio',
 			'session_exp'		=> 'Sessione scaduta, esegui login!',
 			'unauthorized'		=> 'Accesso non autorizzato, esegui login!',
-			'input_validator'	=> 'Verifica i dati inseriti!',
+			'upload_completed'	=> 'Impossibile caricare files!',
 
 		),
 
@@ -35,10 +36,13 @@ return array(
 
 			'element_created'	=> 'Nuovo elemento creato!',
 			'element_order'		=> 'Ordine degli elementi salvato!',
+			'file_created'		=> 'Nuovo file inserito correttamente!',
 			'page_created'		=> 'Nuova pagina creata!',
 			'page_deleted'		=> 'La pagina è stata eliminata!',
 			'page_order'		=> 'Ordine di pagina salvato!',
 			'save'				=> 'Informazioni salvate!',
+			'upload_completed'	=> 'File caricati correttamente!',
+			'upload_comp_err'	=> 'File caricati con qualche errore!',
 
 		),
 
@@ -51,12 +55,19 @@ return array(
 			'cancel'	=> 'Annulla',
 			'choose'	=> 'Seleziona file',
 			'clone'		=> 'Clona',
+			'create'	=> 'Crea',
 			'element' 	=> 'Elemento',
 			'delete'	=> 'Elimina',
 			'ok'		=> 'Ok',
 			'page' 		=> 'Pagina',
 			'save'		=> 'Salva',
-			'upload'	=> 'Carica',
+			'upload'	=> 'Avvia caricamento',
+
+		),
+
+		'infos' => array(
+
+			'create_file' => 'Rinomina questo file in ":rename" e caricalo via FTP nella cartella ":upload".'
 
 		),
 
@@ -83,6 +94,12 @@ return array(
 
 		),
 
+		'file' => array(
+
+			'bar_title' => 'File di pagina',
+
+		),
+
 		'option' => array(
 
 			'bar_title' => 'Opzioni',
@@ -91,12 +108,13 @@ return array(
 
 		'page' => array(
 
-			'bar_title' 		=> 'Gestione pagine',
-			'layout_title' 		=> 'Layout',
-			'seo_title'		 	=> 'Seo',
-			'files_title' 		=> 'Files',
-			'linked_title' 		=> 'Pagine collegate',
-			'settings_title' 	=> 'Impostazioni',
+			'bar_title' 			=> 'Gestione pagine',
+			'layout_title' 			=> 'Layout',
+			'seo_title'		 		=> 'Seo',
+			'files_title' 			=> 'Caricamento Files',
+			'files_create_title' 	=> 'Creazione Files',
+			'linked_title' 			=> 'Pagine collegate',
+			'settings_title' 		=> 'Impostazioni',
 
 		),
 
@@ -139,8 +157,13 @@ return array(
 
 			'files'	=> array(
 
-				'max_upload' => 'Dimensione massima',
-				'mimes' => 'Formati consentiti',
+				'custom_upload'	=> 'Crea l\'inserimento di nuovo file',
+				'file_name'		=> 'Nome del file',
+				'file_size'		=> 'Peso del file',
+				'ftp_upload'	=> 'Carica il file attraverso una connessione FTP',
+				'max_item'		=> 'Numero massimo di elementi per volta',
+				'max_upload' 	=> 'Dimensione massima',
+				'mimes' 		=> 'Formati consentiti',
 
 			),	
 
@@ -178,10 +201,12 @@ return array(
 
 		'errors' => array(
 
-			'file_mimes'	=> 'Il formato del file non è consentito.',
-			'unique_file' 	=> 'Questo file è già presente nel sistema.',
+			'ext_mimes'		=> 'Il formato del file non è consentito.',
+			'integer'		=> 'Il valore deve essere un numero intero',
 			'file_size'		=> 'Questo file è superiore al limite consentito.',
-			'required' 		=> 'Il campo :attribute è obbligatorio.',
+			'not_image'		=> 'Non puoi inserire immagini.',
+			'required' 		=> 'Questo campo è obbligatorio.',
+			'unique_file' 	=> 'Questo file è già presente nel sistema.',
 
 		),
 

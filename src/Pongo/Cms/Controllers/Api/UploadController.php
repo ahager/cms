@@ -3,7 +3,8 @@
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Pongo\Cms\Support\Repositories\FileRepositoryInterface as File;
 
-use Pongo\Cms\Support\Validators\FileValidator as FileValidator;
+use Pongo\Cms\Support\Validators\FileCreateValidator as FileCreateValidator;
+use Pongo\Cms\Support\Validators\FileUploadValidator as FileUploadValidator;
 
 use Config, Image, Input, Tool;
 
@@ -30,6 +31,84 @@ class UploadController extends ApiController {
 		$this->upload_path = Config::get('cms::settings.upload_path');
 	}
 
+	public function pageFilesCreate()
+	{
+		$input = Input::all();
+
+		$pid = $input['page_id'];
+
+		if(isset($input['file_name']) and isset($input['file_size'])) {
+
+			$file_name = $input['file_name'];
+			$file_size = $input['file_size'];
+			$size_type = $input['size_type'];
+
+			// Validate file name
+			$v = new FileCreateValidator();
+
+			if($v->passes()) {
+
+				$folder_name = Tool::getFolderName($file_name);
+
+				$format_name = Tool::formatFile($file_name);
+
+				$file_ext = Tool::fileExtension($file_name);
+
+				$file_size = Tool::formatFileSize($file_size, $size_type);
+
+				$http_path = Tool::getFolderPublic($this->upload_path . $folder_name . $format_name);
+
+				$file_arr = array(
+					'name' 		=> $format_name,
+					'original'	=> $file_name,
+					'ext'		=> $file_ext,
+					'size'		=> $file_size,
+					'w'			=> 0,
+					'h'			=> 0,
+					'path'		=> $http_path,
+					'is_image'	=> 0,
+					'is_valid'	=> 1
+				);
+
+				// Write into db
+				$new_file = $this->file->createFile($file_arr);
+
+				$page = $this->page->getPage($pid);
+
+				$file_page = $this->page->savePageFile($page, $new_file);
+
+				$response = array(
+					'status' 	=> 'success',
+					'msg'		=> t('alert.success.file_created'),
+					'infos'		=> array(
+
+						'file_name' => t('form.infos.create_file', array(
+
+							'rename' => $format_name,
+							'upload' => $http_path
+
+						)),
+
+					),
+				);
+
+			} else {
+
+				return json_encode($v->formatErrors());
+			}
+
+		} else {
+
+			$response = array(
+				'status' 	=> 'error',
+				'msg'		=> t('alert.error.page_order')
+			);
+
+		}
+
+		return json_encode($response);
+	}
+
 	/**
 	 * Upload files in Pages
 	 * 
@@ -39,8 +118,6 @@ class UploadController extends ApiController {
 	{
 		$input = Input::all();
 
-		// D($input, true);
-
 		$pid = $input['page_id'];
 
 		$response = array();
@@ -49,10 +126,12 @@ class UploadController extends ApiController {
 
 			$files = $input['files'];
 
+			$has_errors = false;
+
 			foreach ($files as $key => $file) {
 
 				// Validate each file
-				$v = new FileValidator($file);
+				$v = new FileUploadValidator($file);
 
 				if($v->passes()) {
 
@@ -73,15 +152,20 @@ class UploadController extends ApiController {
 
 					$response[$key] = $v->uploadErrors();
 
+					$has_errors = true;
+
 				}
 
 			}
+
+			$response['status'] = 'success';
+			$response['msg'] = $has_errors ? t('alert.success.upload_comp_err') : t('alert.success.upload_completed');
 
 		} else {
 
 			$response = array(
 				'status' 	=> 'error',
-				'msg'		=> t('alert.error.page_order')
+				'msg'		=> t('alert.error.upload_completed')
 			);
 
 		}
@@ -137,12 +221,13 @@ class UploadController extends ApiController {
 		}					
 
 		return array(
-			'name' 	=> $format_name,
-			'ext'	=> $file_ext,
-			'size'	=> $file_size,
-			'w'		=> $image_w,
-			'h'		=> $image_h,
-			'path'	=> $http_path,
+			'name' 		=> $format_name,
+			'original'	=> $file_name,
+			'ext'		=> $file_ext,
+			'size'		=> $file_size,
+			'w'			=> $image_w,
+			'h'			=> $image_h,
+			'path'		=> $http_path,
 			'is_image'	=> $is_image,
 			'is_valid'	=> 1
 		);

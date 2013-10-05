@@ -62,7 +62,7 @@ class PageController extends BaseController {
 
 		$page = $this->page->getPage($id);
 
-		$n_elements = $this->page->countPageElements($page);
+		$n_files = $this->page->countPageFiles($page);
 
 		$view = Render::view('sections.page.files');
 		$view['section']	= 'files';
@@ -71,7 +71,7 @@ class PageController extends BaseController {
 		
 
 
-		$view['n_elements'] = $n_elements;
+		$view['n_files'] = $n_files;
 
 		return $view;
 	}

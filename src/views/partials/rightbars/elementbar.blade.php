@@ -10,8 +10,6 @@
 				<i class="icon-plus-sign"> {{t('form.button.element')}}</i>
 			</button>
 
-			<input type="hidden" name="pageid" value="{{$id}}">
-
 		</header>
 
 		<div class="dl">

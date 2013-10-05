@@ -7,7 +7,7 @@ class PongoValidator extends LaravelValidator {
 
 	public function validateUniqueFile($attribute, $value, $parameters)
 	{
-		$file_name = $value;
+		$file_name = \Tool::formatFile($value);
 
 		$upload_path = Config::get('cms::settings.upload_path');
 
@@ -25,7 +25,7 @@ class PongoValidator extends LaravelValidator {
 		return ($value < $max_size) ? true : false;
 	}
 
-	public function validateFileMimes($attribute, $value, $parameters)
+	public function validateExtMimes($attribute, $value, $parameters)
 	{
 		$ext = $value;
 
@@ -34,6 +34,22 @@ class PongoValidator extends LaravelValidator {
 		$mimes_arr = explode(',', $mimes);
 
 		return (in_array($ext, $mimes_arr)) ? true : false;
+	}
+
+	public function validateFileMimes($attribute, $value, $parameters)
+	{
+		$ext = \Tool::fileExtension($value);
+
+		$mimes = str_replace(' ', '', Config::get('cms::settings.mimes'));
+
+		$mimes_arr = explode(',', $mimes);
+
+		return (in_array($ext, $mimes_arr)) ? true : false;
+	}
+
+	public function validateNotImage($attribute, $value, $parameters)
+	{
+		return Tool::isFile($value);
 	}
 
 }

@@ -4,6 +4,8 @@ interface PageRepositoryInterface {
 
 	public function countPageElements($page);
 
+	public function countPageFiles($page);
+
 	public function createPage($page_arr);
 
 	public function deletePageElements($element);
@@ -13,6 +15,8 @@ interface PageRepositoryInterface {
 	public function getPageBySlug($slug);
 
 	public function getPageElements($page_id);
+
+	public function getPageFiles($page_id);
 
 	public function getPageList($parent_id, $lang);
 

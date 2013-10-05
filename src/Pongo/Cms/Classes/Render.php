@@ -109,7 +109,7 @@ class Render {
 	 * Create element list by page_id
 	 * 
 	 * @param  int $page_id    page id
-	 * @return string          element itwm view
+	 * @return string          element item view
 	 */
 	public function elementList($page_id)
 	{
@@ -117,6 +117,23 @@ class Render {
 		$items = $this->page->getPageElements($page_id);
 
 		$item_view = $this->view('partials.elementitem');
+		$item_view['items'] = $items;
+
+		return $item_view;
+	}
+
+	/**
+	 * Create file list by page_id
+	 * 
+	 * @param  int $page_id    page id
+	 * @return string          file item view
+	 */
+	public function fileList($page_id)
+	{
+		// $items = Page::find($page_id)->elements;
+		$items = $this->page->getPageFiles($page_id);
+
+		$item_view = $this->view('partials.fileitem');
 		$item_view['items'] = $items;
 
 		return $item_view;

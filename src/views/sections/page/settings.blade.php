@@ -1,7 +1,7 @@
 @extends('cms::layouts.base')
 
 @section('element-bar')
-	@include('cms::partials.elementbar')
+	@include('cms::partials.rightbars.elementbar')
 @stop
 
 @section('option-bar')
@@ -9,7 +9,7 @@
 @stop
 
 @section('subbar')
-	@include('cms::partials.subbar')
+	@include('cms::partials.subbars.element')
 @stop
 
 @section('footer-js')

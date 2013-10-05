@@ -16,6 +16,7 @@ return array(
 
 			'element_created'	=> 'Unable to create element',
 			'element_order'		=> 'Unable to save order',
+			'input_validator'	=> 'Check form fields!',
 			'login' 			=> 'Access denied, please retry!',
 			'not_granted'		=> 'Editing not allowed',
 			'page_cant_delete'	=> 'Unable to delete this page',
@@ -27,18 +28,21 @@ return array(
 			'save'				=> 'Unable to save',
 			'session_exp'		=> 'Session expired, please login!',
 			'unauthorized'		=> 'Unauthorized access, please login!',
-			'input_validator'	=> 'Check form fields!',
-
+			'upload_completed'	=> 'Unable to upload files!',
+			
 		),
 
 		'success' => array(
 
 			'element_created'	=> 'New element created!',
 			'element_order'		=> 'New element order saved!',
+			'file_created'		=> 'File entry successfully saved!',
 			'page_created'		=> 'New page created!',
 			'page_deleted'		=> 'The page has been deleted!',
 			'page_order'		=> 'New page order saved!',
 			'save'				=> 'Successfully saved!',
+			'upload_completed'	=> 'Files successfully uploaded!',
+			'upload_comp_err'	=> 'Files uploaded with some errors!',
 
 		),
 
@@ -49,14 +53,21 @@ return array(
 		'button' => array(
 
 			'cancel'	=> 'Cancel',
-			'choose'	=> 'Select file',
+			'choose'	=> 'Select files',
 			'clone'		=> 'Clone',
+			'create'	=> 'Create',
 			'element' 	=> 'Element',
 			'delete'	=> 'Delete',
 			'ok'		=> 'Ok',
 			'page' 		=> 'Page',
 			'save'		=> 'Save',
-			'upload'	=> 'Upload',
+			'upload'	=> 'Start upload',
+
+		),
+
+		'infos' => array(
+
+			'create_file' => 'Please rename this file to ":rename" and upload it to ":upload" using a FTP connection.'
 
 		),
 
@@ -83,6 +94,12 @@ return array(
 
 		),
 
+		'file' => array(
+
+			'bar_title' => 'Page files',
+
+		),
+
 		'option' => array(
 
 			'bar_title' => 'Options',
@@ -91,12 +108,13 @@ return array(
 
 		'page' => array(
 
-			'bar_title' 		=> 'Page manager',
-			'layout_title' 		=> 'Layout',
-			'seo_title'		 	=> 'Seo',
-			'files_title' 		=> 'Files',
-			'linked_title' 		=> 'Linked pages',
-			'settings_title' 	=> 'Settings',
+			'bar_title' 			=> 'Page manager',
+			'layout_title' 			=> 'Layout',
+			'seo_title'		 		=> 'Seo',
+			'files_title' 			=> 'Upload Files',
+			'files_create_title' 	=> 'Create Files',
+			'linked_title' 			=> 'Linked pages',
+			'settings_title' 		=> 'Settings',
 
 		),
 
@@ -139,6 +157,11 @@ return array(
 
 			'files'	=> array(
 
+				'custom_upload'	=> 'Create an empty file entry',
+				'file_name'		=> 'File name',
+				'file_size'		=> 'File size',
+				'ftp_upload'	=> 'Upload your new file using a FTP connection',
+				'max_item'		=> 'Maximum number of items at a time',
 				'max_upload' 	=> 'Maximum upload size',
 				'mimes' 		=> 'Allowed file formats',
 
@@ -178,10 +201,12 @@ return array(
 
 		'errors' => array(
 
-			'file_mimes'	=> 'This file extension is not allowed.',
-			'unique_file' 	=> 'This file name is already present.',
+			'ext_mimes'		=> 'This file extension is not allowed.',
+			'integer'		=> 'This value must be an integer.',
 			'file_size'		=> 'The file size exceeds maximum allowed.',
-			'required' 		=> 'The :attribute field is required.',
+			'not_image'		=> 'This tool is not for images.',
+			'required' 		=> 'This field is required.',
+			'unique_file' 	=> 'This file name is already present.',
 
 		),
 
