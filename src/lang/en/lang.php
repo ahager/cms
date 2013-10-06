@@ -6,43 +6,46 @@ return array(
 
 		'info' => array(
 			
-			'logout'		=> 'You have been logged out!',
+			'logout'		=> 'You have been logged out',
 			'page_lang'		=> 'Editing content in :lang',
-			'welcome'		=> 'Welcome back, :user!',
+			'welcome'		=> 'Welcome back, :user',
 
 		),
 
 		'error' => array(
 
+			'create_item'		=> 'Unable to create this item',
+			'delete_item'		=> 'Unable to delete this item',
 			'element_created'	=> 'Unable to create element',
 			'element_order'		=> 'Unable to save order',
-			'input_validator'	=> 'Check form fields!',
-			'login' 			=> 'Access denied, please retry!',
+			'input_validator'	=> 'Check form fields',
+			'login' 			=> 'Access denied, please retry',
 			'not_granted'		=> 'Editing not allowed',
 			'page_cant_delete'	=> 'Unable to delete this page',
 			'page_created'		=> 'Unable to create page',
-			'page_has_elements'	=> 'This page still contains elements!',
-			'page_has_subpages'	=> 'This page still contains subpages!',
+			'page_has_elements'	=> 'This page still contains elements',
+			'page_has_subpages'	=> 'This page still contains subpages',
 			'page_lang'			=> 'Unable to change language',
 			'page_order'		=> 'Unable to save page order',
-			'save'				=> 'Unable to save',
-			'session_exp'		=> 'Session expired, please login!',
-			'unauthorized'		=> 'Unauthorized access, please login!',
-			'upload_completed'	=> 'Unable to upload files!',
+			'save'				=> 'Unable to save',			
+			'session_exp'		=> 'Session expired, please login',
+			'unauthorized'		=> 'Unauthorized access, please login',
+			'upload_completed'	=> 'Unable to upload files',
 			
 		),
 
 		'success' => array(
 
-			'element_created'	=> 'New element created!',
-			'element_order'		=> 'New element order saved!',
-			'file_created'		=> 'File entry successfully saved!',
-			'page_created'		=> 'New page created!',
-			'page_deleted'		=> 'The page has been deleted!',
-			'page_order'		=> 'New page order saved!',
-			'save'				=> 'Successfully saved!',
-			'upload_completed'	=> 'Files successfully uploaded!',
-			'upload_comp_err'	=> 'Files uploaded with some errors!',
+			'element_created'	=> 'New element created',
+			'element_order'		=> 'New element order saved',
+			'file_created'		=> 'File entry successfully saved',
+			'item_remove'		=> 'This item has been removed',
+			'page_created'		=> 'New page created',
+			'page_deleted'		=> 'The page has been deleted',
+			'page_order'		=> 'New page order saved',
+			'save'				=> 'Successfully saved',
+			'upload_completed'	=> 'Files successfully uploaded',
+			'upload_comp_err'	=> 'Files uploaded with some errors',
 
 		),
 
@@ -67,7 +70,7 @@ return array(
 
 		'infos' => array(
 
-			'create_file' => 'Please rename this file to ":rename" and upload it to ":upload" using a FTP connection.'
+			'create_file' => 'Please rename this file to ":rename" and upload it to ":upload" using a FTP connection'
 
 		),
 
@@ -160,6 +163,7 @@ return array(
 				'custom_upload'	=> 'Create an empty file entry',
 				'file_name'		=> 'File name',
 				'file_size'		=> 'File size',
+				'force_delete'	=> 'Delete this file if not linked to any other page',
 				'ftp_upload'	=> 'Upload your new file using a FTP connection',
 				'max_item'		=> 'Maximum number of items at a time',
 				'max_upload' 	=> 'Maximum upload size',
@@ -176,6 +180,7 @@ return array(
 		'title' => array(
 
 			'delete_page' => 'Delete this page?',
+			'detach_file' => 'Detach file from this page?',
 
 		),
 
@@ -201,12 +206,12 @@ return array(
 
 		'errors' => array(
 
-			'ext_mimes'		=> 'This file extension is not allowed.',
-			'integer'		=> 'This value must be an integer.',
-			'file_size'		=> 'The file size exceeds maximum allowed.',
-			'not_image'		=> 'This tool is not for images.',
-			'required' 		=> 'This field is required.',
-			'unique_file' 	=> 'This file name is already present.',
+			'ext_mimes'		=> 'This file extension is not allowed',
+			'integer'		=> 'This value must be an integer',
+			'file_size'		=> 'The file size exceeds maximum allowed',
+			'not_image'		=> 'This tool is not for images',
+			'required' 		=> 'This field is required',
+			'unique_file' 	=> 'This file name is already present',
 
 		),
 

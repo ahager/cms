@@ -33,6 +33,9 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	// ELEMENT
 	Route::get('element/edit/{id}', array('uses' => $pongoControllers.'ElementController@editElement', 'as' => 'element.edit'));
 
+	// FILE
+	Route::get('file/edit/{id}', array('uses' => $pongoControllers.'FileController@editFile', 'as' => 'file.edit'));
+
 });
 
 // API calls
@@ -64,6 +67,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 		// FILES
 		Route::any('page/files/upload', array('uses' => $apiControllers.'UploadController@pageFilesUpload', 'as' => 'api.page.files.upload'));
 		Route::any('page/files/create', array('uses' => $apiControllers.'UploadController@pageFilesCreate', 'as' => 'api.page.files.create'));
+		Route::any('page/files/delete/{id}', array('uses' => $apiControllers.'UploadController@pageFilesDelete', 'as' => 'api.page.files.delete'));
 
 	// ELEMENT
 	Route::any('element/order', array('uses' => $apiControllers.'ElementController@orderElements', 'as' => 'api.element.order'));

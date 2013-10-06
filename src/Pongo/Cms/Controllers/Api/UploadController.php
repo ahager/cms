@@ -6,7 +6,7 @@ use Pongo\Cms\Support\Repositories\FileRepositoryInterface as File;
 use Pongo\Cms\Support\Validators\FileCreateValidator as FileCreateValidator;
 use Pongo\Cms\Support\Validators\FileUploadValidator as FileUploadValidator;
 
-use Config, Image, Input, Tool;
+use Config, Image, Input, Media;
 
 class UploadController extends ApiController {
 
@@ -48,15 +48,15 @@ class UploadController extends ApiController {
 
 			if($v->passes()) {
 
-				$folder_name = Tool::getFolderName($file_name);
+				$folder_name = Media::getFolderName($file_name);
 
-				$format_name = Tool::formatFile($file_name);
+				$format_name = Media::formatFileName($file_name);
 
-				$file_ext = Tool::fileExtension($file_name);
+				$file_ext = Media::fileExtension($file_name);
 
-				$file_size = Tool::formatFileSize($file_size, $size_type);
+				$file_size = Media::convertFileSize($file_size, $size_type);
 
-				$http_path = Tool::getFolderPublic($this->upload_path . $folder_name . $format_name);
+				$http_path = Media::getFolderPublic($this->upload_path . $folder_name . $format_name);
 
 				$file_arr = array(
 					'name' 		=> $format_name,
@@ -80,6 +80,7 @@ class UploadController extends ApiController {
 				$response = array(
 					'status' 	=> 'success',
 					'msg'		=> t('alert.success.file_created'),
+					'counter' 	=> 'up',
 					'infos'		=> array(
 
 						'file_name' => t('form.infos.create_file', array(
@@ -90,6 +91,19 @@ class UploadController extends ApiController {
 						)),
 
 					),
+
+					'item'		=> array(
+
+						'file_id' 		=> $new_file->id,
+						'file_name' 	=> Media::formatFileName($file_arr['name'], false),
+						'thumb' 		=> Image::showThumb($new_file->path),
+						'ext' 			=> $file_arr['ext'],
+						'size'			=> Media::formatFileSize($file_arr['size']),
+						'edit_url'		=> route('file.edit', array('id' => $new_file->id)),
+						'delete_url'	=> route('api.page.files.delete', array('id' => $new_file->id))
+
+					),
+
 				);
 
 			} else {
@@ -101,7 +115,58 @@ class UploadController extends ApiController {
 
 			$response = array(
 				'status' 	=> 'error',
-				'msg'		=> t('alert.error.page_order')
+				'msg'		=> t('alert.error.create_item')
+			);
+
+		}
+
+		return json_encode($response);
+	}
+
+	/**
+	 * Detach/delete file from a page
+	 * 
+	 * @return json object
+	 */
+	public function pageFilesDelete($id)
+	{
+
+		$input = Input::all();
+
+		$fid = $id;
+		$pid = $input['page_id'];
+
+		$force_delete = (Input::has('force_delete')) ? true : false;
+
+		if(isset($pid)) {
+
+			$page = $this->page->getPage($pid);
+
+			$this->page->detachPageFiles($page, $fid);
+
+			$file = $this->file->getFile($fid);
+
+			// Conte a quante pagine è collegato questo file
+			$count_pages = $this->file->countFilePages($file);
+
+			if($count_pages == 0 and $force_delete) {
+
+				Media::deleteFile($file->name);
+
+				$this->file->deleteFile($file);
+			}
+
+			$response = array(
+				'status' 	=> 'success',
+				'msg'		=> t('alert.success.item_remove'),
+				'remove'	=> $fid
+			);
+
+		} else {
+
+			$response = array(
+				'status' 	=> 'error',
+				'msg'		=> t('alert.error.delete_item')
 			);
 
 		}
@@ -148,6 +213,16 @@ class UploadController extends ApiController {
 					$response[$key]['status'] = 'success';
 					$response[$key]['icon'] = 'icon-ok success';
 
+					// Fill json data for each list element
+					$response[$key]['item']['file_id'] = $new_file->id;
+					$response[$key]['item']['file_name'] = Media::formatFileName($file_arr['name'], false);
+					$response[$key]['item']['thumb'] = Image::showThumb($new_file->path);
+					$response[$key]['item']['ext'] = $file_arr['ext'];
+					$response[$key]['item']['size'] = Media::formatFileSize($file_arr['size']);
+					$response[$key]['item']['edit_url'] = route('file.edit', array('id' => $new_file->id));
+					$response[$key]['item']['delete_url'] = route('api.page.files.delete', array('id' => $new_file->id));
+
+
 				} else {
 
 					$response[$key] = $v->uploadErrors();
@@ -189,12 +264,12 @@ class UploadController extends ApiController {
 		// file extension
 		$file_ext 	= $file->getClientOriginalExtension();
 		// dir type
-		$folder_name = Tool::getFolderName($file_name);
+		$folder_name = Media::getFolderName($file_name);
 		// upload path
 		$upload_path = public_path($this->upload_path . $folder_name);
 
 		// Format file name
-		$format_name = Tool::formatFile($file_name);
+		$format_name = Media::formatFileName($file_name);
 		
 		// Save to disk
 		$file->move($upload_path, $format_name);
@@ -205,7 +280,7 @@ class UploadController extends ApiController {
 		// http path
 		$http_path = '/' . $this->upload_path . $folder_name . $format_name;
 		
-		if(Tool::isImage($format_name)) {
+		if(Media::isImage($format_name)) {
 			$image 		= Image::get($file_path);
 			$image_w 	= $image->getWidth();
 			$image_h 	= $image->getHeight();

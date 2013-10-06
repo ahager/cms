@@ -6,43 +6,46 @@ return array(
 
 		'info' => array(
 			
-			'logout'		=> 'Non sei più loggato!',
+			'logout'		=> 'Non sei più loggato',
 			'page_lang'		=> 'Stai inserendo in :lang',
-			'welcome'		=> 'Bentornato, :user!',
+			'welcome'		=> 'Bentornato, :user',
 
 		),
 
 		'error' => array(
 
-			'element_created'	=> 'Impossibile creare l\'elemento!',
+			'create_item'		=> 'Impossibile creare l\'elemento',
+			'delete_item'		=> 'Impossibile eliminare l\'elemento',
+			'element_created'	=> 'Impossibile creare l\'elemento',
 			'element_order'		=> 'Impossibile salvare l\'ordinamento',
-			'input_validator'	=> 'Verifica i dati inseriti!',
-			'login' 			=> 'Accesso vietato, riprova nuovamente!',			
+			'input_validator'	=> 'Verifica i dati inseriti',
+			'login' 			=> 'Accesso vietato, riprova nuovamente',			
 			'not_granted'		=> 'Modifica non consentita',
 			'page_cant_delete'	=> 'Impossibile eliminare questa pagina',
 			'page_created'		=> 'Impossibile creare la pagina',
-			'page_has_elements'	=> 'Questa pagina contiene ancora elementi!',
-			'page_has_subpages'	=> 'Questa pagina contiene ancora sottopagine!',
+			'page_has_elements'	=> 'Questa pagina contiene ancora elementi',
+			'page_has_subpages'	=> 'Questa pagina contiene ancora sottopagine',
 			'page_lang'			=> 'Impossibile cambiare lingua',
 			'page_order'		=> 'Impossibile salvare l\'ordinamento',
 			'save'				=> 'Errore di salvataggio',
-			'session_exp'		=> 'Sessione scaduta, esegui login!',
-			'unauthorized'		=> 'Accesso non autorizzato, esegui login!',
-			'upload_completed'	=> 'Impossibile caricare files!',
+			'session_exp'		=> 'Sessione scaduta, esegui login',
+			'unauthorized'		=> 'Accesso non autorizzato, esegui login',
+			'upload_completed'	=> 'Impossibile caricare files',
 
 		),
 
 		'success' => array(
 
-			'element_created'	=> 'Nuovo elemento creato!',
-			'element_order'		=> 'Ordine degli elementi salvato!',
-			'file_created'		=> 'Nuovo file inserito correttamente!',
-			'page_created'		=> 'Nuova pagina creata!',
-			'page_deleted'		=> 'La pagina è stata eliminata!',
-			'page_order'		=> 'Ordine di pagina salvato!',
-			'save'				=> 'Informazioni salvate!',
-			'upload_completed'	=> 'File caricati correttamente!',
-			'upload_comp_err'	=> 'File caricati con qualche errore!',
+			'element_created'	=> 'Nuovo elemento creato',
+			'element_order'		=> 'Ordine degli elementi salvato',
+			'file_created'		=> 'Nuovo file inserito correttamente',
+			'item_remove'		=> 'Questo elemento è stato rimosso',
+			'page_created'		=> 'Nuova pagina creata',
+			'page_deleted'		=> 'La pagina è stata eliminata',
+			'page_order'		=> 'Ordine di pagina salvato',
+			'save'				=> 'Informazioni salvate',
+			'upload_completed'	=> 'File caricati correttamente',
+			'upload_comp_err'	=> 'File caricati con qualche errore',
 
 		),
 
@@ -67,7 +70,7 @@ return array(
 
 		'infos' => array(
 
-			'create_file' => 'Rinomina questo file in ":rename" e caricalo via FTP nella cartella ":upload".'
+			'create_file' => 'Rinomina questo file in ":rename" e caricalo via FTP nella cartella ":upload"'
 
 		),
 
@@ -160,6 +163,7 @@ return array(
 				'custom_upload'	=> 'Crea l\'inserimento di nuovo file',
 				'file_name'		=> 'Nome del file',
 				'file_size'		=> 'Peso del file',
+				'force_delete'	=> 'Elimina il file se non associato a nessun\'altra pagina',
 				'ftp_upload'	=> 'Carica il file attraverso una connessione FTP',
 				'max_item'		=> 'Numero massimo di elementi per volta',
 				'max_upload' 	=> 'Dimensione massima',
@@ -176,6 +180,7 @@ return array(
 		'title' => array(
 
 			'delete_page' => 'Eliminare questa pagina?',
+			'detach_file' => 'Dissociare il file dalla pagina?',
 
 		),
 
@@ -201,12 +206,12 @@ return array(
 
 		'errors' => array(
 
-			'ext_mimes'		=> 'Il formato del file non è consentito.',
+			'ext_mimes'		=> 'Il formato del file non è consentito',
 			'integer'		=> 'Il valore deve essere un numero intero',
-			'file_size'		=> 'Questo file è superiore al limite consentito.',
-			'not_image'		=> 'Non puoi inserire immagini.',
-			'required' 		=> 'Questo campo è obbligatorio.',
-			'unique_file' 	=> 'Questo file è già presente nel sistema.',
+			'file_size'		=> 'Questo file è superiore al limite consentito',
+			'not_image'		=> 'Non puoi inserire immagini',
+			'required' 		=> 'Questo campo è obbligatorio',
+			'unique_file' 	=> 'Questo file è già presente nel sistema',
 
 		),
 

@@ -3,14 +3,22 @@
 
 		<div class="dl-handle">
 			
-			{{$file->name}}
-
-			{{HTML::image($file->path)}}
+			<a href="{{route('file.edit', array('id' => $file->id))}}">
+				{{Image::showThumb($file->path)}}</a>
+			<span>{{Media::formatFileName($file->name, false)}}</span>
+			<div>
+				<span class="ext">{{$file->ext}}</span>
+				<span class="size">{{Media::formatFileSize($file->size)}}</span>
+			</div>
 
 		</div>
 
-		<a href="{{--route('file.edit', array('id' => $file->id))--}}">
+		<a href="{{route('file.edit', array('id' => $file->id))}}" class="edit">
 			<i class="icon-chevron-left"></i>
+		</a>
+
+		<a href="{{route('api.page.files.delete', array('id' => $file->id))}}" class="remove confirm">
+			<i class="icon-remove"></i>
 		</a>
 
 	</li>

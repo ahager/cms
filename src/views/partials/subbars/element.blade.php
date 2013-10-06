@@ -15,7 +15,7 @@
 
 		<button type="button" class="subbar-toggle right-toggle element-toggle">			
 			@if($n_elements > 0)
-			<span class="label label-primary">{{$n_elements}}</span>
+			<span class="label label-primary counter">{{$n_elements}}</span>
 			@endif
 			<i class="icon-sort-by-attributes"></i>
 		</button>

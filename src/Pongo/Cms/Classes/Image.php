@@ -2,7 +2,7 @@
 
 use PHPImageWorkshop\ImageWorkshop as ImageWorkshop;
 
-use Config, Theme, Tool;
+use Config, Media, Pongo, Theme;
 
 class Image {
 
@@ -32,9 +32,9 @@ class Image {
 	 * 
 	 * @param File $file
 	 */
-	public function __construct(ImageWorkshop $imageWorkshop )
+	public function __construct(ImageWorkshop $imageWorkshop)
 	{
-		Tool::memoryLimitOff();
+		Pongo::memoryLimitOff();
 		
 		$this->ImageWorkshop = $imageWorkshop;
 		$this->image_quality = Config::get('cms::settings.image_quality');
@@ -50,17 +50,15 @@ class Image {
 	 * @param  string $thumb
 	 * @return void
 	 */
-	public function createThumb($image, $file_name, $thumb)
+	public function createThumb($image, $file_name, $thumb = 'cms')
 	{
-		$w = Theme::config('thumb.'.$thumb.'.width');
-		$h = Theme::config('thumb.'.$thumb.'.height');
-		// $w = $this->thumb[$thumb]['width'];
-		// $h = $this->thumb[$thumb]['height'];
+		$w = $this->thumb[$thumb]['width'];
+		$h = $this->thumb[$thumb]['height'];
 
 		$image->cropMaximumInPixel(0, 0, "MM");
 		$image->resizeInPixel($w, $h);
 
-		$thumb_name = Tool::formatFileThumb($file_name);
+		$thumb_name = Media::formatFileThumb($file_name);
 
 		$this->save($image, $thumb_name);
 	}
@@ -88,6 +86,33 @@ class Image {
 		$image->save($this->upload_path, $thumb_name, true, null, $this->image_quality);
 	}
 
+	/**
+	 * Generate an img tag to thumb
+	 * 
+	 * @param  string $img_path
+	 * @param  string $thumb
+	 * @param  string $alt
+	 * @return string
+	 */
+	public function showThumb($img_path, $thumb = 'cms', $alt = '')
+	{
+		$path_arr = explode('/', $img_path);
+		$file_name = end($path_arr);
 
+		if(Media::isImage($file_name)) {
+
+			$thumb_name = Media::formatFileThumb($file_name, $thumb);
+			$thumb_path = str_replace($file_name, $thumb_name, $img_path);
+
+			return \HTML::image($thumb_path, $alt, array('class' => 'cms-thumb', 'width' => $this->thumb[$thumb]['width'], 'height' => $this->thumb[$thumb]['height']));
+
+		} else {
+
+			$ext = Media::fileExtension($file_name);
+
+			return '<span class="cms-thumb">'.$ext.'</span>';
+
+		}
+	}
 
 }

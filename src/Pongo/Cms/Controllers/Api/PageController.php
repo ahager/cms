@@ -298,7 +298,7 @@ class PageController extends ApiController {
 		// $page->menus()->delete();
 
 		//DELETE PAGE
-		$page->delete();
+		$this->page->deletePage($page);
 
 		return true;
 	}

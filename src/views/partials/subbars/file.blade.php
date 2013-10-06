@@ -15,7 +15,7 @@
 
 		<button type="button" class="subbar-toggle right-toggle file-toggle">
 			@if($n_files > 0)
-			<span class="label label-primary">{{$n_files}}</span>
+			<span class="label label-primary counter">{{$n_files}}</span>
 			@endif
 			<i class="icon-th"></i>
 		</button>

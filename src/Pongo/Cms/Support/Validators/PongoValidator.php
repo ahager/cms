@@ -1,17 +1,18 @@
 <?php namespace Pongo\Cms\Support\Validators;
 
 use Illuminate\Validation\Validator as LaravelValidator;
-use Config, Tool;
+
+use Config, Media;
 
 class PongoValidator extends LaravelValidator {
 
 	public function validateUniqueFile($attribute, $value, $parameters)
 	{
-		$file_name = \Tool::formatFile($value);
+		$file_name = Media::formatFileName($value);
 
 		$upload_path = Config::get('cms::settings.upload_path');
 
-		$folder_name = Tool::getFolderName($file_name);
+		$folder_name = Media::getFolderName($file_name);
 
 		$file_path = public_path($upload_path . $folder_name . $file_name);
 		
@@ -38,7 +39,7 @@ class PongoValidator extends LaravelValidator {
 
 	public function validateFileMimes($attribute, $value, $parameters)
 	{
-		$ext = \Tool::fileExtension($value);
+		$ext = Media::fileExtension($value);
 
 		$mimes = str_replace(' ', '', Config::get('cms::settings.mimes'));
 
@@ -49,7 +50,7 @@ class PongoValidator extends LaravelValidator {
 
 	public function validateNotImage($attribute, $value, $parameters)
 	{
-		return Tool::isFile($value);
+		return Media::isFile($value);
 	}
 
 }

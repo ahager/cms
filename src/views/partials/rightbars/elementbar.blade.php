@@ -6,8 +6,8 @@
 
 			<h2>{{t('heading.element.bar_title')}}</h2>
 
-			<button id="create-element" class="btn btn-primary">
-				<i class="icon-plus-sign"> {{t('form.button.element')}}</i>
+			<button id="create-element" class="btn btn-primary loading">
+				<i class="icon-plus-sign"></i> {{t('form.button.element')}}
 			</button>
 
 		</header>

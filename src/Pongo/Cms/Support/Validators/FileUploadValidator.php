@@ -2,6 +2,8 @@
 
 use Pongo\Cms\Support\Validators\BaseValidator;
 
+use Media;
+
 class FileUploadValidator extends BaseValidator {
 
 	/**
@@ -41,9 +43,9 @@ class FileUploadValidator extends BaseValidator {
 
 		$file_arr = array();
 
-		$file_arr['file_name'] = \Tool::formatFile($file_name);
+		$file_arr['file_name'] = Media::formatFileName($file_name);
 		$file_arr['file_size'] = $input->getSize();
-		$file_arr['ext_mimes'] = \Tool::fileExtension($file_name);
+		$file_arr['ext_mimes'] = Media::fileExtension($file_name);
 
 		return $file_arr;
 	}

@@ -127,6 +127,14 @@ return array(
 
 		),
 
+		'Media' => array(
+
+			'class'	=> 'Pongo\Cms\Classes\Media',
+			'alias'	=> 'Pongo\Cms\Support\Facades\Media',
+			'repos' => '',
+
+		),
+
 		'Render' => array(
 
 			'class' => 'Pongo\Cms\Classes\Render',

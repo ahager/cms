@@ -8,7 +8,11 @@ interface PageRepositoryInterface {
 
 	public function createPage($page_arr);
 
+	public function deletePage($page);
+
 	public function deletePageElements($element);
+
+	public function detachPageFiles($page, $file_id);
 
 	public function getPage($page_id);
 

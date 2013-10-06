@@ -19,9 +19,19 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 		return Page::create($page_arr);
 	}
 
+	public function deletePage($page)
+	{
+		return $page->delete();
+	}
+
 	public function deletePageElements($element)
 	{
 		return $element->pivot->delete();
+	}
+
+	public function detachPageFiles($page, $file_id)
+	{
+		return $page->files()->detach($file_id);
 	}
 
 	public function getPage($page_id)

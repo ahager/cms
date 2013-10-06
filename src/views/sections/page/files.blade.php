@@ -57,3 +57,29 @@
 	</form>
 
 @stop
+
+
+@section('modal')
+
+	<div class="modal-box" id="delete-modal">
+		<button type="button" class="close close-modal">&times;</button>
+		<h3>{{t('modal.title.detach_file')}}</h3>
+		<form method="POST">
+			<input type="hidden" name="page_id" value="{{$pageid}}">
+			<div class="form-group">
+				<div class="checkbox">
+					<label class="control-label">
+						<input type="checkbox" name="force_delete" value="1">
+						{{t('label.page.files.force_delete')}}
+					</label>
+				</div>
+			</div>
+			<div class="form-buttons">
+				<a href="" class="btn btn-danger api">{{t('form.button.ok')}}</a>
+				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>
+			</div>
+		</form>
+
+	</div>
+
+@stop

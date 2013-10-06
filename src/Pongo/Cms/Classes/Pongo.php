@@ -69,6 +69,16 @@ class Pongo {
 	}
 
 	/**
+	 * Turn off PHP memory limit
+	 * 
+	 * @return void
+	 */
+	public function memoryLimitOff()
+	{
+		ini_set('memory_limit', '-1');
+	}
+	
+	/**
 	 * Create a back recursive site structure of pages
 	 * 
 	 * @param  int     $id        page id
