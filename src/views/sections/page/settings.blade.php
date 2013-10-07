@@ -25,7 +25,7 @@
 		<input type="hidden" name="page_id" value="{{$id}}">
 		<div class="form-group" rel="name">
 			<label for="name" class="control-label">{{t('label.page.settings.name')}}</label>
-			<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: pageName, valueUpdate: 'afterkeydown'">
+			<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: itemName, valueUpdate: 'afterkeydown'">
 		</div>
 		<div class="form-group" rel="slug_last">
 			<label for="slug_last" class="control-label">{{t('label.page.settings.slug')}}</label>

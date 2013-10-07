@@ -3,7 +3,7 @@
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
-use Config, Theme, Render;
+use Config, Pongo, Theme, Tool, Render, View;
 
 class PageController extends BaseController {
 
@@ -25,7 +25,7 @@ class PageController extends BaseController {
 	public function layoutPage($id)
 	{
 		// Share page id with all views
-		\View::share('pageid', $id);
+		View::share('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
@@ -58,7 +58,7 @@ class PageController extends BaseController {
 	public function filesPage($id)
 	{
 		// Share page id with all views
-		\View::share('pageid', $id);
+		View::share('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
@@ -79,7 +79,7 @@ class PageController extends BaseController {
 	public function seoPage($id)
 	{
 		// Share page id with all views
-		\View::share('pageid', $id);
+		View::share('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
@@ -107,7 +107,7 @@ class PageController extends BaseController {
 	public function settingsPage($id)
 	{
 		// Share page id with all views
-		\View::share('pageid', $id);
+		View::share('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
@@ -115,7 +115,7 @@ class PageController extends BaseController {
 		$roles = $this->role->orderBy('level', 'asc');
 
 		// Role admin array
-		$admin_roles = \Tool::adminRoles($roles);
+		$admin_roles = Pongo::adminRoles($roles);
 
 		// Count element per page
 		$n_elements = $this->page->countPageElements($page);
@@ -124,8 +124,8 @@ class PageController extends BaseController {
 		$view['section']	= 'settings';
 		$view['id'] 		= $id;
 		$view['name'] 		= $page->name;
-		$view['slug_last'] 	= \Tool::slugSlice($page->slug, 1);
-		$view['slug_base'] 	= \Tool::slugBack($page->slug, 1);
+		$view['slug_last'] 	= Tool::slugSlice($page->slug, 1);
+		$view['slug_base'] 	= Tool::slugBack($page->slug, 1);
 		$view['slug'] 		= $page->slug;
 		$view['is_home'] 	= $page->is_home;
 		$view['is_valid'] 	= $page->is_valid;

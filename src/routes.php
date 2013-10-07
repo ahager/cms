@@ -31,7 +31,9 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	Route::get('page/deleted', array('uses' => $pongoControllers.'PageController@deletedPage', 'as' => 'page.deleted'));
 
 	// ELEMENT
-	Route::get('element/edit/{id}', array('uses' => $pongoControllers.'ElementController@editElement', 'as' => 'element.edit'));
+	Route::get('element/settings/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@settingsElement', 'as' => 'element.settings'));
+	Route::get('element/content/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@contentElement', 'as' => 'element.content'));
+	Route::get('element/files/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@filesElement', 'as' => 'element.files'));
 
 	// FILE
 	Route::get('file/edit/{id}', array('uses' => $pongoControllers.'FileController@editFile', 'as' => 'file.edit'));
@@ -72,6 +74,13 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 	// ELEMENT
 	Route::any('element/order', array('uses' => $apiControllers.'ElementController@orderElements', 'as' => 'api.element.order'));
 	Route::any('element/create', array('uses' => $apiControllers.'ElementController@createElement', 'as' => 'api.element.create'));
+
+		// SETTINGS
+		Route::any('element/settings/save', array('uses' => $apiControllers.'ElementController@elementSettingsSave', 'as' => 'api.element.settings.save'));
+		Route::any('element/settings/clone', array('uses' => $apiControllers.'ElementController@elementSettingsClone', 'as' => 'api.element.settings.clone'));
+		Route::any('element/settings/delete', array('uses' => $apiControllers.'ElementController@elementSettingsDelete', 'as' => 'api.element.settings.delete'));
+	
+
 
 });
 

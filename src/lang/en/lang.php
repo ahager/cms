@@ -93,13 +93,20 @@ return array(
 
 		'element' => array(
 
-			'bar_title' => 'Page elements',
+			'bar_title' 	=> 'Page elements',
+			'content_title' => 'Content',
 
 		),
 
 		'file' => array(
 
 			'bar_title' => 'Page files',
+
+		),
+
+		'layout' => array(
+
+			'bar_title' => 'Content layout',
 
 		),
 

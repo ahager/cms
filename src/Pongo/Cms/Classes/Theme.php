@@ -3,7 +3,7 @@
 use Config, View;
 
 class Theme {
-	
+
 	/**
 	 * Default theme name
 	 * 
@@ -12,7 +12,7 @@ class Theme {
 	public $name = 'default';
 
 	public function __construct()
-	{
+	{		
 		$this->name = Config::get('cms::settings.theme');
 	}
 
@@ -44,6 +44,20 @@ class Theme {
 		}
 
 		return View::make($view_name, $data);
+	}
+
+	/**
+	 * Return layout zones for a specific page layout as set in theme.php
+	 * @param  string $page_layout
+	 * @return array
+	 */
+	public function zones($page_layout)
+	{
+		$layout_name = 'layout_' . $page_layout;
+
+		$layout_zones = $this->config($layout_name);
+
+		return (is_array($layout_zones)) ? $layout_zones : array();
 	}
 
 	/**

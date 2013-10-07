@@ -15,6 +15,29 @@ class Pongo {
 	}
 
 	/**
+	 * Create array of admin roles
+	 * 
+	 * @param  array  	$roles   	Roles array of object
+	 * @param  boolean 	$reverse 	Reverse result array
+	 * @return array           		Admin roles array
+	 */
+	public function adminRoles($roles, $reverse = false)
+	{
+		$min_access = Config::get('cms::system.min_access');
+		$role_access = Config::get('cms::system.roles.'.$min_access);
+
+		$admin_roles = array();
+
+		foreach ($roles as $role) {
+			if($role->level >= $role_access) {
+				$admin_roles[$role->name] = $role->level;	
+			}			
+		}
+
+		return $reverse ? array_reverse($admin_roles) : $admin_roles;
+	}
+	
+	/**
 	 * Get actual url segments
 	 * -> full, first, last, prev
 	 * 

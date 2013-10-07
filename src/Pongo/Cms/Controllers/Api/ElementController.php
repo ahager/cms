@@ -38,8 +38,6 @@ class ElementController extends ApiController {
 
 			$page = $this->page->getPage($pid);
 
-			$count_el = $this->page->countPageElements($page);
-
 			$element = $this->page->savePageElement($page, $element, Config::get('cms::system.default_order'));
 
 			$response = array(
@@ -49,7 +47,7 @@ class ElementController extends ApiController {
 				'label'		=> $element->label,
 				'url'		=> route('element.edit', array('id' => $element->id)),
 				'cls'		=> 'new',
-				'count'		=> ($count_el + 1)
+				'counter'	=> 'up'
 			);
 
 		} else {

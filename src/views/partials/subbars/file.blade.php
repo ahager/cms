@@ -4,7 +4,7 @@
 		<div class="box">
 
 			<h2>
-				<span data-bind="text: pageName">{{$name}}</span>
+				<span data-bind="text: itemName">{{$name}}</span>
 			</h2>
 
 		</div>
