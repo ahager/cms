@@ -3,9 +3,7 @@
 
 		<div class="box">
 
-			<h2>
-				<span data-bind="text: itemName">{{$name}}</span>
-			</h2>
+			<h2 data-bind="text: itemName">{{$name}}</h2>
 
 		</div>
 

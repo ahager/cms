@@ -428,13 +428,15 @@ class PageController extends ApiController {
 				'status' 	=> 'success',
 				'msg'		=> t('alert.success.save'),
 				'page'		=> array(
-										'id' 		=> $page_id,
-										'lang'		=> LANG,
-										'name'		=> $name,
-										'slug'		=> $full_slug,
-										'checked' 	=> $valid,
-										'home'		=> $home
-							   )
+
+					'id' 		=> $page_id,
+					'lang'		=> LANG,
+					'name'		=> $name,
+					'slug'		=> $full_slug,
+					'checked' 	=> $valid,
+					'home'		=> $home
+					
+				)
 			);
 
 

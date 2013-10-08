@@ -19,6 +19,11 @@ class ElementController extends BaseController {
 		$this->role = $role;
 	}
 
+	public function deletedElement()
+	{
+		return Render::view('sections.element.deleted');
+	}
+
 	/**
 	 * Show element settings page
 	 * 
@@ -42,11 +47,8 @@ class ElementController extends BaseController {
 		$view['name']			= $element->name;
 		$view['label']			= $element->label;
 		$view['zones']			= Theme::zones($page->layout);
-
-		$view['zone_selected'] 	= $element->zone;
-		
+		$view['zone_selected'] 	= $element->zone;		
 		$view['is_valid'] 		= $element->is_valid;
-
 
 		return $view;
 	}

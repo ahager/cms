@@ -2,7 +2,7 @@
 
 use Illuminate\Validation\Validator as LaravelValidator;
 
-use Config, Media;
+use Config, Media, Str;
 
 class PongoValidator extends LaravelValidator {
 
@@ -46,6 +46,11 @@ class PongoValidator extends LaravelValidator {
 		$mimes_arr = explode(',', $mimes);
 
 		return (in_array($ext, $mimes_arr)) ? true : false;
+	}
+
+	public function validateIsSlug($attribute, $value, $parameters)
+	{
+		return $value == Str::slug($value);
 	}
 
 	public function validateNotImage($attribute, $value, $parameters)

@@ -146,7 +146,6 @@ class UploadController extends ApiController {
 
 			$file = $this->file->getFile($fid);
 
-			// Conte a quante pagine è collegato questo file
 			$count_pages = $this->file->countFilePages($file);
 
 			if($count_pages == 0 and $force_delete) {

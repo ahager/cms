@@ -14,29 +14,30 @@ return array(
 
 		'error' => array(
 
-			'create_item'		=> 'Impossibile creare l\'elemento',
-			'delete_item'		=> 'Impossibile eliminare l\'elemento',
-			'element_created'	=> 'Impossibile creare l\'elemento',
-			'element_order'		=> 'Impossibile salvare l\'ordinamento',
-			'input_validator'	=> 'Verifica i dati inseriti',
-			'login' 			=> 'Accesso vietato, riprova nuovamente',			
-			'not_granted'		=> 'Modifica non consentita',
-			'page_cant_delete'	=> 'Impossibile eliminare questa pagina',
-			'page_created'		=> 'Impossibile creare la pagina',
-			'page_has_elements'	=> 'Questa pagina contiene ancora elementi',
-			'page_has_subpages'	=> 'Questa pagina contiene ancora sottopagine',
-			'page_lang'			=> 'Impossibile cambiare lingua',
-			'page_order'		=> 'Impossibile salvare l\'ordinamento',
-			'save'				=> 'Errore di salvataggio',
-			'session_exp'		=> 'Sessione scaduta, esegui login',
-			'unauthorized'		=> 'Accesso non autorizzato, esegui login',
-			'upload_completed'	=> 'Impossibile caricare files',
+			'create_item'			=> 'Impossibile creare l\'elemento',
+			'delete_item'			=> 'Impossibile eliminare l\'elemento',
+			'element_created'		=> 'Impossibile creare l\'elemento',
+			'element_order'			=> 'Impossibile salvare l\'ordinamento',
+			'input_validator'		=> 'Verifica i dati inseriti',
+			'login' 				=> 'Accesso vietato, riprova nuovamente',			
+			'not_granted'			=> 'Modifica non consentita',
+			'page_cant_delete'		=> 'Impossibile eliminare questa pagina',
+			'page_created'			=> 'Impossibile creare la pagina',
+			'page_has_elements'		=> 'Questa pagina contiene ancora elementi',
+			'page_has_subpages'		=> 'Questa pagina contiene ancora sottopagine',
+			'page_lang'				=> 'Impossibile cambiare lingua',
+			'page_order'			=> 'Impossibile salvare l\'ordinamento',
+			'save'					=> 'Errore di salvataggio',
+			'session_exp'			=> 'Sessione scaduta, esegui login',
+			'unauthorized'			=> 'Accesso non autorizzato, esegui login',
+			'upload_completed'		=> 'Impossibile caricare files',
 
 		),
 
 		'success' => array(
 
 			'element_created'	=> 'Nuovo elemento creato',
+			'element_deleted'	=> 'L\'elemento è stato eliminato',
 			'element_order'		=> 'Ordine degli elementi salvato',
 			'file_created'		=> 'Nuovo file inserito correttamente',
 			'item_remove'		=> 'Questo elemento è stato rimosso',
@@ -180,14 +181,27 @@ return array(
 
 		),
 
+		'element' => array(
+
+			'settings' => array(
+
+				'label' => 'Etichetta dell\'elemento',
+				'name'	=> 'Proprietà ID dell\'elemento',
+				'zone' => 'Dove inserire questo elemento?',
+
+			),
+
+		),
+
 	),
 
 	'modal' => array(
 
 		'title' => array(
 
-			'delete_page' => 'Eliminare questa pagina?',
-			'detach_file' => 'Dissociare il file dalla pagina?',
+			'delete_page' 		=> 'Eliminare questa pagina?',
+			'detach_file' 		=> 'Dissociare il file dalla pagina?',
+			'remove_element' 	=> 'Rimuovere l\'elemento dalla pagina?',
 
 		),
 
@@ -213,8 +227,10 @@ return array(
 
 		'errors' => array(
 
+			'alpha_dash'	=> 'Questo campo può contenere solo lettere, numeri e trattini',
 			'ext_mimes'		=> 'Il formato del file non è consentito',
 			'integer'		=> 'Il valore deve essere un numero intero',
+			'is_slug'		=> 'Questo slug non è corretto. Usa il tasto.',
 			'file_size'		=> 'Questo file è superiore al limite consentito',
 			'not_image'		=> 'Non puoi inserire immagini',
 			'required' 		=> 'Questo campo è obbligatorio',

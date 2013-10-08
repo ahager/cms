@@ -1,4 +1,4 @@
-<?php namespace Pongo\Cms\Support\Validators\Page;
+<?php namespace Pongo\Cms\Support\Validators\Element;
 
 use Pongo\Cms\Support\Validators\BaseValidator;
 
@@ -10,8 +10,8 @@ class SettingsValidator extends BaseValidator {
 	 * @var array
 	 */
 	public static $rules = array(
-		'name' 			=> 'required',
-		'slug_last'  	=> 'required|is_slug',
+		'label'			=> 'required',
+		'name' 			=> 'required|alpha_dash',
 	);
 
 	/**
@@ -23,7 +23,7 @@ class SettingsValidator extends BaseValidator {
 		
 		static::$messages = array(
 			'required' => t('validation.errors.required'),
-			'is_slug' => t('validation.errors.is_slug'),
+			'alpha_dash' => t('validation.errors.alpha_dash'),
 		);
 	}
 	

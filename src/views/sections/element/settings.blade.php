@@ -31,13 +31,19 @@
 		</div>
 		<div class="form-group" rel="name">
 			<label for="name" class="control-label">{{t('label.element.settings.name')}}</label>
-			<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: elementName">
+			<div class="input-group">
+  				<span class="input-group-addon">#</span>
+				<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: elementName">
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default button" data-bind="click: createId">{{t('label.element.settings.create_id')}}</button>
+				</span>
+			</div>
 		</div>
 		<div class="form-group">
 			<label for="zone" class="control-label">{{t('label.element.settings.zone')}}</label>
 			<select name="zone" class="form-control" id="zone">
 				@foreach($zones as $zone => $name)
-				<option value="{{$zone}}"{{selected($zone, $zone_selected)}}>{{st('settings.theme.' . $zone)}}</option>
+				<option value="{{$zone}}"{{selected($zone, $zone_selected)}}>{{st('settings.theme.' . $zone, $name)}}</option>
 				@endforeach
 			</select>
 		</div>
@@ -53,7 +59,7 @@
 			</div>
 		</div>
 		<div class="form-buttons">
-			{{link_to_route('api.page.settings.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}
+			{{link_to_route('api.element.settings.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}
 			<a href="#clone-modal" class="btn btn-primary btn-block confirm">{{t('form.button.clone')}}</a>
 			<a href="#delete-modal" class="btn btn-danger btn-block pull-right confirm">{{t('form.button.delete')}}</a>
 		</div>
@@ -67,18 +73,10 @@
 
 	<div class="modal-box" id="delete-modal">
 		<button type="button" class="close close-modal">&times;</button>
-		<h3>{{t('modal.title.delete_page')}}</h3>
+		<h3>{{t('modal.title.remove_element')}}</h3>
 		<form action="{{route('api.element.settings.delete')}}" method="POST">
 			<input type="hidden" name="page_id" value="{{$pid}}">
 			<input type="hidden" name="element_id" value="{{$eid}}">
-			<div class="form-group">
-				<div class="checkbox">
-					<label class="control-label">
-						<input type="checkbox" name="force_delete" value="1">
-						{{t('label.page.settings.force_delete')}}
-					</label>
-				</div>
-			</div>
 			<div class="form-buttons">
 				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
 				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>

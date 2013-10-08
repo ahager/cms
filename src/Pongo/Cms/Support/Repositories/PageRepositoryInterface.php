@@ -12,6 +12,8 @@ interface PageRepositoryInterface {
 
 	public function deletePageElements($element);
 
+	public function detachPageElements($page, $element_id);
+
 	public function detachPageFiles($page, $file_id);
 
 	public function getPage($page_id);

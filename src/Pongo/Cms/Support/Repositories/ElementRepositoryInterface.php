@@ -2,9 +2,13 @@
 
 interface ElementRepositoryInterface {
 
+	public function countElementPages($element);
+
 	public function countElements($element, $element_id);
 
 	public function createElement($element_arr);
+
+	public function deleteElement($element);
 
 	public function getElement($element_id);
 

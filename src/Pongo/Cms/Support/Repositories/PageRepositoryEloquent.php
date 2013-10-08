@@ -29,6 +29,11 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 		return $element->pivot->delete();
 	}
 
+	public function detachPageElements($page, $element_id)
+	{
+		return $page->elements()->detach($element_id);
+	}
+
 	public function detachPageFiles($page, $file_id)
 	{
 		return $page->files()->detach($file_id);

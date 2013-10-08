@@ -84,7 +84,7 @@ if ( ! function_exists('st'))
 	 * @param  array   $parameters
 	 * @return string
 	 */
-	function st($id, $parameters = array(), $locale = null)
+	function st($id, $alias = null, $parameters = array(), $locale = null)
 	{
 		$domain = 'messages';
 		
@@ -92,7 +92,9 @@ if ( ! function_exists('st'))
 
 		$str = "site::lang.{$id}";
 
-		return app('translator')->trans($str, $parameters, $domain, $locale);
+		$trans = app('translator')->trans($str, $parameters, $domain, $locale);
+
+		return ($trans == $str and !is_null($alias)) ? $alias : $trans;
 	}
 }
 

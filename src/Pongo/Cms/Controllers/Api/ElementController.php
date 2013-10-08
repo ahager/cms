@@ -2,16 +2,33 @@
 
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
-use Config, DB, Input, Session, Str;
+
+use Pongo\Cms\Support\Validators\Element\SettingsValidator as SettingsValidator;
+
+use Alert, Config, Input, Pongo, Redirect;
 
 class ElementController extends ApiController {
 
+	/**
+	 * Default order
+	 * 
+	 * @var int
+	 */
+	private $default_order;
+
+	/**
+	 * Class constructor
+	 * @param Page    $page 
+	 * @param Element $element
+	 */
 	public function __construct(Page $page, Element $element)
 	{
 		parent::__construct();
 
 		$this->page = $page;
 		$this->element = $element;
+
+		$this->default_order = Config::get('cms::system.default_order');
 	}
 
 	public function createElement()
@@ -38,7 +55,7 @@ class ElementController extends ApiController {
 
 			$page = $this->page->getPage($pid);
 
-			$element = $this->page->savePageElement($page, $element, Config::get('cms::system.default_order'));
+			$element = $this->page->savePageElement($page, $element, $this->default_order);
 
 			$response = array(
 				'status' 	=> 'success',
@@ -61,6 +78,115 @@ class ElementController extends ApiController {
 
 		return json_encode($response);
 	}
+
+	/**
+	 * Detach an element from a page
+	 * Delete element if no other page refers to it
+	 * 
+	 * @return void
+	 */
+	public function elementSettingsDelete()
+	{
+		if(Input::has('page_id') and Input::has('element_id')) {
+
+			$pid = Input::get('page_id');
+			$eid = Input::get('element_id');
+
+			$page = $this->page->getPage($pid);
+
+			$this->page->detachPageElements($page, $eid);
+
+			$element = $this->element->getElement($eid);
+
+			$count_elements = $this->element->countElementPages($element);
+
+			Alert::success(t('alert.success.element_deleted'))->flash();
+
+			if($count_elements == 0) {
+
+				$this->element->deleteElement($element);
+
+				return Redirect::route('element.deleted');
+			}			
+
+			return Redirect::route('page.settings', array('id' => $pid));
+
+		} else {
+
+			Alert::error(t('alert.error.delete_item'))->flash();
+
+			return Redirect::route('element.settings', array('pid' => $pid, 'eid' => $eid));
+		}
+
+	}
+
+	/**
+	 * Save element settings
+	 * 
+	 * @return json object
+	 */
+	public function elementSettingsSave()
+	{
+		if(Input::has('element_id') and Input::has('page_id')) {
+
+			$input = Input::all();
+
+			$v = new SettingsValidator();
+
+			if($v->passes()) {
+
+				extract($input);
+
+				$page = $this->page->getPage($page_id);
+
+				// Author can edit the page
+				if(is_array($unauth = Pongo::grantEdit($page->role_level)))
+					return json_encode($unauth);
+
+				$element = $this->element->getElement($element_id);
+
+				$valid = isset($is_valid) ? 1 : 0;
+
+				$element->name 		= $name;
+				$element->label 	= $label;
+				$element->zone 		= $zone;
+				$element->is_valid 	= $valid;
+
+				$this->element->saveElement($element);
+
+				$response = array(
+					'status' 	=> 'success',
+					'msg'		=> t('alert.success.save'),
+					'element'	=> array(
+
+						'id'		=> $element_id,
+						'label'		=> $label,
+						'checked'	=> $valid
+
+					)
+				);
+
+			} else {
+
+				return json_encode($v->formatErrors());
+
+			}
+
+		} else {
+
+			$response = array(
+				'status' 	=> 'error',
+				'msg'		=> t('alert.error.save')
+			);
+
+		}
+
+		return json_encode($response);	
+	}
+
+
+
+
 
 	/**
 	 * Reorder page elements

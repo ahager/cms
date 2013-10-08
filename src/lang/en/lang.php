@@ -14,29 +14,30 @@ return array(
 
 		'error' => array(
 
-			'create_item'		=> 'Unable to create this item',
-			'delete_item'		=> 'Unable to delete this item',
-			'element_created'	=> 'Unable to create element',
-			'element_order'		=> 'Unable to save order',
-			'input_validator'	=> 'Check form fields',
-			'login' 			=> 'Access denied, please retry',
-			'not_granted'		=> 'Editing not allowed',
-			'page_cant_delete'	=> 'Unable to delete this page',
-			'page_created'		=> 'Unable to create page',
-			'page_has_elements'	=> 'This page still contains elements',
-			'page_has_subpages'	=> 'This page still contains subpages',
-			'page_lang'			=> 'Unable to change language',
-			'page_order'		=> 'Unable to save page order',
-			'save'				=> 'Unable to save',			
-			'session_exp'		=> 'Session expired, please login',
-			'unauthorized'		=> 'Unauthorized access, please login',
-			'upload_completed'	=> 'Unable to upload files',
+			'create_item'			=> 'Unable to create this item',
+			'delete_item'			=> 'Unable to delete this item',
+			'element_created'		=> 'Unable to create element',
+			'element_order'			=> 'Unable to save order',
+			'input_validator'		=> 'Check form fields',
+			'login' 				=> 'Access denied, please retry',
+			'not_granted'			=> 'Editing not allowed',
+			'page_cant_delete'		=> 'Unable to delete this page',
+			'page_created'			=> 'Unable to create page',
+			'page_has_elements'		=> 'This page still contains elements',
+			'page_has_subpages'		=> 'This page still contains subpages',
+			'page_lang'				=> 'Unable to change language',
+			'page_order'			=> 'Unable to save page order',
+			'save'					=> 'Unable to save',			
+			'session_exp'			=> 'Session expired, please login',
+			'unauthorized'			=> 'Unauthorized access, please login',
+			'upload_completed'		=> 'Unable to upload files',
 			
 		),
 
 		'success' => array(
 
 			'element_created'	=> 'New element created',
+			'element_deleted'	=> 'The element has been deleted',
 			'element_order'		=> 'New element order saved',
 			'file_created'		=> 'File entry successfully saved',
 			'item_remove'		=> 'This item has been removed',
@@ -180,14 +181,28 @@ return array(
 
 		),
 
+		'element' => array(
+
+			'settings' => array(
+
+				'create_id' => 'id',
+				'label' 	=> 'Element label',
+				'name'		=> 'Element ID name',
+				'zone' 		=> 'Where to insert this element?',
+
+			),
+
+		),
+
 	),
 
 	'modal' => array(
 
 		'title' => array(
 
-			'delete_page' => 'Delete this page?',
-			'detach_file' => 'Detach file from this page?',
+			'delete_page' 		=> 'Delete this page?',
+			'detach_file' 		=> 'Detach file from this page?',
+			'remove_element' 	=> 'Remove element from this page?',
 
 		),
 
@@ -213,8 +228,10 @@ return array(
 
 		'errors' => array(
 
+			'alpha_dash'	=> 'This field may only contain letters, numbers, and dashes',
 			'ext_mimes'		=> 'This file extension is not allowed',
 			'integer'		=> 'This value must be an integer',
+			'is_slug'		=> 'This slug is incorrect. Use the button.',
 			'file_size'		=> 'The file size exceeds maximum allowed',
 			'not_image'		=> 'This tool is not for images',
 			'required' 		=> 'This field is required',

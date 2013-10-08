@@ -4,6 +4,11 @@ use Pongo\Cms\Models\Element as Element;
 
 class ElementRepositoryEloquent implements ElementRepositoryInterface {
 
+	public function countElementPages($element)
+	{
+		return $element->pages->count();
+	}
+
 	public function countElements($element, $element_id)
 	{
 		return $element->pivot->where('element_id', $element_id)->count();
@@ -12,6 +17,11 @@ class ElementRepositoryEloquent implements ElementRepositoryInterface {
 	public function createElement($element_arr)
 	{
 		return Element::create($element_arr);
+	}
+
+	public function deleteElement($element)
+	{
+		return $element->delete();
 	}
 
 	public function getElement($element_id)

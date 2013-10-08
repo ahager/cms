@@ -34,6 +34,7 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	Route::get('element/settings/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@settingsElement', 'as' => 'element.settings'));
 	Route::get('element/content/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@contentElement', 'as' => 'element.content'));
 	Route::get('element/files/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@filesElement', 'as' => 'element.files'));
+	Route::get('element/deleted', array('uses' => $pongoControllers.'ElementController@deletedElement', 'as' => 'element.deleted'));
 
 	// FILE
 	Route::get('file/edit/{id}', array('uses' => $pongoControllers.'FileController@editFile', 'as' => 'file.edit'));
