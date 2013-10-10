@@ -1,6 +1,6 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Config, View;
+use Config, Pongo, View;
 
 class Theme {
 
@@ -11,9 +11,12 @@ class Theme {
 	 */
 	public $name = 'default';
 
+	/**
+	 * Class constructor
+	 */
 	public function __construct()
 	{		
-		$this->name = Config::get('cms::settings.theme');
+		$this->name = Pongo::settings('theme');
 	}
 
 	/**
@@ -25,7 +28,18 @@ class Theme {
 	public function config($key)
 	{
 		return Config::get('site::theme.'.$key);
-	}	
+	}
+
+	/**
+	 * Get layout array in theme by name
+	 * 
+	 * @param  string $name
+	 * @return array
+	 */
+	public function layout($name)
+	{
+		return $this->config('layout_' . $name);
+	}
 
 	/**
 	 * Load a theme view from themes/{theme name}

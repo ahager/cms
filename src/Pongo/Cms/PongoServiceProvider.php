@@ -29,14 +29,6 @@ class PongoServiceProvider extends ServiceProvider {
 	{
 		$this->package('pongocms/cms');
 
-		// Inclusions
-		require __DIR__.'/../../start.php';
-		require __DIR__.'/../../helpers.php';
-		require __DIR__.'/../../pongo.php';
-		require __DIR__.'/../../routes.php';
-		require __DIR__.'/../../filters.php';
-		require __DIR__.'/../../composers.php';
-
 		// Instantiate AliasLoader
 		$this->aliasLoader = AliasLoader::getInstance();
 
@@ -45,6 +37,14 @@ class PongoServiceProvider extends ServiceProvider {
 		$this->bindRepositories();
 		$this->activateFacades();
 		$this->bootCommands();
+
+		// Inclusions
+		require __DIR__.'/../../start.php';
+		require __DIR__.'/../../helpers.php';
+		require __DIR__.'/../../pongo.php';
+		require __DIR__.'/../../routes.php';
+		require __DIR__.'/../../filters.php';
+		require __DIR__.'/../../composers.php';
 	}
 
 	/**

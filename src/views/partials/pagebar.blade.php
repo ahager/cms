@@ -14,7 +14,7 @@
 			</div>
 
 			<select id="change-lang" class="form-control">
-				@foreach(Config::get('cms::settings.languages') as $lang => $label)
+				@foreach(Pongo::settings('languages') as $lang => $label)
 					<option value="{{$lang}}"{{selected($lang, LANG)}}>{{$label}}</option>
 				@endforeach
 			</select>
@@ -25,7 +25,7 @@
 			
 		</header>
 		
-		@foreach(Config::get('cms::settings.languages') as $lang => $label)
+		@foreach(Pongo::settings('languages') as $lang => $label)
 		<div class="dd" rel="{{$lang}}">	
 			
 			<ol class="dd-list">

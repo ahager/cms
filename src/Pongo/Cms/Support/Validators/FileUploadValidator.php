@@ -7,22 +7,17 @@ use Media;
 class FileUploadValidator extends BaseValidator {
 
 	/**
-	 * Validation rules
-	 * 
-	 * @var array static
-	 */
-	public static $rules = array(
-		"file_name" 	=> "unique_file",
-		"file_size"		=> "file_size",
-		"ext_mimes"		=> "ext_mimes"
-	);
-
-	/**
 	 * Auto set mimes and max upload size
 	 */
 	public function __construct($input)
 	{
 		$this->input = $this->makeFileArray($input);
+
+		static::$rules = array(
+			"file_name" 	=> "unique_file",
+			"file_size"		=> "file_size",
+			"ext_mimes"		=> "ext_mimes"
+		);
 
 		static::$messages = array(
 			'unique_file' 	=> t('validation.errors.unique_file'),

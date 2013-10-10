@@ -67,7 +67,7 @@ if ( ! function_exists('t'))
 	{
 		$domain = 'messages';
 		
-		$locale = is_null($locale) ? Config::get('cms::settings.language') : $locale;
+		$locale = is_null($locale) ? Pongo::settings('language') : $locale;
 
 		$str = "cms::lang.{$id}";
 
@@ -88,7 +88,7 @@ if ( ! function_exists('st'))
 	{
 		$domain = 'messages';
 		
-		$locale = is_null($locale) ? Config::get('cms::settings.language') : $locale;
+		$locale = is_null($locale) ? Pongo::settings('language') : $locale;
 
 		$str = "site::lang.{$id}";
 

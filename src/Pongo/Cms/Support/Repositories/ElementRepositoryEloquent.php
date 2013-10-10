@@ -29,6 +29,13 @@ class ElementRepositoryEloquent implements ElementRepositoryInterface {
 		return Element::find($element_id);
 	}
 
+	public function getElementCheck($field, $value)
+	{
+		return Element::where('lang', LANG)
+				   	  ->where($field, $value)
+				   	  ->first();
+	}
+
 	public function saveElement($element)
 	{
 		return $element->save();

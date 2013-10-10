@@ -2,7 +2,7 @@
 
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 
-use Asset, HTML, View;
+use Asset, HTML, Theme, Tool, View;
 
 class Render {
 	
@@ -48,7 +48,8 @@ class Render {
 	}
 
 	/**
-	 * Append asset to container
+	 * Append asset to wrapper
+	 * 
 	 * @param  string $container  Container name
 	 * @param  string $name       Asset name
 	 * @param  string $source     Asset source
@@ -140,6 +141,51 @@ class Render {
 	}
 
 	/**
+	 * Render a cleaned and formatted layout preview
+	 * 
+	 * @param  string $header
+	 * @param  string $layout
+	 * @param  string $footer
+	 * @return string
+	 */
+	public function layoutPreview($header, $layout, $footer)
+	{
+		$layout_view = Theme::view('layouts.' . $layout);
+
+		$layout_zones = Theme::layout($layout);
+
+		foreach ($layout_zones as $zone => $name) {
+
+			$layout_view[$zone] = st('settings.layout.' . $layout . '.' . $zone, $name);
+		}
+
+		$layout_view = strip_tags($layout_view, '<div>');
+
+		$attrib_to_remove = array('class', 'id', 'rel');
+
+		foreach ($attrib_to_remove as $attrib) {
+			
+			$attrib_values = Tool::getAllAttributes($attrib, $layout_view);
+
+			if(!empty($attrib_values)) {
+
+				foreach ($attrib_values as $value) {
+
+					if(substr($value, 0, 4) != 'col-')
+						$layout_view = str_replace(' '.$attrib.'="'.$value.'"', '', $layout_view);
+				}
+			}
+		}
+
+		$view = $this->view('partials.previews.layout');
+		$view['header'] = st('settings.header.' . $header, Theme::config('header.' . $header));
+		$view['layout'] = $layout_view;
+		$view['footer'] = st('settings.footer.' . $footer, Theme::config('footer.' . $footer));
+
+		return $view;
+	}
+
+	/**
 	 * Render page list recursively
 	 * 
 	 * @param  int $parent_id 	pages's parent id
@@ -148,11 +194,6 @@ class Render {
 	 */
 	public function pageList($parent_id, $lang, $page_id = 0)
 	{
-		/*$items = Page::where('parent_id', $parent_id)
-					 ->where('lang', $lang)
-					 ->orderBy('order_id')
-					 ->get();*/
-
 		$items = $this->page->getPageList($parent_id, $lang);
 
 		$item_view = $this->view('partials.pageitem');
@@ -173,11 +214,9 @@ class Render {
 	public function view($name, array $data = array())
 	{		
 		// Point to cms views
-		// 
 		$view_name = 'cms::' . $name;
 
 		// Set to 'default' view if view not found
-		// 
 		if ( ! View::exists($view_name)) {
 
 			$view_name_arr = explode('.', $view_name);

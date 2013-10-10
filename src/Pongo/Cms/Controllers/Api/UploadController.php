@@ -6,7 +6,7 @@ use Pongo\Cms\Support\Repositories\FileRepositoryInterface as File;
 use Pongo\Cms\Support\Validators\FileCreateValidator as FileCreateValidator;
 use Pongo\Cms\Support\Validators\FileUploadValidator as FileUploadValidator;
 
-use Config, Image, Input, Media;
+use Image, Input, Media, Pongo;
 
 class UploadController extends ApiController {
 
@@ -28,7 +28,7 @@ class UploadController extends ApiController {
 
 		$this->page = $page;
 		$this->file = $file;
-		$this->upload_path = Config::get('cms::settings.upload_path');
+		$this->upload_path = Pongo::settings('upload_path');
 	}
 
 	public function pageFilesCreate()
@@ -182,11 +182,11 @@ class UploadController extends ApiController {
 	{
 		$input = Input::all();
 
-		$pid = $input['page_id'];
-
 		$response = array();
 
-		if(!empty($input['files']) and is_array($input['files'])) {
+		if(!empty($input) and !empty($input['files']) and is_array($input['files'])) {
+
+			$pid = $input['page_id'];
 
 			$files = $input['files'];
 
@@ -220,7 +220,6 @@ class UploadController extends ApiController {
 					$response[$key]['item']['size'] = Media::formatFileSize($file_arr['size']);
 					$response[$key]['item']['edit_url'] = route('file.edit', array('id' => $new_file->id));
 					$response[$key]['item']['delete_url'] = route('api.page.files.delete', array('id' => $new_file->id));
-
 
 				} else {
 

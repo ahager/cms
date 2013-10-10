@@ -2,7 +2,7 @@
 
 use PHPImageWorkshop\ImageWorkshop as ImageWorkshop;
 
-use Config, Media, Pongo, Theme;
+use Media, Pongo, Theme;
 
 class Image {
 
@@ -37,8 +37,8 @@ class Image {
 		Pongo::memoryLimitOff();
 		
 		$this->ImageWorkshop = $imageWorkshop;
-		$this->image_quality = Config::get('cms::settings.image_quality');
-		$this->upload_path = public_path(Config::get('cms::settings.upload_path').'img');
+		$this->image_quality = Pongo::settings('image_quality');
+		$this->upload_path = public_path(Pongo::settings('upload_path').'img');
 		$this->thumb = Theme::config('thumb');
 	}
 

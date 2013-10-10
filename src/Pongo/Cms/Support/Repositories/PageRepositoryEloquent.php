@@ -69,6 +69,20 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 				   ->get();
 	}
 
+	public function getPageCheck($field, $value)
+	{
+		return Page::where('lang', LANG)
+				   ->where($field, $value)
+				   ->first();
+	}
+
+	public function getPagePath($path)
+	{
+		return Page::where('lang', LANG)
+				   ->where('slug', $path)
+				   ->first();
+	}
+
 	public function getLangHomePage()
 	{
 		return Page::where('lang', LANG)

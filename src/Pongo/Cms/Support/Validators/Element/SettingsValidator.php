@@ -5,25 +5,21 @@ use Pongo\Cms\Support\Validators\BaseValidator;
 class SettingsValidator extends BaseValidator {
 
 	/**
-	 * Validation rules
-	 * 
-	 * @var array
+	 * Validation rules and messages
 	 */
-	public static $rules = array(
-		'label'			=> 'required',
-		'name' 			=> 'required|alpha_dash',
-	);
-
-	/**
-	 * Validation messages
-	 */
-	public function __construct() {
+	public function __construct($element_id) {
 		
 		parent::__construct();
 		
+		static::$rules = array(
+			'label'	=> 'required|uniqueName:element,' . $element_id,
+			'name' 	=> 'required|alpha_dash|uniqueName:element,' . $element_id,
+		);
+
 		static::$messages = array(
-			'required' => t('validation.errors.required'),
-			'alpha_dash' => t('validation.errors.alpha_dash'),
+			'required' 		=> t('validation.errors.required'),
+			'alpha_dash' 	=> t('validation.errors.alpha_dash'),
+			'unique_name'	=> t('validation.errors.unique_name'),
 		);
 	}
 	

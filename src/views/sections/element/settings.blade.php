@@ -43,7 +43,7 @@
 			<label for="zone" class="control-label">{{t('label.element.settings.zone')}}</label>
 			<select name="zone" class="form-control" id="zone">
 				@foreach($zones as $zone => $name)
-				<option value="{{$zone}}"{{selected($zone, $zone_selected)}}>{{st('settings.theme.' . $zone, $name)}}</option>
+				<option value="{{$zone}}"{{selected($zone, $zone_selected)}}>{{st('settings.layout.' . $zone, $name)}}</option>
 				@endforeach
 			</select>
 		</div>

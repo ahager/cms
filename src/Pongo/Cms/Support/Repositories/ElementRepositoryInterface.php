@@ -12,6 +12,8 @@ interface ElementRepositoryInterface {
 
 	public function getElement($element_id);
 
+	public function getElementCheck($field, $value);
+
 	public function saveElement($element);
 
 	public function updateElementOrder($element, $order);

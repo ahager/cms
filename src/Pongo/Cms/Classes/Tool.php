@@ -4,6 +4,18 @@ use Config;
 
 class Tool {	
 
+	public function getAllAttributes($attrib, $text)
+	{
+		$regex = '/' . preg_quote($attrib) . '=([\'"])?((?(1).+?|[^\s>]+))(?(1)\1)/is';
+
+		if (preg_match_all($regex, $text, $match)) {
+
+			return $match[2];
+		}
+
+		return false;
+	}
+
 	/**
 	 * Print out class=active if true
 	 * 

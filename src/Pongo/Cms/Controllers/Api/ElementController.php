@@ -5,7 +5,7 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Pongo\Cms\Support\Validators\Element\SettingsValidator as SettingsValidator;
 
-use Alert, Config, Input, Pongo, Redirect;
+use Alert, Input, Pongo, Redirect;
 
 class ElementController extends ApiController {
 
@@ -28,7 +28,7 @@ class ElementController extends ApiController {
 		$this->page = $page;
 		$this->element = $element;
 
-		$this->default_order = Config::get('cms::system.default_order');
+		$this->default_order = Pongo::system('default_order');
 	}
 
 	public function createElement()
@@ -62,7 +62,7 @@ class ElementController extends ApiController {
 				'msg'		=> t('alert.success.element_created'),
 				'id'		=> $element->id,
 				'label'		=> $element->label,
-				'url'		=> route('element.edit', array('id' => $element->id)),
+				'url'		=> route('element.settings', array('pid' => $pid, 'eid' => $element->id)),
 				'cls'		=> 'new',
 				'counter'	=> 'up'
 			);
@@ -131,7 +131,7 @@ class ElementController extends ApiController {
 
 			$input = Input::all();
 
-			$v = new SettingsValidator();
+			$v = new SettingsValidator($input['element_id']);
 
 			if($v->passes()) {
 
@@ -183,10 +183,6 @@ class ElementController extends ApiController {
 
 		return json_encode($response);	
 	}
-
-
-
-
 
 	/**
 	 * Reorder page elements

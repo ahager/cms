@@ -230,11 +230,13 @@ return array(
 			'alpha_dash'	=> 'Questo campo può contenere solo lettere, numeri e trattini',
 			'ext_mimes'		=> 'Il formato del file non è consentito',
 			'integer'		=> 'Il valore deve essere un numero intero',
-			'is_slug'		=> 'Questo slug non è corretto. Usa il tasto.',
+			'is_slug'		=> 'Clicca il tasto per generare uno slug corretto',
 			'file_size'		=> 'Questo file è superiore al limite consentito',
 			'not_image'		=> 'Non puoi inserire immagini',
 			'required' 		=> 'Questo campo è obbligatorio',
 			'unique_file' 	=> 'Questo file è già presente nel sistema',
+			'unique_name' 	=> 'Questo nome è già presente per questa lingua',
+			'unique_slug' 	=> 'Questo slug è già presente per questa lingua',
 
 		),
 

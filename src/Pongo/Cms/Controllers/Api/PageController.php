@@ -5,7 +5,7 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Pongo\Cms\Support\Validators\Page\SettingsValidator as SettingsValidator;
 
-use Alert, Config, Input, Pongo, Redirect, Session, Str, Tool;
+use Alert, Input, Pongo, Redirect, Render, Session, Str, Tool;
 
 class PageController extends ApiController {
 
@@ -27,7 +27,7 @@ class PageController extends ApiController {
 		if(Input::has('lang')) {
 
 			$lang = Input::get('lang');
-			$label = Config::get('cms::settings.languages.'.$lang);
+			$label = Pongo::settings('languages.'.$lang);
 
 			Session::put('LANG', $lang);
 
@@ -69,7 +69,7 @@ class PageController extends ApiController {
 				'author_id' => USERID,
 				'access_level' => 0,				
 				'role_level' => LEVEL,
-				'order_id' => Config::get('cms::system.default_order'),
+				'order_id' => Pongo::system('default_order'),
 				'is_valid' => 0
 			);
 
@@ -303,6 +303,22 @@ class PageController extends ApiController {
 		return true;
 	}
 
+	/**
+	 * Change page layout preview
+	 * 
+	 * @return string html
+	 */
+	public function pageLayoutChange()
+	{
+		$input = Input::all();
+
+		if(!is_empty($input)) {
+
+			return Render::layoutPreview($input['header'], $input['layout'], $input['footer']);
+
+		}
+	}
+
 	public function pageLayoutSave()
 	{
 		$input = Input::all();
@@ -392,7 +408,7 @@ class PageController extends ApiController {
 	{
 		$input = Input::all();
 
-		$v = new SettingsValidator();
+		$v = new SettingsValidator($input['page_id']);
 
 		if($v->passes()) {
 

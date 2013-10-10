@@ -1,6 +1,6 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Config, Theme;
+use Pongo, Str, Theme;
 
 class Media {
 
@@ -25,7 +25,7 @@ class Media {
 	 */
 	public function __construct()
 	{
-		$this->upload_path = Config::get('cms::settings.upload_path');
+		$this->upload_path = Pongo::settings('upload_path');
 		$this->thumb = Theme::config('thumb');
 	}
 
@@ -110,7 +110,7 @@ class Media {
 		$extension = end($temp);
 		$temp_name = $temp[0];
 
-		$temp_name = \Str::slug($temp_name, '_');
+		$temp_name = Str::slug($temp_name, '_');
 
 		return  ($add_ext) ? $temp_name . '.' . $extension : $temp_name;
 	}
@@ -130,7 +130,7 @@ class Media {
 		$extension = end($temp);
 		$temp_name = $temp[0];
 
-		return \Str::slug($temp_name, '_') . '_' . $thumb . '.' . $extension;
+		return Str::slug($temp_name, '_') . '_' . $thumb . '.' . $extension;
 	}
 
 	/**

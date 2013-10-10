@@ -231,11 +231,13 @@ return array(
 			'alpha_dash'	=> 'This field may only contain letters, numbers, and dashes',
 			'ext_mimes'		=> 'This file extension is not allowed',
 			'integer'		=> 'This value must be an integer',
-			'is_slug'		=> 'This slug is incorrect. Use the button.',
+			'is_slug'		=> 'Click the button to generate a correct slug',
 			'file_size'		=> 'The file size exceeds maximum allowed',
 			'not_image'		=> 'This tool is not for images',
 			'required' 		=> 'This field is required',
 			'unique_file' 	=> 'This file name is already present',
+			'unique_name' 	=> 'This name is already present in this language',
+			'unique_slug' 	=> 'This slug is already present in this language',
 
 		),
 

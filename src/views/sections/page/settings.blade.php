@@ -36,11 +36,12 @@
 				</span>
 			</div>
 			<input type="hidden" name="slug_base" id="slug_base" value="{{$slug_base}}">
+			<input type="hidden" name="slug_full" value="" data-bind="value: slugFull">
 		</div>
 
-		<div class="form-group">
-			<label for="slug_last" class="control-label">{{t('label.page.settings.slug_preview')}}</label>
-			<input type="text" name="slug_last" class="form-control" id="slug_last" data-bind="value: slugFull" disabled>
+		<div class="form-group" rel="slug_full">
+			<label for="slug_full" class="control-label">{{t('label.page.settings.slug_preview')}}</label>
+			<input type="text" name="slug_full" class="form-control" id="slug_full" data-bind="value: slugFull" disabled>
 		</div>
 
 		<div class="form-group">

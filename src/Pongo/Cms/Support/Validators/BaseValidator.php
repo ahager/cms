@@ -78,7 +78,7 @@ abstract class BaseValidator {
 	 * @return bool validation result
 	 */
 	public function passes()
-	{
+	{		
 		$validation = Validator::make($this->input, static::$rules, static::$messages);
 
 		if ($validation->passes()) return true;

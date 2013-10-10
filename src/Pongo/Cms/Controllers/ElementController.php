@@ -50,6 +50,11 @@ class ElementController extends BaseController {
 		$view['zone_selected'] 	= $element->zone;		
 		$view['is_valid'] 		= $element->is_valid;
 
+		$view['template_selected'] 	= $page->template;
+		$view['header_selected'] 	= $page->header;
+		$view['layout_selected'] 	= $page->layout;
+		$view['footer_selected'] 	= $page->footer;
+
 		return $view;
 	}
 

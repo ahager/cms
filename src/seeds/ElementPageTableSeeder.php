@@ -7,7 +7,7 @@ class ElementPageTableSeeder extends Seeder {
 		// Reset table
 		DB::table('element_page')->truncate();
 
-		$order_id = Config::get('cms::system.default_order');
+		$order_id = Pongo::system('default_order');
 
 		DB::table('element_page')->insert(array(
 

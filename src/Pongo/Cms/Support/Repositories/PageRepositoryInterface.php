@@ -26,6 +26,10 @@ interface PageRepositoryInterface {
 
 	public function getPageList($parent_id, $lang);
 
+	public function getPageCheck($field, $value);
+
+	public function getPagePath($path);
+
 	public function getLangHomePage();
 
 	public function getSubPages($page_id);

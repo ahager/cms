@@ -23,8 +23,8 @@ class Pongo {
 	 */
 	public function adminRoles($roles, $reverse = false)
 	{
-		$min_access = Config::get('cms::system.min_access');
-		$role_access = Config::get('cms::system.roles.'.$min_access);
+		$min_access = $this->system('min_access');
+		$role_access = $this->system('roles.'.$min_access);
 
 		$admin_roles = array();
 
@@ -188,13 +188,35 @@ class Pongo {
 	}
 
 	/**
+	 * Get config settings values
+	 * 
+	 * @param  string $key
+	 * @return string
+	 */
+	public function settings($key)
+	{
+		return Config::get('cms::settings.' . $key);
+	}
+
+	/**
+	 * Get config system values
+	 * 
+	 * @param  string $key
+	 * @return string
+	 */
+	public function system($key)
+	{
+		return Config::get('cms::system.' . $key);
+	}
+
+	/**
 	 * Show alert wrapper
 	 * 
 	 * @return string Alert message
 	 */
 	public function showAlert()
 	{
-		$format = Config::get('cms::system.alert_tpl');
+		$format = $this->system('alert_tpl');
 
 		foreach (Alert::all($format) as $alert) {
 			return $alert;

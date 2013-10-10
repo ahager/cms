@@ -23,9 +23,9 @@
 	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
 
 	<ul class="info-list">
-		<li>{{t('label.page.files.mimes')}}: {{Config::get('cms::settings.mimes')}}</li>
+		<li>{{t('label.page.files.mimes')}}: {{Pongo::settings('mimes')}}</li>
 		<li>{{t('label.page.files.max_item')}}: 20</li>
-		<li>{{t('label.page.files.max_upload')}}: {{Config::get('cms::settings.max_upload_size')}} Mb</li>
+		<li>{{t('label.page.files.max_upload')}}: {{Pongo::settings('max_upload_size')}} Mb</li>
 	</ul>
 	
 	<div id="fileuploader">{{t('form.button.choose')}}</div>

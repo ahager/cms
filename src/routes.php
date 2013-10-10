@@ -63,6 +63,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 	
 		// LAYOUT
 		Route::any('page/layout/save', array('uses' => $apiControllers.'PageController@pageLayoutSave', 'as' => 'api.page.layout.save'));
+		Route::any('page/layout/change', array('uses' => $apiControllers.'PageController@pageLayoutChange', 'as' => 'api.page.layout.change'));
 
 		// SEO
 		Route::any('page/seo/save', array('uses' => $apiControllers.'PageController@pageSeoSave', 'as' => 'api.page.seo.save'));

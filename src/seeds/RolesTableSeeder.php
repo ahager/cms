@@ -7,7 +7,7 @@ class RolesTableSeeder extends Seeder {
 		// Reset table
 		DB::table('roles')->truncate();
 
-		$roles = Config::get('cms::system.roles');
+		$roles = Pongo::system('roles');
 
 		foreach ($roles as $name => $level) {
 

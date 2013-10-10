@@ -42,10 +42,10 @@ class PageController extends BaseController {
 
 		$view['n_elements'] = $n_elements;
 
-		$view['template_selected'] 	= $page->template;
-		$view['header_selected'] 	= $page->header;
-		$view['layout_selected'] 	= $page->layout;
-		$view['footer_selected'] 	= $page->footer;
+		$view['template_selected'] 	= !empty($page->template) ? $page->template : 'default';
+		$view['header_selected'] 	= !empty($page->header) ? $page->header : 'default';
+		$view['layout_selected'] 	= !empty($page->layout) ? $page->layout : 'default';
+		$view['footer_selected'] 	= !empty($page->footer) ? $page->footer : 'default';
 
 		return $view;
 	}
@@ -136,7 +136,7 @@ class PageController extends BaseController {
 		
 		$view['roles']			= $roles;
 		$view['admin_roles'] 	= $admin_roles;
-		$view['wrappers']		= Config::get('cms::system.wrappers');
+		$view['wrappers']		= Pongo::system('wrappers');
 		
 		$view['n_elements'] 	= $n_elements;
 
