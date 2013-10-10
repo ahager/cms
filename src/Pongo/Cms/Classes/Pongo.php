@@ -2,7 +2,7 @@
 
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 
-use Alert, Asset, Config;
+use Alert, Config, View;
 
 class Pongo {
 
@@ -221,6 +221,18 @@ class Pongo {
 		foreach (Alert::all($format) as $alert) {
 			return $alert;
 		}
+	}
+
+	/**
+	 * Share a var value with views
+	 * 
+	 * @param  string $var
+	 * @param  mixed  $value
+	 * @return void
+	 */
+	public function viewShare($var, $value)
+	{
+		return View::share($var, $value);
 	}
 
 	/**

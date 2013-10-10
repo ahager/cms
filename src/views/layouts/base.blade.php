@@ -39,7 +39,7 @@
 
 		</div>
 		
-		<footer>PongoCMS v2.0.0 &copy; Pongoweb.it</footer>
+		<!-- <footer>PongoCMS v2.0.0 &copy; Pongoweb.it</footer> -->
 
 	</div>
 

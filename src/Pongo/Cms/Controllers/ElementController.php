@@ -4,10 +4,17 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
-use Config, Pongo, Theme, Tool, Render, View;
+use HTML, Pongo, Theme, Tool, Render;
 
 class ElementController extends BaseController {
 
+	/**
+	 * Class constructor
+	 * 
+	 * @param Element $element
+	 * @param Page    $page
+	 * @param Role    $role
+	 */
 	public function __construct(Element $element, Page $page, Role $role)
 	{
 		parent::__construct();
@@ -19,6 +26,11 @@ class ElementController extends BaseController {
 		$this->role = $role;
 	}
 
+	/**
+	 * Show element deleted
+	 * 
+	 * @return string
+	 */
 	public function deletedElement()
 	{
 		return Render::view('sections.element.deleted');
@@ -34,8 +46,7 @@ class ElementController extends BaseController {
 	public function settingsElement($pid, $eid)
 	{
 		
-		// Share page id with all views
-		View::share('pageid', $pid);
+		Pongo::viewShare('pageid', $pid);
 
 		$page = $this->page->getPage($pid);
 		$element = $this->element->getElement($eid);
@@ -49,6 +60,8 @@ class ElementController extends BaseController {
 		$view['zones']			= Theme::zones($page->layout);
 		$view['zone_selected'] 	= $element->zone;		
 		$view['is_valid'] 		= $element->is_valid;
+
+		$view['page_link']		= HTML::link(route('page.settings', array('id' => $page->id)), $page->name);
 
 		$view['template_selected'] 	= $page->template;
 		$view['header_selected'] 	= $page->header;

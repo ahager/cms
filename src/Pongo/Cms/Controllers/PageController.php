@@ -3,7 +3,7 @@
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
-use Config, Pongo, Theme, Tool, Render, View;
+use Pongo, Theme, Tool, Render, View;
 
 class PageController extends BaseController {
 
@@ -24,8 +24,7 @@ class PageController extends BaseController {
 
 	public function layoutPage($id)
 	{
-		// Share page id with all views
-		View::share('pageid', $id);
+		Pongo::viewShare('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
@@ -41,6 +40,7 @@ class PageController extends BaseController {
 		$view['footers']	= Theme::config('footer');
 
 		$view['n_elements'] = $n_elements;
+		$view['page_link'] 	= '';
 
 		$view['template_selected'] 	= !empty($page->template) ? $page->template : 'default';
 		$view['header_selected'] 	= !empty($page->header) ? $page->header : 'default';
@@ -57,8 +57,7 @@ class PageController extends BaseController {
 
 	public function filesPage($id)
 	{
-		// Share page id with all views
-		View::share('pageid', $id);
+		Pongo::viewShare('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
@@ -78,8 +77,7 @@ class PageController extends BaseController {
 
 	public function seoPage($id)
 	{
-		// Share page id with all views
-		View::share('pageid', $id);
+		Pongo::viewShare('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
@@ -106,8 +104,7 @@ class PageController extends BaseController {
 	 */
 	public function settingsPage($id)
 	{
-		// Share page id with all views
-		View::share('pageid', $id);
+		Pongo::viewShare('pageid', $id);
 
 		$page = $this->page->getPage($id);
 
