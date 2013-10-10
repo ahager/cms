@@ -37,6 +37,37 @@ class ElementController extends BaseController {
 	}
 
 	/**
+	 * Show element content page
+	 *
+	 * @param  int $pid   page id
+	 * @param  int $eid   element id
+	 * @return string     view page
+	 */
+	public function contentElement($pid, $eid)
+	{
+		Pongo::viewShare('pid', $pid);
+		Pongo::viewShare('eid', $eid);
+
+		$page = $this->page->getPage($pid);
+		$element = $this->element->getElement($eid);
+
+		// Count element per page
+		$n_elements = $this->page->countPageElements($page);
+
+		$view = Render::view('sections.element.content');
+		$view['section'] 		= 'content';
+		$view['pid'] 			= $pid;
+		$view['eid'] 			= $eid;
+		$view['name']			= $element->name;
+
+		$view['page_link']		= HTML::link(route('page.settings', array('pid' => $page->id)), $page->name);
+
+		$view['n_elements'] 	= $n_elements;
+
+		return $view;
+	}
+
+	/**
 	 * Show element settings page
 	 * 
 	 * @param  int $pid   page id
@@ -46,7 +77,8 @@ class ElementController extends BaseController {
 	public function settingsElement($pid, $eid)
 	{
 		
-		Pongo::viewShare('pageid', $pid);
+		Pongo::viewShare('pid', $pid);
+		Pongo::viewShare('eid', $eid);
 
 		$page = $this->page->getPage($pid);
 		$element = $this->element->getElement($eid);
@@ -61,7 +93,7 @@ class ElementController extends BaseController {
 		$view['zone_selected'] 	= $element->zone;		
 		$view['is_valid'] 		= $element->is_valid;
 
-		$view['page_link']		= HTML::link(route('page.settings', array('id' => $page->id)), $page->name);
+		$view['page_link']		= HTML::link(route('page.settings', array('pid' => $page->id)), $page->name);
 
 		$view['template_selected'] 	= $page->template;
 		$view['header_selected'] 	= $page->header;

@@ -1,3 +1,5 @@
+{{-- */ if(!isset($eid)) $eid = 0; /* --}}
+
 <div class="element-bar">
 
 	<div class="element-body">
@@ -16,7 +18,7 @@
 
 			<ol class="dl-list">
 
-				{{Render::elementList($id)}}
+				{{Render::elementList($pid, $eid)}}
 
 			</ol>
 

@@ -1,4 +1,4 @@
-{{-- */ if(!isset($pageid)) $pageid = 0; /* --}}
+{{-- */ if(!isset($pid)) $pid = 0; /* --}}
 
 <div class="page-bar">
 
@@ -30,7 +30,7 @@
 			
 			<ol class="dd-list">
 
-				{{Render::pageList(0, $lang, $pageid)}}
+				{{Render::pageList(0, $lang, $pid)}}
 
 			</ol>
 

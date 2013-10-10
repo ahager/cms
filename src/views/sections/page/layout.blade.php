@@ -22,7 +22,7 @@
 	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
 
 	<form role="form" id="page-layout-form">
-		<input type="hidden" name="page_id" value="{{$id}}">
+		<input type="hidden" name="page_id" value="{{$pid}}">
 		<div class="form-group">
 			<label for="template" class="control-label">{{t('label.page.layout.template')}}</label>
 			<select name="template" class="form-control" id="template">

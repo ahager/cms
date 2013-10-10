@@ -22,17 +22,17 @@ class PageController extends BaseController {
 		return Render::view('sections.page.deleted');
 	}
 
-	public function layoutPage($id)
+	public function layoutPage($pid)
 	{
-		Pongo::viewShare('pageid', $id);
+		Pongo::viewShare('pid', $pid);
 
-		$page = $this->page->getPage($id);
+		$page = $this->page->getPage($pid);
 
 		$n_elements = $this->page->countPageElements($page);
 
 		$view = Render::view('sections.page.layout');
 		$view['section']	= 'layout';
-		$view['id'] 		= $id;
+		$view['pid'] 		= $pid;
 		$view['name'] 		= $page->name;
 		$view['templates']	= Theme::config('template');
 		$view['headers']	= Theme::config('header');
@@ -55,37 +55,35 @@ class PageController extends BaseController {
 		
 	}
 
-	public function filesPage($id)
+	public function filesPage($pid)
 	{
-		Pongo::viewShare('pageid', $id);
+		Pongo::viewShare('pid', $pid);
 
-		$page = $this->page->getPage($id);
+		$page = $this->page->getPage($pid);
 
 		$n_files = $this->page->countPageFiles($page);
 
 		$view = Render::view('sections.page.files');
 		$view['section']	= 'files';
-		$view['id'] 		= $id;
+		$view['pid'] 		= $pid;
 		$view['name'] 		= $page->name;
-		
-
 
 		$view['n_files'] = $n_files;
 
 		return $view;
 	}
 
-	public function seoPage($id)
+	public function seoPage($pid)
 	{
-		Pongo::viewShare('pageid', $id);
+		Pongo::viewShare('pid', $pid);
 
-		$page = $this->page->getPage($id);
+		$page = $this->page->getPage($pid);
 
 		$n_elements = $this->page->countPageElements($page);
 
 		$view = Render::view('sections.page.seo');
 		$view['section']	= 'seo';
-		$view['id'] 		= $id;
+		$view['pid'] 		= $pid;
 		$view['name'] 		= $page->name;
 		$view['title']		= $page->title;
 		$view['keyw']		= $page->keyw;
@@ -102,11 +100,11 @@ class PageController extends BaseController {
 	 * @param  int $id
 	 * @return string     view page
 	 */
-	public function settingsPage($id)
+	public function settingsPage($pid)
 	{
-		Pongo::viewShare('pageid', $id);
+		Pongo::viewShare('pid', $pid);
 
-		$page = $this->page->getPage($id);
+		$page = $this->page->getPage($pid);
 
 		// Available roles
 		$roles = $this->role->orderBy('level', 'asc');
@@ -119,7 +117,7 @@ class PageController extends BaseController {
 
 		$view = Render::view('sections.page.settings');
 		$view['section']	= 'settings';
-		$view['id'] 		= $id;
+		$view['pid'] 		= $pid;
 		$view['name'] 		= $page->name;
 		$view['slug_last'] 	= Tool::slugSlice($page->slug, 1);
 		$view['slug_base'] 	= Tool::slugBack($page->slug, 1);

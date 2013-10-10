@@ -8,7 +8,7 @@
 
 		</div>
 
-		<a href="{{route('element.settings', array('pid' => $pageid, 'eid' => $element->id))}}">
+		<a href="{{route('element.settings', array('pid' => $pid, 'eid' => $element->id))}}"{{active($element->id, $eid)}}>
 			<i class="icon-chevron-left"></i>
 		</a>
 

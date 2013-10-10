@@ -128,12 +128,11 @@ class UploadController extends ApiController {
 	 * 
 	 * @return json object
 	 */
-	public function pageFilesDelete($id)
+	public function pageFilesDelete($fid)
 	{
 
 		$input = Input::all();
 
-		$fid = $id;
 		$pid = $input['page_id'];
 
 		$force_delete = (Input::has('force_delete')) ? true : false;

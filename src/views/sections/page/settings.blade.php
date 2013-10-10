@@ -22,7 +22,7 @@
 	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
 
 	<form role="form" id="page-settings-form">
-		<input type="hidden" name="page_id" value="{{$id}}">
+		<input type="hidden" name="page_id" value="{{$pid}}">
 		<div class="form-group" rel="name">
 			<label for="name" class="control-label">{{t('label.page.settings.name')}}</label>
 			<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: itemName, valueUpdate: 'afterkeydown'">
@@ -120,7 +120,7 @@
 		<button type="button" class="close close-modal">&times;</button>
 		<h3>{{t('modal.title.delete_page')}}</h3>
 		<form action="{{route('api.page.settings.delete')}}" method="POST">
-			<input type="hidden" name="page_id" value="{{$pageid}}">
+			<input type="hidden" name="page_id" value="{{$pid}}">
 			<div class="form-group">
 				<div class="checkbox">
 					<label class="control-label">

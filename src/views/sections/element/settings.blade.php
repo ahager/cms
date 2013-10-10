@@ -32,7 +32,7 @@
 		<div class="form-group" rel="name">
 			<label for="name" class="control-label">{{t('label.element.settings.name')}}</label>
 			<div class="input-group">
-  				<span class="input-group-addon">#</span>
+				<span class="input-group-addon">#</span>
 				<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: elementName">
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default button" data-bind="click: createId">{{t('label.element.settings.create_id')}}</button>

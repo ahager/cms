@@ -55,14 +55,14 @@ class ElementController extends ApiController {
 
 			$page = $this->page->getPage($pid);
 
-			$element = $this->page->savePageElement($page, $element, $this->default_order);
+			$new_element = $this->page->savePageElement($page, $element, $this->default_order);
 
 			$response = array(
 				'status' 	=> 'success',
 				'msg'		=> t('alert.success.element_created'),
-				'id'		=> $element->id,
-				'label'		=> $element->label,
-				'url'		=> route('element.settings', array('pid' => $pid, 'eid' => $element->id)),
+				'id'		=> $new_element->id,
+				'label'		=> $new_element->label,
+				'url'		=> route('element.settings', array('pid' => $pid, 'eid' => $new_element->id)),
 				'cls'		=> 'new',
 				'counter'	=> 'up'
 			);

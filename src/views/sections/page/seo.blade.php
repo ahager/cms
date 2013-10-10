@@ -22,7 +22,7 @@
 	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
 
 	<form role="form" id="page-seo-form">
-		<input type="hidden" name="page_id" value="{{$id}}">
+		<input type="hidden" name="page_id" value="{{$pid}}">
 		<div class="form-group">
 			<label for="title" class="control-label">{{t('label.page.seo.title')}}  <span class="counter" data-bind="text: titleLen"></span></label>
 			<input type="text" name="title" class="form-control" id="title" value="{{$title}}" data-bind="value: pageTitle, valueUpdate: 'afterkeydown'">
