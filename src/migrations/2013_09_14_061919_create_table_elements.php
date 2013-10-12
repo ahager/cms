@@ -16,8 +16,8 @@ class CreateTableElements extends Migration {
 		{
 			$table->increments('id');
 			$table->string('lang', 5);
-			$table->string('name', 50);
-			$table->string('label', 50);
+			$table->string('attrib', 255);
+			$table->string('name', 255);
 			$table->text('text');
 			$table->string('zone', 10);
 			$table->integer('author_id');

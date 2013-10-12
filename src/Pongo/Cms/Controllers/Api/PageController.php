@@ -27,7 +27,7 @@ class PageController extends ApiController {
 		if(Input::has('lang')) {
 
 			$lang = Input::get('lang');
-			$label = Pongo::settings('languages.'.$lang);
+			$label = Pongo::settings('languages.' . $lang . '.lang');
 
 			Session::put('LANG', $lang);
 
@@ -61,16 +61,20 @@ class PageController extends ApiController {
 			$name = t('template.page.new', array(), $lang);
 
 			$page_arr = array(
-				'parent_id' => 0,
-				'lang' => $lang,
-				'name' => $name,
-				'slug' => '/' . Str::slug($name),
-				'title' => $name,
-				'author_id' => USERID,
-				'access_level' => 0,				
-				'role_level' => LEVEL,
-				'order_id' => Pongo::system('default_order'),
-				'is_valid' => 0
+				'parent_id' 	=> 0,
+				'lang' 			=> $lang,
+				'name' 			=> $name,
+				'slug' 			=> '/' . Str::slug($name),
+				'title' 		=> $name,
+				'template'		=> 'default',
+				'header'		=> 'default',
+				'layout'		=> 'default',
+				'footer'		=> 'default',
+				'author_id' 	=> USERID,
+				'access_level' 	=> 0,				
+				'role_level' 	=> LEVEL,
+				'order_id' 		=> Pongo::system('default_order'),
+				'is_valid' 		=> 0
 			);
 
 			$page = $this->page->createPage($page_arr);
@@ -80,7 +84,7 @@ class PageController extends ApiController {
 				'msg'		=> t('alert.success.page_created'),
 				'id'		=> $page->id,
 				'name'		=> $name,
-				'url'		=> route('page.settings', array('id' => $page->id)),
+				'url'		=> route('page.settings', array('page_id' => $page->id)),
 				'cls'		=> 'new',
 				'lang'		=> $lang
 			);
@@ -140,10 +144,10 @@ class PageController extends ApiController {
 		foreach ($pages as $key => $page_arr) {
 
 			// Get page ID
-			$pid = $page_arr['id'];
+			$page_id = $page_arr['id'];
 
 			// Update pages 1st level
-			$page = $this->page->getPage($pid);
+			$page = $this->page->getPage($page_id);
 			$page->parent_id = $parent;
 			$page->order_id = $key + 1;
 			$this->page->savePage($page);
@@ -153,7 +157,7 @@ class PageController extends ApiController {
 
 			// Recursive update
 			if(array_key_exists('children', $page_arr)) {
-				$this->updateOrderRecursivePage($page_arr['children'], $pid);
+				$this->updateOrderRecursivePage($page_arr['children'], $page_id);
 			}
 
 		}
@@ -180,11 +184,11 @@ class PageController extends ApiController {
 	{
 		if(Input::has('page_id')) {
 
-			$pid = Input::get('page_id');
+			$page_id = Input::get('page_id');
 
-			$elements = $this->page->getPageElements($pid);
+			$elements = $this->page->getPageElements($page_id);
 
-			$subpages = $this->page->getSubPages($pid);
+			$subpages = $this->page->getSubPages($page_id);
 
 			// Check if NOT force delete page
 
@@ -196,7 +200,7 @@ class PageController extends ApiController {
 
 					Alert::error(t('alert.error.page_has_elements'))->flash();
 
-					return Redirect::route('page.settings', array('id' => $pid));
+					return Redirect::route('page.settings', array('id' => $page_id));
 
 				// Has subpages
 
@@ -204,13 +208,13 @@ class PageController extends ApiController {
 
 					Alert::error(t('alert.error.page_has_subpages'))->flash();
 
-					return Redirect::route('page.settings', array('id' => $pid));
+					return Redirect::route('page.settings', array('id' => $page_id));
 
 				// It's OK, ready to delete
 
 				} else {
 
-					if($this->deletePage($pid)) {
+					if($this->deletePage($page_id)) {
 
 						Alert::success(t('alert.success.page_deleted'))->flash();
 
@@ -229,7 +233,7 @@ class PageController extends ApiController {
 
 					Alert::error(t('alert.error.page_has_subpages'))->flash();
 
-					return Redirect::route('page.settings', array('id' => $pid));
+					return Redirect::route('page.settings', array('id' => $page_id));
 
 				// It's OK, ready to delete
 
@@ -255,7 +259,7 @@ class PageController extends ApiController {
 
 					// Delete page
 
-					if($this->deletePage($pid)) {
+					if($this->deletePage($page_id)) {
 
 						Alert::success(t('alert.success.page_deleted'))->flash();
 
@@ -270,7 +274,7 @@ class PageController extends ApiController {
 
 			Alert::error(t('alert.error.page_cant_delete'))->flash();
 
-			return Redirect::route('page.settings', array('id', $pid));	
+			return Redirect::route('page.settings', array('id', $page_id));	
 		}
 
 	}

@@ -4,11 +4,11 @@
 		<div class="dl-handle">
 			
 			{{Tool::unChecked($element->is_valid)}}
-			{{$element->label}}
+			{{$element->name}}
 
 		</div>
 
-		<a href="{{route('element.settings', array('pid' => $pid, 'eid' => $element->id))}}"{{active($element->id, $eid)}}>
+		<a href="{{route('element.settings', array('page_id' => $page_id, 'element_id' => $element->id))}}"{{active($element->id, $element_id)}}>
 			<i class="icon-chevron-left"></i>
 		</a>
 

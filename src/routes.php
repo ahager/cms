@@ -23,21 +23,21 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	Route::get('dashboard', array('uses' => $pongoControllers.'DashboardController@showDashboard', 'as' => 'dashboard'));
 
 	// PAGE
-	Route::get('page/settings/{pid}', array('uses' => $pongoControllers.'PageController@settingsPage', 'as' => 'page.settings'));
-	Route::get('page/layout/{pid}', array('uses' => $pongoControllers.'PageController@layoutPage', 'as' => 'page.layout'));
-	Route::get('page/seo/{pid}', array('uses' => $pongoControllers.'PageController@seoPage', 'as' => 'page.seo'));
-	Route::get('page/files/{pid}', array('uses' => $pongoControllers.'PageController@filesPage', 'as' => 'page.files'));
-	Route::get('page/link/{pid}', array('uses' => $pongoControllers.'PageController@linkPage', 'as' => 'page.link'));
+	Route::get('page/settings/{page_id}', array('uses' => $pongoControllers.'PageController@settingsPage', 'as' => 'page.settings'));
+	Route::get('page/layout/{page_id}', array('uses' => $pongoControllers.'PageController@layoutPage', 'as' => 'page.layout'));
+	Route::get('page/seo/{page_id}', array('uses' => $pongoControllers.'PageController@seoPage', 'as' => 'page.seo'));
+	Route::get('page/files/{page_id}', array('uses' => $pongoControllers.'PageController@filesPage', 'as' => 'page.files'));
+	Route::get('page/link/{page_id}', array('uses' => $pongoControllers.'PageController@linkPage', 'as' => 'page.link'));
 	Route::get('page/deleted', array('uses' => $pongoControllers.'PageController@deletedPage', 'as' => 'page.deleted'));
 
 	// ELEMENT
-	Route::get('element/settings/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@settingsElement', 'as' => 'element.settings'));
-	Route::get('element/content/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@contentElement', 'as' => 'element.content'));
-	Route::get('element/files/{pid}/{eid}', array('uses' => $pongoControllers.'ElementController@filesElement', 'as' => 'element.files'));
+	Route::get('element/settings/{page_id}/{element_id}', array('uses' => $pongoControllers.'ElementController@settingsElement', 'as' => 'element.settings'));
+	Route::get('element/content/{page_id}/{element_id}', array('uses' => $pongoControllers.'ElementController@contentElement', 'as' => 'element.content'));
+	Route::get('element/files/{page_id}/{element_id}', array('uses' => $pongoControllers.'ElementController@filesElement', 'as' => 'element.files'));
 	Route::get('element/deleted', array('uses' => $pongoControllers.'ElementController@deletedElement', 'as' => 'element.deleted'));
 
 	// FILE
-	Route::get('file/edit/{fid}', array('uses' => $pongoControllers.'FileController@editFile', 'as' => 'file.edit'));
+	Route::get('file/edit/{file_id}', array('uses' => $pongoControllers.'FileController@editFile', 'as' => 'file.edit'));
 
 });
 
@@ -71,7 +71,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 		// FILES
 		Route::any('page/files/upload', array('uses' => $apiControllers.'UploadController@pageFilesUpload', 'as' => 'api.page.files.upload'));
 		Route::any('page/files/create', array('uses' => $apiControllers.'UploadController@pageFilesCreate', 'as' => 'api.page.files.create'));
-		Route::any('page/files/delete/{fid}', array('uses' => $apiControllers.'UploadController@pageFilesDelete', 'as' => 'api.page.files.delete'));
+		Route::any('page/files/delete/{file_id}', array('uses' => $apiControllers.'UploadController@pageFilesDelete', 'as' => 'api.page.files.delete'));
 
 	// ELEMENT
 	Route::any('element/order', array('uses' => $apiControllers.'ElementController@orderElements', 'as' => 'api.element.order'));
@@ -82,7 +82,8 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 		Route::any('element/settings/clone', array('uses' => $apiControllers.'ElementController@elementSettingsClone', 'as' => 'api.element.settings.clone'));
 		Route::any('element/settings/delete', array('uses' => $apiControllers.'ElementController@elementSettingsDelete', 'as' => 'api.element.settings.delete'));
 	
-
+		// CONTENT
+		Route::any('element/content/save', array('uses' => $apiControllers.'ElementController@elementContentSave', 'as' => 'api.element.content.save'));
 
 });
 

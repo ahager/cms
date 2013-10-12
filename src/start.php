@@ -13,5 +13,5 @@ define('ROLEID', Session::get('ROLEID'));
 define('ROLENAME', Session::get('ROLENAME'));
 define('LEVEL', Session::get('LEVEL'));
 define('LANG', Session::get('LANG'));
-define('INTERFACE', Session::get('INTERFACE', Config::get('cms::settings.language')));
+define('CMSLANG', Session::get('CMSLANG', Config::get('cms::settings.language')));
 define('EDITOR', Session::get('EDITOR'));

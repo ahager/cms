@@ -3,7 +3,7 @@
 
 		<div class="box">
 
-			<h2>{{$page_link}} <span data-bind="text: itemName">{{$name}}</span></h2>
+			<h2><em>{{strtoupper(LANG)}}</em> {{$page_link}} <span data-bind="text: itemName">{{$name}}</span></h2>
 
 		</div>
 

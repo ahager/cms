@@ -45,6 +45,7 @@
 
 	{{Render::asset('bower_components/jquery/jquery.js')}}
 	{{Render::asset('bower_components/underscore/underscore.js')}}
+	{{Render::asset('scripts/plugins/detectmobilebrowser.js')}}
 	{{Render::asset('scripts/plugins/nestable.js')}}
 	{{Render::asset('scripts/pongo.js')}}
 	@section('footer-js')

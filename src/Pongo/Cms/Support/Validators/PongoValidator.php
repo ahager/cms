@@ -115,11 +115,11 @@ class PongoValidator extends LaravelValidator {
 
 	public function validateUniqueSlug($attribute, $value, $parameters)
 	{
-		$pid = $parameters[0];
+		$page_id = $parameters[0];
 
 		$page = $this->page->getPagePath($value);
 
-		return (!is_empty($page) and $pid != $page->id) ? false : true;
+		return (!is_empty($page) and $page_id != $page->id) ? false : true;
 	}
 
 }

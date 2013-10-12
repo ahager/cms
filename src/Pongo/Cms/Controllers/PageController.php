@@ -22,17 +22,17 @@ class PageController extends BaseController {
 		return Render::view('sections.page.deleted');
 	}
 
-	public function layoutPage($pid)
+	public function layoutPage($page_id)
 	{
-		Pongo::viewShare('pid', $pid);
+		Pongo::viewShare('page_id', $page_id);
 
-		$page = $this->page->getPage($pid);
+		$page = $this->page->getPage($page_id);
 
 		$n_elements = $this->page->countPageElements($page);
 
 		$view = Render::view('sections.page.layout');
 		$view['section']	= 'layout';
-		$view['pid'] 		= $pid;
+		$view['page_id'] 	= $page_id;
 		$view['name'] 		= $page->name;
 		$view['templates']	= Theme::config('template');
 		$view['headers']	= Theme::config('header');
@@ -55,41 +55,43 @@ class PageController extends BaseController {
 		
 	}
 
-	public function filesPage($pid)
+	public function filesPage($page_id)
 	{
-		Pongo::viewShare('pid', $pid);
+		Pongo::viewShare('page_id', $page_id);
 
-		$page = $this->page->getPage($pid);
+		$page = $this->page->getPage($page_id);
 
 		$n_files = $this->page->countPageFiles($page);
 
 		$view = Render::view('sections.page.files');
 		$view['section']	= 'files';
-		$view['pid'] 		= $pid;
+		$view['page_id'] 	= $page_id;
 		$view['name'] 		= $page->name;
 
-		$view['n_files'] = $n_files;
+		$view['n_files'] 	= $n_files;
+		$view['page_link'] 	= '';
 
 		return $view;
 	}
 
-	public function seoPage($pid)
+	public function seoPage($page_id)
 	{
-		Pongo::viewShare('pid', $pid);
+		Pongo::viewShare('page_id', $page_id);
 
-		$page = $this->page->getPage($pid);
+		$page = $this->page->getPage($page_id);
 
 		$n_elements = $this->page->countPageElements($page);
 
 		$view = Render::view('sections.page.seo');
 		$view['section']	= 'seo';
-		$view['pid'] 		= $pid;
+		$view['page_id'] 	= $page_id;
 		$view['name'] 		= $page->name;
 		$view['title']		= $page->title;
 		$view['keyw']		= $page->keyw;
 		$view['descr']		= $page->descr;
 
 		$view['n_elements'] = $n_elements;
+		$view['page_link'] 	= '';
 
 		return $view;
 	}
@@ -100,11 +102,11 @@ class PageController extends BaseController {
 	 * @param  int $id
 	 * @return string     view page
 	 */
-	public function settingsPage($pid)
+	public function settingsPage($page_id)
 	{
-		Pongo::viewShare('pid', $pid);
+		Pongo::viewShare('page_id', $page_id);
 
-		$page = $this->page->getPage($pid);
+		$page = $this->page->getPage($page_id);
 
 		// Available roles
 		$roles = $this->role->orderBy('level', 'asc');
@@ -117,7 +119,7 @@ class PageController extends BaseController {
 
 		$view = Render::view('sections.page.settings');
 		$view['section']	= 'settings';
-		$view['pid'] 		= $pid;
+		$view['page_id'] 	= $page_id;
 		$view['name'] 		= $page->name;
 		$view['slug_last'] 	= Tool::slugSlice($page->slug, 1);
 		$view['slug_base'] 	= Tool::slugBack($page->slug, 1);
@@ -134,6 +136,7 @@ class PageController extends BaseController {
 		$view['wrappers']		= Pongo::system('wrappers');
 		
 		$view['n_elements'] 	= $n_elements;
+		$view['page_link'] 	= '';
 
 		return $view;
 	}

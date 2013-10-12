@@ -12,7 +12,7 @@
 
 			<ol class="dn-list">
 
-				{{Render::fileList($pid)}}
+				{{Render::fileList($page_id)}}
 
 			</ol>
 

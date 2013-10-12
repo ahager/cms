@@ -185,10 +185,10 @@ return array(
 
 			'settings' => array(
 
-				'create_id' => 'id',
-				'label' 	=> 'Element label',
-				'name'		=> 'Element ID name',
-				'zone' 		=> 'Where to insert this element?',
+				'attrib'		=> 'Element ID attribute',
+				'create_attrib' => 'id',
+				'name' 			=> 'Element name',				
+				'zone' 			=> 'Where to insert this element?',
 
 			),
 

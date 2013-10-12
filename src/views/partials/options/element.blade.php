@@ -10,13 +10,13 @@
 
 		<ul class="options list-unstyled">
 			<li{{active('settings', $section)}}>
-				<a href="{{route('element.settings', array('pid' => $pid, 'eid' => $eid))}}">{{t('heading.page.settings_title')}}</a>
+				<a href="{{route('element.settings', array('page_id' => $page_id, 'element_id' => $element_id))}}">{{t('heading.page.settings_title')}}</a>
 			</li>
 			<li{{active('content', $section)}}>
-				<a href="{{route('element.content', array('pid' => $pid, 'eid' => $eid))}}">{{t('heading.element.content_title')}}</a>
+				<a href="{{route('element.content', array('page_id' => $page_id, 'element_id' => $element_id))}}">{{t('heading.element.content_title')}}</a>
 			</li>
 			<li{{active('files', $section)}}>
-				<a href="{{route('element.files', array('pid' => $pid, 'eid' => $eid))}}">{{t('heading.page.files_title')}}</a>
+				<a href="{{route('element.files', array('page_id' => $page_id, 'element_id' => $element_id))}}">{{t('heading.page.files_title')}}</a>
 			</li>
 		</ul>
 

@@ -54,7 +54,7 @@ class LoginController extends BaseController {
 		Session::put('ROLENAME', Auth::user()->role->name);
 		Session::put('LEVEL', Auth::user()->role->level);
 		Session::put('LANG', Auth::user()->lang);
-		Session::put('INTERFACE', Auth::user()->lang);
+		Session::put('CMSLANG', Auth::user()->lang);
 		Session::put('EDITOR', Auth::user()->editor);
 	}
 

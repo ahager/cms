@@ -1,4 +1,4 @@
-{{-- */ if(!isset($pid)) $pid = 0; /* --}}
+{{-- */ if(!isset($page_id)) $page_id = 0; /* --}}
 
 <div class="page-bar">
 
@@ -14,8 +14,8 @@
 			</div>
 
 			<select id="change-lang" class="form-control">
-				@foreach(Pongo::settings('languages') as $lang => $label)
-					<option value="{{$lang}}"{{selected($lang, LANG)}}>{{$label}}</option>
+				@foreach(Pongo::settings('languages') as $lang_key => $lang)
+					<option value="{{$lang_key}}"{{selected($lang_key, LANG)}}>{{$lang['lang']}}</option>
 				@endforeach
 			</select>
 
@@ -25,12 +25,12 @@
 			
 		</header>
 		
-		@foreach(Pongo::settings('languages') as $lang => $label)
-		<div class="dd" rel="{{$lang}}">	
+		@foreach(Pongo::settings('languages') as $lang_key => $lang)
+		<div class="dd" rel="{{$lang_key}}">	
 			
 			<ol class="dd-list">
 
-				{{Render::pageList(0, $lang, $pid)}}
+				{{Render::pageList(0, $lang_key, $page_id)}}
 
 			</ol>
 

@@ -109,17 +109,17 @@ class Render {
 	/**
 	 * Create element list by page_id
 	 * 
-	 * @param  int $pid    page id
-	 * @param  int $eid    element id
+	 * @param  int $page_id    page id
+	 * @param  int $element_id    element id
 	 * @return string      element item view
 	 */
-	public function elementList($pid, $eid = 0)
+	public function elementList($page_id, $element_id = 0)
 	{
-		$items = $this->page->getPageElements($pid);
+		$items = $this->page->getPageElements($page_id);
 
 		$item_view = $this->view('partials.elementitem');
 		$item_view['items'] = $items;
-		$item_view['eid'] = $eid;
+		$item_view['element_id'] = $element_id;
 
 		return $item_view;
 	}
@@ -130,9 +130,9 @@ class Render {
 	 * @param  int $page_id    page id
 	 * @return string          file item view
 	 */
-	public function fileList($pid)
+	public function fileList($page_id)
 	{
-		$items = $this->page->getPageFiles($pid);
+		$items = $this->page->getPageFiles($page_id);
 
 		$item_view = $this->view('partials.fileitem');
 		$item_view['items'] = $items;
@@ -192,13 +192,13 @@ class Render {
 	 * @param  string $lang 	available languages
 	 * @return string           page item view
 	 */
-	public function pageList($parent_id, $lang, $pid = 0)
+	public function pageList($parent_id, $lang, $page_id = 0)
 	{
 		$items = $this->page->getPageList($parent_id, $lang);
 
 		$item_view = $this->view('partials.pageitem');
 		$item_view['items'] = $items;
-		$item_view['pid'] = $pid;
+		$item_view['page_id'] = $page_id;
 		$item_view['parent_id'] = $parent_id;
 
 		return $item_view;

@@ -38,7 +38,7 @@
 	</ul>
 
 	<form role="form" id="page-files-form">
-		<input type="hidden" name="page_id" value="{{$pid}}">
+		<input type="hidden" name="page_id" value="{{$page_id}}">
 		<div class="form-group size" rel="file_size">
 			<label for="file_size" class="control-label">{{t('label.page.files.file_size')}}</label>
 			<input type="text" name="file_size" class="form-control" id="file_size">
@@ -65,7 +65,7 @@
 		<button type="button" class="close close-modal">&times;</button>
 		<h3>{{t('modal.title.detach_file')}}</h3>
 		<form method="POST">
-			<input type="hidden" name="page_id" value="{{$pid}}">
+			<input type="hidden" name="page_id" value="{{$page_id}}">
 			<div class="form-group">
 				<div class="checkbox">
 					<label class="control-label">

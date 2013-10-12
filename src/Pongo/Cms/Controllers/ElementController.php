@@ -21,9 +21,9 @@ class ElementController extends BaseController {
 
 		$this->beforeFilter('pongo.auth');
 
-		$this->element = $element;
-		$this->page = $page;
-		$this->role = $role;
+		$this->element 	= $element;
+		$this->page 	= $page;
+		$this->role 	= $role;
 	}
 
 	/**
@@ -39,28 +39,29 @@ class ElementController extends BaseController {
 	/**
 	 * Show element content page
 	 *
-	 * @param  int $pid   page id
-	 * @param  int $eid   element id
+	 * @param  int $page_id   page id
+	 * @param  int $element_id   element id
 	 * @return string     view page
 	 */
-	public function contentElement($pid, $eid)
+	public function contentElement($page_id, $element_id)
 	{
-		Pongo::viewShare('pid', $pid);
-		Pongo::viewShare('eid', $eid);
+		Pongo::viewShare('page_id', $page_id);
+		Pongo::viewShare('element_id', $element_id);
 
-		$page = $this->page->getPage($pid);
-		$element = $this->element->getElement($eid);
+		$page 		= $this->page->getPage($page_id);
+		$element 	= $this->element->getElement($element_id);
 
 		// Count element per page
 		$n_elements = $this->page->countPageElements($page);
 
 		$view = Render::view('sections.element.content');
 		$view['section'] 		= 'content';
-		$view['pid'] 			= $pid;
-		$view['eid'] 			= $eid;
+		$view['page_id'] 		= $page_id;
+		$view['element_id'] 	= $element_id;
 		$view['name']			= $element->name;
+		$view['text']			= $element->text;
 
-		$view['page_link']		= HTML::link(route('page.settings', array('pid' => $page->id)), $page->name);
+		$view['page_link']		= HTML::link(route('page.settings', array('page_id' => $page->id)), $page->name);
 
 		$view['n_elements'] 	= $n_elements;
 
@@ -70,35 +71,35 @@ class ElementController extends BaseController {
 	/**
 	 * Show element settings page
 	 * 
-	 * @param  int $pid   page id
-	 * @param  int $eid   element id
+	 * @param  int $page_id   page id
+	 * @param  int $element_id   element id
 	 * @return string     view page
 	 */
-	public function settingsElement($pid, $eid)
+	public function settingsElement($page_id, $element_id)
 	{
 		
-		Pongo::viewShare('pid', $pid);
-		Pongo::viewShare('eid', $eid);
+		Pongo::viewShare('page_id', $page_id);
+		Pongo::viewShare('element_id', $element_id);
 
-		$page = $this->page->getPage($pid);
-		$element = $this->element->getElement($eid);
+		$page 		= $this->page->getPage($page_id);
+		$element 	= $this->element->getElement($element_id);
 
 		$view = Render::view('sections.element.settings');
 		$view['section'] 		= 'settings';
-		$view['pid'] 			= $pid;
-		$view['eid'] 			= $eid;
+		$view['page_id'] 		= $page_id;
+		$view['element_id'] 	= $element_id;
 		$view['name']			= $element->name;
-		$view['label']			= $element->label;
+		$view['attrib']			= $element->attrib;
 		$view['zones']			= Theme::zones($page->layout);
 		$view['zone_selected'] 	= $element->zone;		
 		$view['is_valid'] 		= $element->is_valid;
 
-		$view['page_link']		= HTML::link(route('page.settings', array('pid' => $page->id)), $page->name);
+		$view['page_link']		= HTML::link(route('page.settings', array('page_id' => $page->id)), $page->name);
 
-		$view['template_selected'] 	= $page->template;
-		$view['header_selected'] 	= $page->header;
-		$view['layout_selected'] 	= $page->layout;
-		$view['footer_selected'] 	= $page->footer;
+		$view['template_selected'] 	= !empty($page->template) ? $page->template : 'default';
+		$view['header_selected'] 	= !empty($page->header) ? $page->header : 'default';
+		$view['layout_selected'] 	= !empty($page->layout) ? $page->layout : 'default';
+		$view['footer_selected'] 	= !empty($page->footer) ? $page->footer : 'default';
 
 		return $view;
 	}

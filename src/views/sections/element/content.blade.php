@@ -14,20 +14,26 @@
 
 @section('footer-js')
 	@parent
-	{{Render::asset('scripts/vm/element/settings.js')}}
+	{{Render::asset('scripts/tinymce/tinymce.min.js')}}
+	{{Render::asset('scripts/sections/element.js')}}
+	{{Render::asset('scripts/vm/element/content.js')}}
 @stop
 
 @section('content')
 	
-	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
+	<h3>{{t('heading.element.'.$section.'_title')}}</h3>
 
 	<form role="form" id="element-content-form">
-		<input type="hidden" name="page_id" value="{{$pid}}">
-		<input type="hidden" name="element_id" value="{{$eid}}">
-
+		<input type="hidden" name="page_id" value="{{$page_id}}">
+		<input type="hidden" name="element_id" value="{{$element_id}}">
+		<input type="hidden" id="name" value="{{$name}}">
+		
+		<div class="form-group">
+			<textarea name="text" class="form-control" id="text">{{$text}}</textarea>
+		</div>
 
 		<div class="form-buttons">
-			{{link_to_route('api.element.settings.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}
+			{{link_to_route('api.element.content.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api pull-right'))}}
 
 		</div>
 	</form>

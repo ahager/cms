@@ -35,7 +35,7 @@ class UploadController extends ApiController {
 	{
 		$input = Input::all();
 
-		$pid = $input['page_id'];
+		$page_id = $input['page_id'];
 
 		if(isset($input['file_name']) and isset($input['file_size'])) {
 
@@ -73,7 +73,7 @@ class UploadController extends ApiController {
 				// Write into db
 				$new_file = $this->file->createFile($file_arr);
 
-				$page = $this->page->getPage($pid);
+				$page = $this->page->getPage($page_id);
 
 				$file_page = $this->page->savePageFile($page, $new_file);
 
@@ -99,8 +99,8 @@ class UploadController extends ApiController {
 						'thumb' 		=> Image::showThumb($new_file->path),
 						'ext' 			=> $file_arr['ext'],
 						'size'			=> Media::formatFileSize($file_arr['size']),
-						'edit_url'		=> route('file.edit', array('id' => $new_file->id)),
-						'delete_url'	=> route('api.page.files.delete', array('id' => $new_file->id))
+						'edit_url'		=> route('file.edit', array('file_id' => $new_file->id)),
+						'delete_url'	=> route('api.page.files.delete', array('file_id' => $new_file->id))
 
 					),
 
@@ -128,22 +128,22 @@ class UploadController extends ApiController {
 	 * 
 	 * @return json object
 	 */
-	public function pageFilesDelete($fid)
+	public function pageFilesDelete($file_id)
 	{
 
 		$input = Input::all();
 
-		$pid = $input['page_id'];
+		$page_id = $input['page_id'];
 
 		$force_delete = (Input::has('force_delete')) ? true : false;
 
-		if(isset($pid)) {
+		if(isset($page_id)) {
 
-			$page = $this->page->getPage($pid);
+			$page = $this->page->getPage($page_id);
 
-			$this->page->detachPageFiles($page, $fid);
+			$this->page->detachPageFiles($page, $file_id);
 
-			$file = $this->file->getFile($fid);
+			$file = $this->file->getFile($file_id);
 
 			$count_pages = $this->file->countFilePages($file);
 
@@ -157,7 +157,7 @@ class UploadController extends ApiController {
 			$response = array(
 				'status' 	=> 'success',
 				'msg'		=> t('alert.success.item_remove'),
-				'remove'	=> $fid
+				'remove'	=> $file_id
 			);
 
 		} else {
@@ -185,7 +185,7 @@ class UploadController extends ApiController {
 
 		if(!empty($input) and !empty($input['files']) and is_array($input['files'])) {
 
-			$pid = $input['page_id'];
+			$page_id = $input['page_id'];
 
 			$files = $input['files'];
 
@@ -204,7 +204,7 @@ class UploadController extends ApiController {
 					// Write into db
 					$new_file = $this->file->createFile($file_arr);
 
-					$page = $this->page->getPage($pid);
+					$page = $this->page->getPage($page_id);
 
 					$file_page = $this->page->savePageFile($page, $new_file);
 
@@ -217,8 +217,8 @@ class UploadController extends ApiController {
 					$response[$key]['item']['thumb'] = Image::showThumb($new_file->path);
 					$response[$key]['item']['ext'] = $file_arr['ext'];
 					$response[$key]['item']['size'] = Media::formatFileSize($file_arr['size']);
-					$response[$key]['item']['edit_url'] = route('file.edit', array('id' => $new_file->id));
-					$response[$key]['item']['delete_url'] = route('api.page.files.delete', array('id' => $new_file->id));
+					$response[$key]['item']['edit_url'] = route('file.edit', array('file_id' => $new_file->id));
+					$response[$key]['item']['delete_url'] = route('api.page.files.delete', array('file_id' => $new_file->id));
 
 				} else {
 

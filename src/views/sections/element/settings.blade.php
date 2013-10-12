@@ -22,20 +22,20 @@
 	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
 
 	<form role="form" id="element-settings-form">
-		<input type="hidden" name="page_id" value="{{$pid}}">
-		<input type="hidden" name="element_id" value="{{$eid}}">
+		<input type="hidden" name="page_id" value="{{$page_id}}">
+		<input type="hidden" name="element_id" value="{{$element_id}}">
 
-		<div class="form-group" rel="label">
-			<label for="label" class="control-label">{{t('label.element.settings.label')}}</label>
-			<input type="text" name="label" class="form-control" id="label" value="{{$label}}" data-bind="value: itemName, valueUpdate: 'afterkeydown'">
-		</div>
 		<div class="form-group" rel="name">
 			<label for="name" class="control-label">{{t('label.element.settings.name')}}</label>
+			<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: itemName, valueUpdate: 'afterkeydown'">
+		</div>
+		<div class="form-group" rel="attrib">
+			<label for="attrib" class="control-label">{{t('label.element.settings.attrib')}}</label>
 			<div class="input-group">
 				<span class="input-group-addon">#</span>
-				<input type="text" name="name" class="form-control" id="name" value="{{$name}}" data-bind="value: elementName">
+				<input type="text" name="attrib" class="form-control" id="attrib" value="{{$attrib}}" data-bind="value: elementAttrib">
 				<span class="input-group-btn">
-					<button type="button" class="btn btn-default button" data-bind="click: createId">{{t('label.element.settings.create_id')}}</button>
+					<button type="button" class="btn btn-default button" data-bind="click: createAttrib">{{t('label.element.settings.create_attrib')}}</button>
 				</span>
 			</div>
 		</div>
@@ -75,8 +75,8 @@
 		<button type="button" class="close close-modal">&times;</button>
 		<h3>{{t('modal.title.remove_element')}}</h3>
 		<form action="{{route('api.element.settings.delete')}}" method="POST">
-			<input type="hidden" name="page_id" value="{{$pid}}">
-			<input type="hidden" name="element_id" value="{{$eid}}">
+			<input type="hidden" name="page_id" value="{{$page_id}}">
+			<input type="hidden" name="element_id" value="{{$element_id}}">
 			<div class="form-buttons">
 				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
 				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>

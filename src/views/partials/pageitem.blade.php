@@ -16,7 +16,7 @@
 
 		</div>
 		
-		<a href="{{route('page.settings', array('pid' => $item->id))}}"{{active($item->id, $pid)}}>
+		<a href="{{route('page.settings', array('page_id' => $item->id))}}"{{active($item->id, $page_id)}}>
 			
 			<i class="icon-chevron-right"></i>
 
@@ -24,7 +24,7 @@
 
 		@if($item->id > 0)
 
-			{{Render::pageList($item->id, $item->lang, $pid)}}
+			{{Render::pageList($item->id, $item->lang, $page_id)}}
 
 		@endif
 

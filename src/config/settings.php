@@ -17,14 +17,28 @@ return array(
 	'language' => 'en',
 
 	/**
-	 * PongoCMS :: Available languages
+	 * PongoCMS :: Available languages and directionality (ltr | rtl)
+	 *
+	 * Check http://www.tinymce.com/i18n/index.php for locale file.
 	 */
 	
 	'languages' => array(
 
-		'en' => 'English',
+		'en' => array(
 
-		'it' => 'Italiano',
+			'lang' 		=> 'English',
+			'locale'	=> 'en',
+			'dir'		=> 'ltr',
+
+		),
+
+		'it' => array(
+
+			'lang' 		=> 'Italiano',
+			'locale'	=> 'it',
+			'dir'		=> 'ltr',
+
+		),
 
 	),
 

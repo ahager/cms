@@ -94,7 +94,7 @@ class Media {
 	{
 		$temp = explode('.', $file_name);
 
-		return end($temp);
+		return strtolower(end($temp));
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Media {
 	public function formatFileName($file_name, $add_ext = true)
 	{
 		$temp = explode('.', $file_name);
-		$extension = end($temp);
+		$extension = strtolower(end($temp));
 		$temp_name = $temp[0];
 
 		$temp_name = Str::slug($temp_name, '_');

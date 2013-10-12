@@ -95,7 +95,7 @@ return array(
 		'element' => array(
 
 			'bar_title' 	=> 'Elementi di pagina',
-			'content_title' => 'Contenuto',
+			'content_title' => 'Contenuti',
 
 		),
 
@@ -185,9 +185,10 @@ return array(
 
 			'settings' => array(
 
-				'label' => 'Etichetta dell\'elemento',
-				'name'	=> 'Proprietà ID dell\'elemento',
-				'zone' => 'Dove inserire questo elemento?',
+				'attrib'		=> 'Attributo ID dell\'elemento',
+				'create_attrib' => 'id',
+				'name' 			=> 'Nome dell\'elemento',				
+				'zone' 			=> 'Dove inserire questo elemento?',
 
 			),
 
