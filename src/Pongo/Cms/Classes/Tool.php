@@ -4,6 +4,13 @@ use Config;
 
 class Tool {	
 
+	/**
+	 * Find attributes in a html tag string
+	 * 
+	 * @param  string $attrib
+	 * @param  string $text
+	 * @return string
+	 */
 	public function getAllAttributes($attrib, $text)
 	{
 		$regex = '/' . preg_quote($attrib) . '=([\'"])?((?(1).+?|[^\s>]+))(?(1)\1)/is';
@@ -39,8 +46,6 @@ class Tool {
 	{
 		return ($var == $fix) ? ' checked="checked"' : '';
 	}
-
-	
 
 	/**
 	 * Print out selected=selected if true

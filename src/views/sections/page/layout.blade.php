@@ -14,7 +14,7 @@
 
 @section('footer-js')
 	@parent
-	{{--Render::asset('scripts/viewmodels/page/layout.js')--}}
+	{{Render::asset('scripts/vm/page/layout.js')}}
 @stop
 
 @section('content')

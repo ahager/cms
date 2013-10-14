@@ -1,8 +1,8 @@
 {{-- */ if(!isset($element_id)) $element_id = 0; /* --}}
 
-<div class="element-bar">
+<div class="right-bar">
 
-	<div class="element-body">
+	<div class="right-body">
 
 		<header>
 

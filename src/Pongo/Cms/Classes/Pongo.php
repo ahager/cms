@@ -92,6 +92,16 @@ class Pongo {
 	}
 
 	/**
+	 * Get markers from config markers
+	 * 
+	 * @return array
+	 */
+	public function markers()
+	{
+		return Config::get('cms::markers');
+	}
+
+	/**
 	 * Turn off PHP memory limit
 	 * 
 	 * @return void

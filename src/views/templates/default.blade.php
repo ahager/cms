@@ -17,6 +17,8 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	
 	{{Render::asset('styles/main.css')}}
+	@section('header-js')
+	@show
 	{{Render::styles('header')}}
 
 	{{Render::asset('bower_components/modernizr/modernizr.js')}}

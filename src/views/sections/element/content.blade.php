@@ -1,7 +1,7 @@
 @extends('cms::layouts.base')
 
 @section('element-bar')
-	@include('cms::partials.rightbars.elementbar')
+	@include('cms::partials.rightbars.contentbar')
 @stop
 
 @section('option-bar')
@@ -12,8 +12,15 @@
 	@include('cms::partials.subbars.element')
 @stop
 
+@section('header-js')
+	@parent
+	{{Render::asset('styles/magnific-popup.css')}}
+@stop
+
 @section('footer-js')
 	@parent
+	{{Render::asset('scripts/plugins/jquery.uploadfile.js')}}
+	{{Render::asset('scripts/plugins/magnific-popup.js')}}
 	{{Render::asset('scripts/tinymce/tinymce.min.js')}}
 	{{Render::asset('scripts/sections/element.js')}}
 	{{Render::asset('scripts/vm/element/content.js')}}

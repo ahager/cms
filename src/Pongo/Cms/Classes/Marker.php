@@ -1,8 +1,37 @@
 <?php namespace Pongo\Cms\Classes;
 
-use App;
+use App, Pongo, Render;
 
 class Marker {
+
+	/**
+	 * Marker settings
+	 * 
+	 * @var string
+	 */
+	public $settings;
+
+	/**
+	 * Class constructor
+	 */
+	public function __construct()
+	{		
+		$this->settings = Pongo::markers();
+	}
+
+	/**
+	 * Print marker api
+	 * 
+	 * @param  string $marker
+	 * @return string
+	 */
+	public function api($marker)
+	{
+		$view = Render::view('partials.markerapi');
+		$view['apis'] = $this->settings[$marker]['api'];
+
+		return $view;
+	}
 
 	/**
 	 * Decode Marker string text
@@ -35,12 +64,13 @@ class Marker {
 				$found = strip_tags($found);
 				$found = html_entity_decode($found);
 
-				$v = json_decode($found, true);
+				// Try to decode Json $found
+				$result = json_decode($found, true);
 
-				if ( ! is_array($v) ) $v = array();
+				// Check if $found is Json otherwise format it and return
+				$vars = !is_null($result) ? $result : $this->formatNotJson($found);
 
-				// Get JSON variables
-				$vars = $v;
+				if ( ! is_array($vars) ) $vars = array();
 
 				$decoded = $this->$method($vars);
 
@@ -53,6 +83,28 @@ class Marker {
 		}
 
 		return $decoded;
+	}
+
+	/**
+	 * Print marker default
+	 * 
+	 * @param  string $marker
+	 * @return string
+	 */
+	public function defaults($marker)
+	{
+		return $this->settings[$marker]['default'];
+	}
+
+	/**
+	 * Print marker description
+	 * 
+	 * @param  string $marker
+	 * @return string
+	 */
+	public function description($marker)
+	{
+		return t('marker.' . strtolower($marker) . '.description');
 	}
 
 	/**
@@ -75,6 +127,42 @@ class Marker {
 
 		// Run instance
 		return $marker->run();
+	}
+
+	/**
+	 * Format string found and return like a json
+	 * 
+	 * @param  string $string_found
+	 * @return array
+	 */
+	protected function formatNotJson($string_found)
+	{
+		$variables = explode('|', $string_found);
+
+		$format = array();
+
+		foreach ($variables as $variable) {
+			
+			$values = explode(':', $variable);
+
+			$name 	= $values[0];
+			$value 	= $values[1];
+				
+			$format[$name] = $value;
+		}
+
+		return $format;
+	}
+
+	/**
+	 * Print mandatory or optional
+	 * 
+	 * @param  bool  $value
+	 * @return string
+	 */
+	public function isMandatory($value)
+	{
+		return $value ? t('marker._api.mandatory') : t('marker._api.optional');
 	}
 
 	/**

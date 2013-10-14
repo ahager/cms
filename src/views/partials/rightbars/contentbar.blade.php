@@ -3,25 +3,53 @@
 <div class="right-bar">
 
 	<div class="right-body multi">
-	
+		
 		<ul class="multi-panel">
 
 			<li>
 
 				<header>
 
-					<h2>{{t('heading.layout.bar_title')}}</h2>
+					<h2>{{t('heading.file.bar_title')}}</h2>
+
+					<div id="fileuploader">{{t('form.button.upload_files')}}</div>
 
 				</header>
 
-				<div id="template-wrapper">
-					{{Render::layoutPreview($header_selected, $layout_selected, $footer_selected)}}
+				<div class="dn">
+
+					<ol class="dn-list list">
+
+						{{Render::fileList($page_id, 'action')}}
+
+					</ol>
+
 				</div>
 
 			</li>
 
 			<li>
-				
+
+				<header>
+
+					<h2>{{t('heading.marker.bar_title')}}</h2>
+
+				</header>
+
+				<div class="dn">
+
+					<ol class="dn-list">
+
+						{{Render::markerList()}}
+
+					</ol>
+
+				</div>
+
+			</li>
+
+			<li>
+
 				<header>
 
 					<h2>{{t('heading.element.bar_title')}}</h2>
@@ -51,8 +79,11 @@
 	<footer>
 			
 		<ul class="toolbar">
-			<li class="active"><a href="#"><i class="icon-desktop"></i></a></li>
+			<li class="active"><a href="#"><i class="icon-picture"></i></a></li>
+			<li><a href="#"><i class="icon-rocket"></i></a></li>
 			<li><a href="#"><i class="icon-sort-by-attributes"></i></a></li>
+			
+			
 		</ul>
 
 	</footer>

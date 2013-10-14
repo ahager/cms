@@ -94,14 +94,19 @@ class UploadController extends ApiController {
 
 					'item'		=> array(
 
+						'action'		=> 'edit',
 						'file_id' 		=> $new_file->id,
 						'file_name' 	=> Media::formatFileName($file_arr['name'], false),
 						'thumb' 		=> Image::showThumb($new_file->path),
+						'thumb_url' 	=> route('file.edit', array('file_id' => $new_file->id)),
+						'thumb_class'	=> '',
 						'ext' 			=> $file_arr['ext'],
 						'size'			=> Media::formatFileSize($file_arr['size']),
 						'edit_url'		=> route('file.edit', array('file_id' => $new_file->id)),
-						'delete_url'	=> route('api.page.files.delete', array('file_id' => $new_file->id))
-
+						'delete_url'	=> route('api.page.files.delete', array('file_id' => $new_file->id)),
+						'edit_class'	=> 'edit',
+						'data_default' 	=> '',
+						'data_tag' 		=> ''
 					),
 
 				);
@@ -187,6 +192,8 @@ class UploadController extends ApiController {
 
 			$page_id = $input['page_id'];
 
+			$action = $input['action'];
+
 			$files = $input['files'];
 
 			$has_errors = false;
@@ -211,14 +218,32 @@ class UploadController extends ApiController {
 					$response[$key]['status'] = 'success';
 					$response[$key]['icon'] = 'icon-ok success';
 
+					$is_image = Media::isImage($new_file->name);
+
 					// Fill json data for each list element
+					$response[$key]['item']['action'] = $action;
 					$response[$key]['item']['file_id'] = $new_file->id;
 					$response[$key]['item']['file_name'] = Media::formatFileName($file_arr['name'], false);
 					$response[$key]['item']['thumb'] = Image::showThumb($new_file->path);
+					$response[$key]['item']['thumb_url'] = ($is_image) ? $new_file->path : route('file.edit', array('file_id' => $new_file->id));;
+					$response[$key]['item']['thumb_class'] = ($is_image) ? 'popup' : '';
 					$response[$key]['item']['ext'] = $file_arr['ext'];
-					$response[$key]['item']['size'] = Media::formatFileSize($file_arr['size']);
+					$response[$key]['item']['size'] = Media::getFileInfo($new_file);
 					$response[$key]['item']['edit_url'] = route('file.edit', array('file_id' => $new_file->id));
 					$response[$key]['item']['delete_url'] = route('api.page.files.delete', array('file_id' => $new_file->id));
+					$response[$key]['item']['edit_class'] = 'edit';
+					$response[$key]['item']['data_default'] = '';
+					$response[$key]['item']['data_tag'] = '';
+
+					// Additional data
+					if($action == 'insert') {
+
+						$response[$key]['item']['edit_class'] = 'edit insert';
+						$response[$key]['item']['edit_url'] = ($is_image) ? '#image' : '#file';
+						$response[$key]['item']['data_default'] = asset($new_file->path);
+						$response[$key]['item']['data_tag'] = ($is_image) ? 'img' : '';
+
+					}
 
 				} else {
 

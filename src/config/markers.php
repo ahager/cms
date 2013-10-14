@@ -3,10 +3,33 @@
 return array(
 
 	/**
-	 * Available Marker Classes
+	 * Available Marker settings
 	 */
 
-	'BACK' => 'Pongo\Cms\Classes\Markers\BackMarker',
-	'IMAGE' => 'Pongo\Cms\Classes\Markers\ImageMarker',
+	'BACK' => array(
+
+		'api' 		=> array(),
+
+		'class' 	=> 'Pongo\Cms\Classes\Markers\BackMarker',
+
+		'default' 	=> '[$BACK[]]',
+
+	),
+
+	'IMAGE' => array(
+
+		'api'		=> array(
+
+			'file' 	=> array('file_name', 'str', true),
+			'w'		=> array('width', 'int', false),
+			'h'		=> array('height', 'int', false),
+
+		),
+
+		'class'		=> 'Pongo\Cms\Classes\Markers\ImageMarker',
+
+		'default' 	=> '[$IMAGE[file:{file name}]]',
+
+	),
 
 );

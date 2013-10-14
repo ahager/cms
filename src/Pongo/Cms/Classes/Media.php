@@ -153,6 +153,17 @@ class Media {
 	}
 
 	/**
+	 * Get file info
+	 * 
+	 * @param  object $file
+	 * @return string
+	 */
+	public function getFileInfo($file)
+	{
+		return ($file->is_image) ? $file->w . ' x ' . $file->h : $this->formatFileSize($file->size);
+	}
+
+	/**
 	 * Get real path of a file
 	 * 
 	 * @param  string $file_name
@@ -192,6 +203,17 @@ class Media {
 		$path_arr = explode('/', public_path());
 
 		return '/' . end($path_arr).($path ? '/'.$path : $path);;
+	}
+
+	/**
+	 * Get http path of a file
+	 * 
+	 * @param  string $file_name
+	 * @return string
+	 */
+	public function getHttpPath($file_path)
+	{
+		return asset($file_path);
 	}
 
 	/**

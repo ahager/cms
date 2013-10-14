@@ -12,8 +12,14 @@
 	@include('cms::partials.subbars.file')
 @stop
 
+@section('header-js')
+	@parent
+	{{Render::asset('styles/magnific-popup.css')}}
+@stop
+
 @section('footer-js')
 	@parent
+	{{Render::asset('scripts/plugins/magnific-popup.js')}}
 	{{Render::asset('scripts/plugins/jquery.uploadfile.js')}}
 	{{Render::asset('scripts/vm/page/files.js')}}
 @stop

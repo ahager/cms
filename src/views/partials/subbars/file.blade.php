@@ -15,7 +15,7 @@
 			@if($n_files > 0)
 			<span class="label label-primary counter">{{$n_files}}</span>
 			@endif
-			<i class="icon-th"></i>
+			<i class="icon-picture"></i>
 		</button>
 
 	</div>

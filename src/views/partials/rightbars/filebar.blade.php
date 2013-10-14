@@ -1,6 +1,6 @@
-<div class="element-bar">
+<div class="right-bar">
 
-	<div class="element-body">
+	<div class="right-body">
 
 		<header>
 
@@ -10,7 +10,7 @@
 
 		<div class="dn">
 
-			<ol class="dn-list">
+			<ol class="dn-list list">
 
 				{{Render::fileList($page_id)}}
 

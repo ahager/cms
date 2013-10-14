@@ -93,10 +93,20 @@ class ElementController extends ApiController {
 	{
 		if(Input::has('element_id') and Input::has('page_id')) {
 
-			$element_id = Input::get('element_id');
-			$page_id = Input::get('page_id');
-			$text = Input::get('text');
+			$page_id 	= Input::get('page_id');
+			$element_id = Input::get('element_id');			
+			$text 		= Input::get('text');
 
+			$element = $this->element->getElement($element_id);
+
+			$element->text = $text;
+
+			$this->element->saveElement($element);
+
+			$response = array(
+				'status' 	=> 'success',
+				'msg'		=> t('alert.success.save')
+			);
 
 		} else {
 
@@ -120,7 +130,7 @@ class ElementController extends ApiController {
 	{
 		if(Input::has('page_id') and Input::has('element_id')) {
 
-			$page_id = Input::get('page_id');
+			$page_id 	= Input::get('page_id');
 			$element_id = Input::get('element_id');
 
 			$page = $this->page->getPage($page_id);
@@ -187,14 +197,7 @@ class ElementController extends ApiController {
 
 				$response = array(
 					'status' 	=> 'success',
-					'msg'		=> t('alert.success.save'),
-					'element'	=> array(
-
-						'id'		=> $element_id,
-						'name'		=> $name,
-						'checked'	=> $valid
-
-					)
+					'msg'		=> t('alert.success.save')
 				);
 
 			} else {

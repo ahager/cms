@@ -13,6 +13,12 @@
 
 	<h1>Dashboard</h1>
 
+	{{MARKER('[$IMAGE[{"file":"test.jpg", "value":"1"}]]')}}
 
+	{{MARKER('[$IMAGE[file:test.jpg|value:1]]')}}
+
+	{{MARKER('[$IMAGE[file:test.jpg]]')}}
+
+	{{MARKER('[$IMAGE[file:test.jpg|value1:1|value2:2]]')}}
 
 @stop

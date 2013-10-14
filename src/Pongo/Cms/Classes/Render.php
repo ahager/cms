@@ -2,7 +2,7 @@
 
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 
-use Asset, HTML, Theme, Tool, View;
+use Asset, HTML, Pongo, Theme, Tool, View;
 
 class Render {
 	
@@ -118,8 +118,8 @@ class Render {
 		$items = $this->page->getPageElements($page_id);
 
 		$item_view = $this->view('partials.elementitem');
-		$item_view['items'] = $items;
-		$item_view['element_id'] = $element_id;
+		$item_view['items'] 		= $items;
+		$item_view['element_id'] 	= $element_id;
 
 		return $item_view;
 	}
@@ -127,15 +127,17 @@ class Render {
 	/**
 	 * Create file list by page_id
 	 * 
-	 * @param  int $page_id    page id
-	 * @return string          file item view
+	 * @param  int     $page_id    page id
+	 * @param  string  $action     insert | edit
+	 * @return string              file item view
 	 */
-	public function fileList($page_id)
+	public function fileList($page_id, $action = 'edit')
 	{
 		$items = $this->page->getPageFiles($page_id);
 
 		$item_view = $this->view('partials.fileitem');
-		$item_view['items'] = $items;
+		$item_view['items']		= $items;
+		$item_view['action']	= $action;
 
 		return $item_view;
 	}
@@ -186,6 +188,21 @@ class Render {
 	}
 
 	/**
+	 * Create marker list
+	 * 
+	 * @return string      element item view
+	 */
+	public function markerList()
+	{
+		$items = Pongo::markers();
+
+		$item_view = $this->view('partials.markeritem');
+		$item_view['items'] = $items;
+
+		return $item_view;
+	}
+
+	/**
 	 * Render page list recursively
 	 * 
 	 * @param  int $parent_id 	pages's parent id
@@ -197,8 +214,8 @@ class Render {
 		$items = $this->page->getPageList($parent_id, $lang);
 
 		$item_view = $this->view('partials.pageitem');
-		$item_view['items'] = $items;
-		$item_view['page_id'] = $page_id;
+		$item_view['items'] 	= $items;
+		$item_view['page_id'] 	= $page_id;
 		$item_view['parent_id'] = $parent_id;
 
 		return $item_view;

@@ -56,16 +56,17 @@ return array(
 
 		'button' => array(
 
-			'cancel'	=> 'Cancel',
-			'choose'	=> 'Select files',
-			'clone'		=> 'Clone',
-			'create'	=> 'Create',
-			'element' 	=> 'Element',
-			'delete'	=> 'Delete',
-			'ok'		=> 'Ok',
-			'page' 		=> 'Page',
-			'save'		=> 'Save',
-			'upload'	=> 'Start upload',
+			'cancel'		=> 'Cancel',
+			'choose'		=> 'Select files',
+			'clone'			=> 'Clone',
+			'create'		=> 'Create',
+			'element' 		=> 'Element',
+			'delete'		=> 'Delete',
+			'ok'			=> 'Ok',
+			'page' 			=> 'Page',
+			'save'			=> 'Save',
+			'upload'		=> 'Start upload',
+			'upload_files'	=> 'Upload files',
 
 		),
 
@@ -108,6 +109,12 @@ return array(
 		'layout' => array(
 
 			'bar_title' => 'Content layout',
+
+		),
+
+		'marker' => array(
+
+			'bar_title' => 'Markers',
 
 		),
 
@@ -191,6 +198,33 @@ return array(
 				'zone' 			=> 'Where to insert this element?',
 
 			),
+
+		),
+
+	),
+	
+	'marker' => array(
+
+		'_api' => array(
+
+			'file_name' => 'file name',
+			'height'	=> 'height',
+			'mandatory' => 'mandatory',
+			'none'		=> 'no options',
+			'optional'	=> 'optional',
+			'width'		=> 'width',
+
+		),
+
+		'back' => array(
+
+			'description' => 'Create a link to the previous page',
+
+		),
+
+		'image'	=> array(
+
+			'description' => 'Render an image by its name',
 
 		),
 

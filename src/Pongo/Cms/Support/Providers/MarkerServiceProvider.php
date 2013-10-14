@@ -1,8 +1,9 @@
 <?php namespace Pongo\Cms\Support\Providers;
 
-use Config;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader as AliasLoader;
+
+use Config;
 
 class MarkerServiceProvider extends ServiceProvider {
 
@@ -15,10 +16,12 @@ class MarkerServiceProvider extends ServiceProvider {
 	{
 		$app = $this->app;
 
-		// Bind Markers according with cms::system.markers
-		foreach (Config::get('cms::markers') as $methodName => $className) {
+		// Bind Markers according with cms::markers
+		foreach (Config::get('cms::markers') as $methodName => $marker) {
 
-			$app->bind($methodName, function() use ($className) { return new $className; });
+			$markerClass = $marker['class'];
+
+			$app->bind($methodName, function() use ($markerClass) { return new $markerClass; });
 
 		}
 	}
