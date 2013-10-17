@@ -15,9 +15,6 @@
 			<li{{active('content', $section)}}>
 				<a href="{{route('element.content', array('page_id' => $page_id, 'element_id' => $element_id))}}">{{t('heading.element.content_title')}}</a>
 			</li>
-			<li{{active('files', $section)}}>
-				<a href="{{route('element.files', array('page_id' => $page_id, 'element_id' => $element_id))}}">{{t('heading.page.files_title')}}</a>
-			</li>
 		</ul>
 
 	</div>

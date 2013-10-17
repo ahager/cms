@@ -91,7 +91,7 @@
 		<div class="form-buttons">
 			{{link_to_route('api.page.settings.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}
 			<a href="#clone-modal" class="btn btn-primary btn-block confirm">{{t('form.button.clone')}}</a>
-			<a href="#delete-modal" class="btn btn-danger btn-block pull-right confirm">{{t('form.button.delete')}}</a>
+			<a href="#delete-modal" class="btn btn-danger btn-block confirm">{{t('form.button.delete')}}</a>
 		</div>
 	</form>
 
@@ -102,16 +102,36 @@
 @section('modal')
 	
 	<div class="modal-box" id="clone-modal">
-		<button type="button" class="close">&times;</button>
-		<h3>Clone this page</h3>
-		<form action="{{route('api.page.settings.clone')}}">
+		<button type="button" class="close  close-modal">&times;</button>
+		<h3>{{t('modal.title.clone_page')}}</h3>
+		<form action="{{route('api.page.settings.clone')}}" method="POST">
+			<input type="hidden" name="page_id" value="{{$page_id}}">
 			<div class="form-group">
-				<label for="access_level" class="control-label">{{t('label.page.settings.browse_by')}}</label>
-				<select name="access_level" class="form-control" id="access_level">
-					@foreach($roles as $role)
-					<option value="{{$role->level}}"{{selected($role->level, $access_level)}}>{{t('form.select.' . $role->name)}}</option>
+				<label for="lang" class="control-label">{{t('label.page.settings.choose_lang')}}</label>
+				<select name="lang" class="form-control" id="lang">
+					@foreach($languages as $code => $name)
+					<option value="{{$code}}">{{$name['lang']}}</option>
 					@endforeach
 				</select>
+			</div>			
+			<div class="form-group">
+				<label class="checkbox-inline">
+					<input type="checkbox" id="clone_all"> {{t('label.page.settings.check_all_ele')}}
+				</label>
+				<label class="checkbox-inline">
+					<input type="checkbox" name="media_all" value="1"> {{t('label.page.settings.media_all')}}
+				</label>
+			</div>
+			<div class="form-group cloning">
+				<div class="cloning page">
+					<ol class="second">
+						{{Render::elementForm($page_id)}}
+					</ol>
+				</div>
+			</div>
+			<div class="form-buttons">
+				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>
+				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
 			</div>
 		</form>
 	</div>
@@ -130,8 +150,8 @@
 				</div>
 			</div>
 			<div class="form-buttons">
-				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
 				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>
+				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
 			</div>
 		</form>
 

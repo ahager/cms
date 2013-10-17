@@ -121,6 +121,65 @@ class ElementController extends ApiController {
 	}
 
 	/**
+	 * Clone one or more elements to page
+	 * 
+	 * @return void
+	 */
+	public function elementSettingsClone()
+	{
+		if(Input::has('pages') and Input::has('element_id')) {
+
+			$pages = Input::get('pages');
+
+			$self_elements = Input::get('self_elements');
+
+			$element_id = Input::get('element_id');
+
+			$element = $this->element->getElement($element_id);
+
+			foreach ($pages as $page_id) {
+				
+				// Check if element is separated
+				if(isset($self_elements[$page_id])) {
+
+					// Duplicate element
+					$new_element_arr = $element->getAttributes();
+
+					// Remove id and time_stamps
+					unset($new_element_arr['id'], $new_element_arr['created_at'], $new_element_arr['updated_at']);
+
+					$new_element_arr['is_valid'] = 0;
+
+					$new_element = $this->element->createElement($new_element_arr);
+
+					$page = $this->page->getPage($page_id);
+
+					$new_element = $this->page->savePageElement($page, $new_element, $this->default_order);
+					
+
+				} else {
+
+					// Clone element
+					$this->element->attachIfNotElementPage($element, $page_id, $this->default_order);
+
+				}
+
+			}
+
+			Alert::success(t('alert.success.element_cloned'))->flash();
+
+			return Redirect::back();
+
+		} else {
+
+			Alert::error(t('alert.error.clone_element'))->flash();
+
+			return Redirect::back();
+		}
+
+	}
+
+	/**
 	 * Detach an element from a page
 	 * Delete element if no other page refers to it
 	 * 
@@ -131,11 +190,12 @@ class ElementController extends ApiController {
 		if(Input::has('page_id') and Input::has('element_id')) {
 
 			$page_id 	= Input::get('page_id');
+
 			$element_id = Input::get('element_id');
 
 			$page = $this->page->getPage($page_id);
 
-			$this->page->detachPageElements($page, $element_id);
+			$this->page->detachPageElement($page, $element_id);
 
 			$element = $this->element->getElement($element_id);
 
@@ -150,13 +210,13 @@ class ElementController extends ApiController {
 				return Redirect::route('element.deleted');
 			}			
 
-			return Redirect::route('page.settings', array('id' => $page_id));
+			return Redirect::route('page.settings', array('page_id' => $page_id));
 
 		} else {
 
 			Alert::error(t('alert.error.delete_item'))->flash();
 
-			return Redirect::route('element.settings', array('page_id' => $page_id, 'element_id' => $element_id));
+			return Redirect::back();
 		}
 
 	}
@@ -197,7 +257,14 @@ class ElementController extends ApiController {
 
 				$response = array(
 					'status' 	=> 'success',
-					'msg'		=> t('alert.success.save')
+					'msg'		=> t('alert.success.save'),
+					'element'	=> array(
+
+						'id' 		=> $element_id,
+						'name'		=> $name,
+						'checked' 	=> $valid
+						
+					)
 				);
 
 			} else {

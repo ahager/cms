@@ -80,9 +80,9 @@
 					</label>
 				</div>
 			</div>
-			<div class="form-buttons">
-				<a href="" class="btn btn-danger api">{{t('form.button.ok')}}</a>
+			<div class="form-buttons">				
 				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>
+				<a href="" class="btn btn-danger api">{{t('form.button.ok')}}</a>
 			</div>
 		</form>
 

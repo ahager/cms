@@ -4,6 +4,11 @@ use Pongo\Cms\Models\Page as Page;
 
 class PageRepositoryEloquent implements PageRepositoryInterface {
 
+	public function attachPageFiles($page, $file_id)
+	{
+		return $page->files()->attach($file_id);
+	}
+
 	public function countPageElements($page)
 	{
 		return $page->elements->count();
@@ -29,14 +34,19 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 		return $element->pivot->delete();
 	}
 
-	public function detachPageElements($page, $element_id)
+	public function detachPageElement($page, $element_id)
 	{
 		return $page->elements()->detach($element_id);
 	}
 
-	public function detachPageFiles($page, $file_id)
+	public function detachPageFile($page, $file_id)
 	{
 		return $page->files()->detach($file_id);
+	}
+
+	public function detachPageFiles($page)
+	{
+		return $page->files()->detach();
 	}
 
 	public function getPage($page_id)

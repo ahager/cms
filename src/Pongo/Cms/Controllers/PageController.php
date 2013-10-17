@@ -138,6 +138,8 @@ class PageController extends BaseController {
 		$view['n_elements'] 	= $n_elements;
 		$view['page_link'] 	= '';
 
+		$view['languages']	= Pongo::settings('languages');
+
 		return $view;
 	}
 

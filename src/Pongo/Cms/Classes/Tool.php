@@ -24,6 +24,18 @@ class Tool {
 	}
 
 	/**
+	 * Add class= .. active if true
+	 * 
+	 * @param  string $var 
+	 * @param  string $fix 
+	 * @return bool
+	 */
+	public function addActive($var, $fix)
+	{
+		return ($var == $fix) ? ' active' : '';
+	}
+
+	/**
 	 * Print out class=active if true
 	 * 
 	 * @param  string $var 

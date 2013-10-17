@@ -51,8 +51,8 @@ class ElementController extends BaseController {
 		$page 		= $this->page->getPage($page_id);
 		$element 	= $this->element->getElement($element_id);
 
-		// Count element per page
-		$n_elements = $this->page->countPageElements($page);
+		// Count files per page
+		$n_files = $this->page->countPageFiles($page);
 
 		$view = Render::view('sections.element.content');
 		$view['section'] 		= 'content';
@@ -63,7 +63,7 @@ class ElementController extends BaseController {
 
 		$view['page_link']		= HTML::link(route('page.settings', array('page_id' => $page->id)), $page->name);
 
-		$view['n_elements'] 	= $n_elements;
+		$view['n_files'] 		= $n_files;
 
 		return $view;
 	}

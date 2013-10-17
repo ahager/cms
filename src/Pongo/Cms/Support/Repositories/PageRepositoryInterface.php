@@ -2,6 +2,8 @@
 
 interface PageRepositoryInterface {
 
+	public function attachPageFiles($page, $file_id);
+
 	public function countPageElements($page);
 
 	public function countPageFiles($page);
@@ -10,12 +12,14 @@ interface PageRepositoryInterface {
 
 	public function deletePage($page);
 
-	public function deletePageElements($element);
+	public function deletePageElements($element);	
 
-	public function detachPageElements($page, $element_id);
+	public function detachPageElement($page, $element_id);
 
-	public function detachPageFiles($page, $file_id);
+	public function detachPageFile($page, $file_id);
 
+	public function detachPageFiles($page);
+	
 	public function getPage($page_id);
 
 	public function getPageBySlug($slug);

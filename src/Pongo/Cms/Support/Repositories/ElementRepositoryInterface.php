@@ -2,6 +2,8 @@
 
 interface ElementRepositoryInterface {
 
+	public function attachIfNotElementPage($element, $page_id, $order);
+
 	public function countElementPages($element);
 
 	public function countElements($element, $element_id);
@@ -9,6 +11,8 @@ interface ElementRepositoryInterface {
 	public function createElement($element_arr);
 
 	public function deleteElement($element);
+
+	public function duplicateElement($element);
 
 	public function getElement($element_id);
 

@@ -146,7 +146,7 @@ class UploadController extends ApiController {
 
 			$page = $this->page->getPage($page_id);
 
-			$this->page->detachPageFiles($page, $file_id);
+			$this->page->detachPageFile($page, $file_id);
 
 			$file = $this->file->getFile($file_id);
 

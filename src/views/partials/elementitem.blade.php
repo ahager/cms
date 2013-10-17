@@ -4,7 +4,7 @@
 		<div class="dl-handle">
 			
 			{{Tool::unChecked($element->is_valid)}}
-			{{$element->name}}
+			<span>{{$element->name}}</span>
 
 		</div>
 

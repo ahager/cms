@@ -9,7 +9,7 @@
 @stop
 
 @section('subbar')
-	@include('cms::partials.subbars.element')
+	@include('cms::partials.subbars.file')
 @stop
 
 @section('header-js')
@@ -40,7 +40,7 @@
 		</div>
 
 		<div class="form-buttons">
-			{{link_to_route('api.element.content.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api pull-right'))}}
+			{{link_to_route('api.element.content.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}
 
 		</div>
 	</form>
@@ -51,6 +51,25 @@
 
 @section('modal')
 
+	<div class="modal-box" id="delete-modal">
+		<button type="button" class="close close-modal">&times;</button>
+		<h3>{{t('modal.title.detach_file')}}</h3>
+		<form method="POST">
+			<input type="hidden" name="page_id" value="{{$page_id}}">
+			<div class="form-group">
+				<div class="checkbox">
+					<label class="control-label">
+						<input type="checkbox" name="force_delete" value="1">
+						{{t('label.page.files.force_delete')}}
+					</label>
+				</div>
+			</div>
+			<div class="form-buttons">
+				<a href="" class="btn btn-danger api">{{t('form.button.ok')}}</a>
+				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>
+			</div>
+		</form>
 
+	</div>
 
 @stop

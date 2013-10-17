@@ -14,6 +14,8 @@ return array(
 
 		'error' => array(
 
+			'clone_element'			=> 'Unable to clone element',
+			'clone_page'			=> 'Unable to clone page',
 			'create_item'			=> 'Unable to create this item',
 			'delete_item'			=> 'Unable to delete this item',
 			'element_created'		=> 'Unable to create element',
@@ -36,11 +38,13 @@ return array(
 
 		'success' => array(
 
+			'element_cloned'	=> 'Element successfully cloned',
 			'element_created'	=> 'New element created',
 			'element_deleted'	=> 'The element has been deleted',
 			'element_order'		=> 'New element order saved',
 			'file_created'		=> 'File entry successfully saved',
 			'item_remove'		=> 'This item has been removed',
+			'page_cloned'		=> 'Page successfully cloned',
 			'page_created'		=> 'New page created',
 			'page_deleted'		=> 'The page has been deleted',
 			'page_order'		=> 'New page order saved',
@@ -145,11 +149,16 @@ return array(
 			'settings' => array(
 
 				'browse_by' 	=> 'Who can visit this?',
+				'check_all_ele' => 'All page elements',
+				'choose_lang'	=> 'In which language to clone this page?',
+				'clone'			=> '[CLONATO]',
 				'create_slug' 	=> 'Slug',
 				'edit_by' 		=> 'Who can edit this?',
 				'force_delete'	=> 'Delete page and detach all elements',
 				'may_contain'	=> 'What can contain?',
+				'media_all'		=> 'All page files',
 				'name' 			=> 'Page name',
+				'page_include'	=> 'Include also',
 				'set_hp' 		=> 'Home Page',
 				'slug' 			=> 'Page slug',
 				'slug_preview'	=> 'Slug preview',
@@ -192,10 +201,12 @@ return array(
 
 			'settings' => array(
 
-				'attrib'		=> 'Element ID attribute',
-				'create_attrib' => 'id',
-				'name' 			=> 'Element name',				
-				'zone' 			=> 'Where to insert this element?',
+				'attrib'			=> 'Element ID attribute',
+				'create_attrib' 	=> 'id',
+				'name' 				=> 'Element name',
+				'page_target'		=> 'Attach the cloned element to page',
+				'self_element' 		=> 'Un-link',
+				'zone' 				=> 'Where to insert this element?',
 
 			),
 
@@ -234,9 +245,11 @@ return array(
 
 		'title' => array(
 
+			'clone_element'		=> 'Clone this element?',
+			'clone_page'		=> 'Clone this page?',
 			'delete_page' 		=> 'Delete this page?',
 			'detach_file' 		=> 'Detach file from this page?',
-			'remove_element' 	=> 'Remove element from this page?',
+			'detach_element' 	=> 'Detach element from page?',
 
 		),
 

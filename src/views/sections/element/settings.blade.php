@@ -61,7 +61,7 @@
 		<div class="form-buttons">
 			{{link_to_route('api.element.settings.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}
 			<a href="#clone-modal" class="btn btn-primary btn-block confirm">{{t('form.button.clone')}}</a>
-			<a href="#delete-modal" class="btn btn-danger btn-block pull-right confirm">{{t('form.button.delete')}}</a>
+			<a href="#delete-modal" class="btn btn-danger btn-block confirm">{{t('form.button.delete')}}</a>
 		</div>
 	</form>
 
@@ -73,13 +73,35 @@
 
 	<div class="modal-box" id="delete-modal">
 		<button type="button" class="close close-modal">&times;</button>
-		<h3>{{t('modal.title.remove_element')}}</h3>
+		<h3>{{t('modal.title.detach_element')}}</h3>
 		<form action="{{route('api.element.settings.delete')}}" method="POST">
 			<input type="hidden" name="page_id" value="{{$page_id}}">
 			<input type="hidden" name="element_id" value="{{$element_id}}">
-			<div class="form-buttons">
-				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
+			<div class="form-buttons">				
 				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>
+				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
+			</div>
+		</form>
+
+	</div>
+
+	<div class="modal-box" id="clone-modal">
+		<button type="button" class="close close-modal">&times;</button>
+		<h3>{{t('modal.title.clone_element')}}</h3>
+		<form action="{{route('api.element.settings.clone')}}" method="POST">
+			<input type="hidden" name="page_id" value="{{$page_id}}">
+			<input type="hidden" name="element_id" value="{{$element_id}}">
+			<div class="form-group cloning">
+				<label class="control-label">{{t('label.element.settings.page_target')}}:</label>
+				<div class="cloning">
+					<ol class="first">
+						{{Render::pageForm(0, LANG, $page_id)}}
+					</ol>
+				</div>
+			</div>
+			<div class="form-buttons">				
+				<button type="button" class="btn btn-default button close-modal">{{t('form.button.cancel')}}</button>
+				<button type="submit" class="btn btn-danger">{{t('form.button.ok')}}</button>
 			</div>
 		</form>
 

@@ -107,6 +107,23 @@ class Render {
 	}
 
 	/**
+	 * Render element form
+	 * 
+	 * @param  int $page_id     active page id
+	 * @return string           page item view
+	 */
+	public function elementForm($page_id)
+	{
+		$items = $this->page->getPageElements($page_id);
+
+		$item_view = $this->view('partials.elementform');
+		$item_view['items'] 	= $items;
+		$item_view['page_id'] 	= $page_id;
+		
+		return $item_view;
+	}
+
+	/**
 	 * Create element list by page_id
 	 * 
 	 * @param  int $page_id    page id
@@ -203,10 +220,31 @@ class Render {
 	}
 
 	/**
+	 * Render page form
+	 * 
+	 * @param  int $parent_id 	pages's parent id
+	 * @param  string $lang 	available languages
+	 * @param  int $page_id     active page id
+	 * @return string           page item view
+	 */
+	public function pageForm($parent_id, $lang, $page_id = 0)
+	{
+		$items = $this->page->getPageList($parent_id, $lang);
+
+		$item_view = $this->view('partials.pageform');
+		$item_view['items'] 	= $items;
+		$item_view['page_id'] 	= $page_id;
+		$item_view['parent_id'] = $parent_id;
+
+		return $item_view;
+	}
+
+	/**
 	 * Render page list recursively
 	 * 
 	 * @param  int $parent_id 	pages's parent id
 	 * @param  string $lang 	available languages
+	 * @param  int $page_id     active page id
 	 * @return string           page item view
 	 */
 	public function pageList($parent_id, $lang, $page_id = 0)

@@ -14,6 +14,8 @@ return array(
 
 		'error' => array(
 
+			'clone_element'			=> 'Impossibile clonare l\'elemento',
+			'clone_page'			=> 'Impossibile clonare la pagina',
 			'create_item'			=> 'Impossibile creare l\'elemento',
 			'delete_item'			=> 'Impossibile eliminare l\'elemento',
 			'element_created'		=> 'Impossibile creare l\'elemento',
@@ -36,11 +38,13 @@ return array(
 
 		'success' => array(
 
+			'element_cloned'	=> 'Elemento clonato correttamente',
 			'element_created'	=> 'Nuovo elemento creato',
 			'element_deleted'	=> 'L\'elemento è stato eliminato',
 			'element_order'		=> 'Ordine degli elementi salvato',
 			'file_created'		=> 'Nuovo file inserito correttamente',
 			'item_remove'		=> 'Questo elemento è stato rimosso',
+			'page_cloned'		=> 'Pagina clonata correttamente',
 			'page_created'		=> 'Nuova pagina creata',
 			'page_deleted'		=> 'La pagina è stata eliminata',
 			'page_order'		=> 'Ordine di pagina salvato',
@@ -145,11 +149,16 @@ return array(
 			'settings' => array(
 
 				'browse_by' 	=> 'Chi la può vedere?',
+				'check_all_ele' => 'Tutti gli elementi della pagina',
+				'choose_lang'	=> 'In quale lingua clonare la pagina?',
+				'clone'			=> '[CLONED]',
 				'create_slug' 	=> 'Slug',
 				'edit_by' 		=> 'Chi la può modificare?',
 				'force_delete'	=> 'Rimuovi la pagina e svincola tutti gli elementi',
 				'may_contain'	=> 'Cosa potrà contenere?',
+				'media_all'		=> 'Tutti i media della pagina',
 				'name' 			=> 'Nome pagina',
+				'page_include'	=> 'Includi anche',
 				'set_hp' 		=> 'Home Page',
 				'slug' 			=> 'Indirizzo pagina',
 				'slug_preview'	=> 'Indirizzo completo',
@@ -192,10 +201,12 @@ return array(
 
 			'settings' => array(
 
-				'attrib'		=> 'Attributo ID dell\'elemento',
-				'create_attrib' => 'id',
-				'name' 			=> 'Nome dell\'elemento',				
-				'zone' 			=> 'Dove inserire questo elemento?',
+				'attrib'			=> 'Attributo ID dell\'elemento',
+				'create_attrib' 	=> 'id',
+				'name' 				=> 'Nome dell\'elemento',
+				'page_target'		=> 'Associare l\'elemento clonato alla pagina',
+				'self_element' 		=> 'Indipendente',
+				'zone' 				=> 'Dove inserire questo elemento?',
 
 			),
 
@@ -234,6 +245,8 @@ return array(
 
 		'title' => array(
 
+			'clone_element'		=> 'Clonare questo elemento?',
+			'clone_page'		=> 'Clonare questa pagina?',
 			'delete_page' 		=> 'Eliminare questa pagina?',
 			'detach_file' 		=> 'Dissociare il file dalla pagina?',
 			'remove_element' 	=> 'Rimuovere l\'elemento dalla pagina?',

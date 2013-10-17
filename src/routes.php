@@ -33,7 +33,6 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	// ELEMENT
 	Route::get('element/settings/{page_id}/{element_id}', array('uses' => $pongoControllers.'ElementController@settingsElement', 'as' => 'element.settings'));
 	Route::get('element/content/{page_id}/{element_id}', array('uses' => $pongoControllers.'ElementController@contentElement', 'as' => 'element.content'));
-	Route::get('element/files/{page_id}/{element_id}', array('uses' => $pongoControllers.'ElementController@filesElement', 'as' => 'element.files'));
 	Route::get('element/deleted', array('uses' => $pongoControllers.'ElementController@deletedElement', 'as' => 'element.deleted'));
 
 	// FILE

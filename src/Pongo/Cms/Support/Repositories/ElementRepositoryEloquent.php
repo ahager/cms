@@ -4,6 +4,12 @@ use Pongo\Cms\Models\Element as Element;
 
 class ElementRepositoryEloquent implements ElementRepositoryInterface {
 
+	public function attachIfNotElementPage($element, $page_id, $order)
+	{
+		if( ! $element->pages->contains($page_id))
+			return $element->pages()->attach($page_id, array('order_id' => $order));
+	}
+
 	public function countElementPages($element)
 	{
 		return $element->pages->count();
@@ -24,6 +30,11 @@ class ElementRepositoryEloquent implements ElementRepositoryInterface {
 		return $element->delete();
 	}
 
+	public function duplicateElement($element)
+	{
+
+	}
+
 	public function getElement($element_id)
 	{
 		return Element::find($element_id);
@@ -40,7 +51,7 @@ class ElementRepositoryEloquent implements ElementRepositoryInterface {
 	{
 		return $element->save();
 	}
-
+	
 	public function updateElementOrder($element, $order)
 	{
 		return $element->pivot->update(array('order_id' => $order));

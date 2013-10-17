@@ -38,7 +38,7 @@
 
 				<div class="dn">
 
-					<ol class="dn-list">
+					<ol class="dn-list list">
 
 						{{Render::markerList()}}
 

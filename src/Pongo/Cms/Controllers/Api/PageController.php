@@ -9,12 +9,26 @@ use Alert, Input, Pongo, Redirect, Render, Session, Str, Tool;
 
 class PageController extends ApiController {
 
+	/**
+	 * Default order
+	 * 
+	 * @var int
+	 */
+	private $default_order;
+
+	/**
+	 * Class constructor
+	 * @param Page    $page 
+	 * @param Element $element
+	 */
 	public function __construct(Page $page, Element $element)
 	{
 		parent::__construct();
 
 		$this->page = $page;
 		$this->element = $element;
+
+		$this->default_order = Pongo::system('default_order');
 	}
 
 	/**
@@ -73,7 +87,7 @@ class PageController extends ApiController {
 				'author_id' 	=> USERID,
 				'access_level' 	=> 0,				
 				'role_level' 	=> LEVEL,
-				'order_id' 		=> Pongo::system('default_order'),
+				'order_id' 		=> $this->default_order,
 				'is_valid' 		=> 0
 			);
 
@@ -163,16 +177,94 @@ class PageController extends ApiController {
 		}
 	}
 
-	
-
+	/**
+	 * Clone a page with elements and files
+	 * 
+	 * @return void
+	 */
 	public function pageSettingsClone()
 	{
-		$response = array(
-			'status' 	=> 'error',
-			'msg'		=> t('alert.error.page_order')
-		);
+		if(Input::has('elements') and Input::has('page_id')) {
 
-		return json_encode($response);
+			$elements = Input::get('elements');
+
+			$self_elements = Input::get('self_elements');
+
+			$page_id = Input::get('page_id');
+
+			$lang = Input::get('lang');
+
+			$page = $this->page->getPage($page_id);
+
+			// Duplicate page
+			$new_page_arr = $page->getAttributes();
+
+			// Remove id and time_stamps
+			unset($new_page_arr['id'], $new_page_arr['created_at'], $new_page_arr['updated_at']);
+
+			// Set new values
+			$new_page_arr['parent_id'] 	= ($lang != $page->lang) ? 0 : $page->parent_id;
+			$new_page_arr['name'] 		= $page->name . ' ' . t('label.page.settings.clone');
+			$new_page_arr['lang'] 		= $lang;
+			$new_page_arr['author_id'] 	= USERID;
+			$new_page_arr['role_level'] = LEVEL;
+			$new_page_arr['is_home'] 	= 0;
+			$new_page_arr['is_valid'] 	= 0;
+
+			// Create new page
+			$new_page = $this->page->createPage($new_page_arr);
+
+			// Loop elements id to check which to clone
+			foreach ($elements as $element_id) {
+				
+				$element = $this->element->getElement($element_id);
+
+				if(isset($self_elements[$element_id]) or ($lang != $page->lang)) {
+
+					// Duplicate element
+					$new_element_arr = $element->getAttributes();
+
+					// Remove id and time_stamps
+					unset($new_element_arr['id'], $new_element_arr['created_at'], $new_element_arr['updated_at']);
+
+					$new_element_arr['lang'] 		= ($lang != $element->lang) ? $lang : $element->lang;
+					$new_element_arr['is_valid'] 	= 0;
+
+					$new_element = $this->element->createElement($new_element_arr);
+
+					$new_element = $this->page->savePageElement($new_page, $new_element, $this->default_order);
+
+				} else {
+
+					// Clone element
+					$this->element->attachIfNotElementPage($element, $new_page->id, $this->default_order);
+
+				}
+
+			}
+
+			// Clone media
+			if(Input::has('media_all')) {
+
+				foreach ($page->files as $file) {
+
+					$this->page->attachPageFiles($new_page, $file->id);
+				}
+
+			}
+
+			Session::put('LANG', $lang);
+
+			Alert::success(t('alert.success.page_cloned'))->flash();
+
+			return Redirect::route('page.settings', array('page_id' => $new_page->id));
+
+		} else {
+
+			Alert::error(t('alert.error.clone_page'))->flash();
+
+			return Redirect::back();
+		}
 	}
 
 	/**
@@ -290,7 +382,7 @@ class PageController extends ApiController {
 		$page = $this->page->getPage($page_id);
 
 		//DELETE FILES ASSOCIATION
-		// $page->files()->delete();
+		$this->page->detachPageFiles($page);
 
 		//DELETE BLOG ASSOCIATIONS
 		// $page->blogs()->delete();
