@@ -56,6 +56,11 @@ class Tool {
 	 */
 	public function isChecked($var, $fix)
 	{
+		if(is_array($fix)) {
+
+			return (in_array($var, $fix)) ? ' checked="checked"' : '';
+		}
+
 		return ($var == $fix) ? ' checked="checked"' : '';
 	}
 

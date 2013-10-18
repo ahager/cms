@@ -50,6 +50,17 @@ class Page extends Eloquent {
 	}
 
 	/**
+	 * Other page relationship
+	 * Each page has many and belongs to many related pages
+	 * 
+	 * @return mixed
+	 */
+	public function rels()
+	{
+		return $this->belongsToMany('Pongo\Cms\Models\Page', 'page_page', 'page_id', 'rel_id');
+	}
+
+	/**
 	 * Author relationship
 	 * Each page has one author
 	 * 

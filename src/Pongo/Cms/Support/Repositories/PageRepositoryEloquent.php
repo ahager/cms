@@ -4,9 +4,14 @@ use Pongo\Cms\Models\Page as Page;
 
 class PageRepositoryEloquent implements PageRepositoryInterface {
 
-	public function attachPageFiles($page, $file_id)
+	public function attachPageFile($page, $file_id)
 	{
 		return $page->files()->attach($file_id);
+	}
+
+	public function attachPageRel($page, $rel_id)
+	{
+		return $page->rels()->attach($rel_id);
 	}
 
 	public function countPageElements($page)
@@ -49,6 +54,11 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 		return $page->files()->detach();
 	}
 
+	public function detachPageRel($page, $rel_id)
+	{
+		return $page->rels()->detach($rel_id);
+	}
+
 	public function getPage($page_id)
 	{
 		return Page::find($page_id);
@@ -58,6 +68,13 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 	{
 		return Page::where('slug', $slug)
 				   ->where('is_valid', 1)
+				   ->first();
+	}
+
+	public function getPageCheck($field, $value)
+	{
+		return Page::where('lang', LANG)
+				   ->where($field, $value)
 				   ->first();
 	}
 
@@ -79,18 +96,16 @@ class PageRepositoryEloquent implements PageRepositoryInterface {
 				   ->get();
 	}
 
-	public function getPageCheck($field, $value)
-	{
-		return Page::where('lang', LANG)
-				   ->where($field, $value)
-				   ->first();
-	}
-
 	public function getPagePath($path)
 	{
 		return Page::where('lang', LANG)
 				   ->where('slug', $path)
 				   ->first();
+	}
+
+	public function getPageRels($page, $to_array = false)
+	{
+		return ($to_array) ? $page->rels->toArray() : $page->rels;
 	}
 
 	public function getLangHomePage()

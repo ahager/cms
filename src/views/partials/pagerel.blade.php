@@ -3,24 +3,19 @@
 	@if($parent_id > 0)
 	<ol class="dd-list">
 	@endif
-
+	
+	@if($page_id != $item->id)
 	<li class="dd-item" data-id="{{$item->id}}">
 		
 		<div class="dd-handle">
 
-			{{Tool::isHome($item->is_home)}}
-			
-			{{Tool::unChecked($item->is_valid)}}
+			{{$item->name}}
 
-			<span>{{$item->name}}</span>
+			<label>
+				<input type="checkbox" value="{{$item->id}}" {{Tool::isChecked($item->id, $page_rels)}} class="page_rel">
+			</label>
 
-		</div>
-		
-		<a href="{{route('page.settings', array('page_id' => $item->id))}}"{{active($item->id, $page_id)}}>
-			
-			<i class="icon-chevron-right"></i>
-
-		</a>
+		</div>		
 
 		@if($item->id > 0)
 
@@ -29,6 +24,7 @@
 		@endif
 
 	</li>
+	@endif
 
 	@if($parent_id > 0)
 	</ol>

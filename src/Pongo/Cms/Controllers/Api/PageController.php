@@ -248,7 +248,7 @@ class PageController extends ApiController {
 
 				foreach ($page->files as $file) {
 
-					$this->page->attachPageFiles($new_page, $file->id);
+					$this->page->attachPageFile($new_page, $file->id);
 				}
 
 			}
@@ -488,6 +488,54 @@ class PageController extends ApiController {
 			$response = array(
 				'status' 	=> 'error',
 				'msg'		=> t('alert.error.save'),
+			);
+
+		}
+
+		return json_encode($response);
+	}
+
+	/**
+	 * Set/unset link between pages
+	 * 
+	 * @return json bool
+	 */
+	public function pageSettingsLink()
+	{
+		if(Input::has('rel_id')) {
+
+			$input = Input::all();
+
+			extract($input);
+
+			$page = $this->page->getPage($page_id);
+
+			if($action == 'add') {
+			
+				$this->page->attachPageRel($page, $rel_id);
+
+				$reverse = $this->page->getPage($rel_id);
+
+				$this->page->attachPageRel($reverse, $page_id);
+
+			} else {
+			
+				$this->page->detachPageRel($page, $rel_id);
+
+				$reverse = $this->page->getPage($rel_id);
+
+				$this->page->detachPageRel($reverse, $page_id);
+
+			}
+
+			$response = array(
+				'status' 	=> true
+			);
+
+		} else {
+
+			$response = array(
+				'status' 	=> false
 			);
 
 		}

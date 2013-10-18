@@ -59,6 +59,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 		Route::any('page/settings/save', array('uses' => $apiControllers.'PageController@pageSettingsSave', 'as' => 'api.page.settings.save'));
 		Route::any('page/settings/clone', array('uses' => $apiControllers.'PageController@pageSettingsClone', 'as' => 'api.page.settings.clone'));
 		Route::any('page/settings/delete', array('uses' => $apiControllers.'PageController@pageSettingsDelete', 'as' => 'api.page.settings.delete'));
+		Route::any('page/settings/link', array('uses' => $apiControllers.'PageController@pageSettingsLink', 'as' => 'api.page.settings.link'));
 	
 		// LAYOUT
 		Route::any('page/layout/save', array('uses' => $apiControllers.'PageController@pageLayoutSave', 'as' => 'api.page.layout.save'));

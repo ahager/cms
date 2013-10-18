@@ -21,9 +21,6 @@
 			<li{{active('files', $section)}}>
 				<a href="{{route('page.files', array('page_id' => $page_id))}}">{{t('heading.page.files_title')}}</a>
 			</li>
-			<li{{active('link', $section)}}>
-				<a href="{{route('page.link', array('page_id' => $page_id))}}">{{t('heading.page.linked_title')}}</a>
-			</li>
 		</ul>
 
 	</div>

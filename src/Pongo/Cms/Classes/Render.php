@@ -247,14 +247,15 @@ class Render {
 	 * @param  int $page_id     active page id
 	 * @return string           page item view
 	 */
-	public function pageList($parent_id, $lang, $page_id = 0)
+	public function pageList($parent_id, $lang, $page_id = 0, $partial = 'pageitem')
 	{
 		$items = $this->page->getPageList($parent_id, $lang);
 
-		$item_view = $this->view('partials.pageitem');
+		$item_view = $this->view('partials.' . $partial);
 		$item_view['items'] 	= $items;
 		$item_view['page_id'] 	= $page_id;
 		$item_view['parent_id'] = $parent_id;
+		$item_view['partial'] 	= $partial;
 
 		return $item_view;
 	}

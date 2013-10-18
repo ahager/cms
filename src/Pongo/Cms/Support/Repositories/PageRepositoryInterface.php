@@ -2,7 +2,9 @@
 
 interface PageRepositoryInterface {
 
-	public function attachPageFiles($page, $file_id);
+	public function attachPageFile($page, $file_id);
+
+	public function attachPageRel($page, $rel_id);
 
 	public function countPageElements($page);
 
@@ -19,10 +21,14 @@ interface PageRepositoryInterface {
 	public function detachPageFile($page, $file_id);
 
 	public function detachPageFiles($page);
+
+	public function detachPageRel($page, $rel_id);
 	
 	public function getPage($page_id);
 
 	public function getPageBySlug($slug);
+
+	public function getPageCheck($field, $value);
 
 	public function getPageElements($page_id);
 
@@ -30,9 +36,9 @@ interface PageRepositoryInterface {
 
 	public function getPageList($parent_id, $lang);
 
-	public function getPageCheck($field, $value);
-
 	public function getPagePath($path);
+
+	public function getPageRels($page, $to_array);
 
 	public function getLangHomePage();
 

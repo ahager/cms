@@ -80,6 +80,8 @@ class PageController extends BaseController {
 
 		$page = $this->page->getPage($page_id);
 
+		Pongo::viewShare('page_rels', array_fetch($this->page->getPageRels($page, true), 'id'));
+
 		$n_elements = $this->page->countPageElements($page);
 
 		$view = Render::view('sections.page.seo');
@@ -108,6 +110,8 @@ class PageController extends BaseController {
 
 		$page = $this->page->getPage($page_id);
 
+		Pongo::viewShare('page_rels', array_fetch($this->page->getPageRels($page, true), 'id'));
+
 		// Available roles
 		$roles = $this->role->orderBy('level', 'asc');
 
@@ -118,14 +122,14 @@ class PageController extends BaseController {
 		$n_elements = $this->page->countPageElements($page);
 
 		$view = Render::view('sections.page.settings');
-		$view['section']	= 'settings';
-		$view['page_id'] 	= $page_id;
-		$view['name'] 		= $page->name;
-		$view['slug_last'] 	= Tool::slugSlice($page->slug, 1);
-		$view['slug_base'] 	= Tool::slugBack($page->slug, 1);
-		$view['slug'] 		= $page->slug;
-		$view['is_home'] 	= $page->is_home;
-		$view['is_valid'] 	= $page->is_valid;
+		$view['section']		= 'settings';
+		$view['page_id'] 		= $page_id;
+		$view['name'] 			= $page->name;
+		$view['slug_last'] 		= Tool::slugSlice($page->slug, 1);
+		$view['slug_base'] 		= Tool::slugBack($page->slug, 1);
+		$view['slug'] 			= $page->slug;
+		$view['is_home'] 		= $page->is_home;
+		$view['is_valid'] 		= $page->is_valid;
 		
 		$view['access_level'] 	= $page->access_level;
 		$view['role_level'] 	= $page->role_level;
