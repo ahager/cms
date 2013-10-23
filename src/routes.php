@@ -18,6 +18,7 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	Route::get('login', array('uses' => $pongoControllers.'LoginController@index', 'as' => 'login.index'));
 	Route::post('login', array('uses' => $pongoControllers.'LoginController@login', 'as' => 'post.login'));
 	Route::get('logout', array('uses' => $pongoControllers.'BaseController@logout', 'as' => 'logout'));
+	Route::get('lang/{lang}', array('uses' => $pongoControllers.'BaseController@changeLang', 'as' => 'lang'));
 
 	// DASHBOARD
 	Route::get('dashboard', array('uses' => $pongoControllers.'DashboardController@showDashboard', 'as' => 'dashboard'));
@@ -37,6 +38,9 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 
 	// FILE
 	Route::get('file/edit/{file_id}', array('uses' => $pongoControllers.'FileController@editFile', 'as' => 'file.edit'));
+
+	// ROLE
+	Route::get('role/settings/{role_id?}', array('uses' => $pongoControllers.'RoleController@settingsRole', 'as' => 'role.settings'));
 
 });
 
@@ -84,6 +88,14 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 	
 		// CONTENT
 		Route::any('element/content/save', array('uses' => $apiControllers.'ElementController@elementContentSave', 'as' => 'api.element.content.save'));
+
+	// ROLE
+	Route::any('role/order', array('uses' => $apiControllers.'RoleController@orderRoles', 'as' => 'api.role.order'));
+	Route::any('role/create', array('uses' => $apiControllers.'RoleController@createRole', 'as' => 'api.role.create'));
+	
+		// SETTINGS
+		Route::any('role/settings/save', array('uses' => $apiControllers.'RoleController@roleSettingsSave', 'as' => 'api.role.settings.save'));
+		Route::any('role/settings/delete', array('uses' => $apiControllers.'RoleController@roleSettingsDelete', 'as' => 'api.role.settings.delete'));
 
 });
 

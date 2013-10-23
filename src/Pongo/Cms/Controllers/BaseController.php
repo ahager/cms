@@ -1,14 +1,22 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Auth, Alert, Controller, Redirect, Render, Response;
+use Auth, Alert, Controller, Input, Redirect, Render, Response, Session;
 
 class BaseController extends Controller {
 
+	/**
+	 * Class constructor
+	 */
 	public function __construct()
 	{
-		
+
 	}
 
+	/**
+	 * Generate bootstrap javascript virtual file
+	 * 
+	 * @return void
+	 */
 	public function bootstrap()
 	{
 		$contents = Render::view('partials.bootstrap');
@@ -18,6 +26,21 @@ class BaseController extends Controller {
 		$response->header('Content-Type', 'application/javascript');
 
 		return $response;
+	}
+
+	/**
+	 * Change interface lang
+	 * 
+	 * @return void
+	 */
+	public function changeLang($lang)
+	{
+		if(isset($lang)) {
+
+			Session::put('CMSLANG', $lang);
+		}
+
+		return Redirect::back();
 	}
 
 	/**

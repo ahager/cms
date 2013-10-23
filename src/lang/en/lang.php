@@ -29,7 +29,10 @@ return array(
 			'page_has_subpages'		=> 'This page still contains subpages',
 			'page_lang'				=> 'Unable to change language',
 			'page_order'			=> 'Unable to save page order',
-			'save'					=> 'Unable to save',			
+			'role_created'			=> 'Unable to create role',
+			'role_deleted'			=> 'Unable to delete role',
+			'role_system'			=> 'Can\'t delete a system role',
+			'save'					=> 'Unable to save',
 			'session_exp'			=> 'Session expired, please login',
 			'unauthorized'			=> 'Unauthorized access, please login',
 			'upload_completed'		=> 'Unable to upload files',
@@ -48,6 +51,8 @@ return array(
 			'page_created'		=> 'New page created',
 			'page_deleted'		=> 'The page has been deleted',
 			'page_order'		=> 'New page order saved',
+			'role_created'		=> 'Role successfully created',
+			'role_deleted'		=> 'Role successfully deleted',
 			'save'				=> 'Successfully saved',
 			'upload_completed'	=> 'Files successfully uploaded',
 			'upload_comp_err'	=> 'Files uploaded with some errors',
@@ -68,6 +73,7 @@ return array(
 			'delete'		=> 'Delete',
 			'ok'			=> 'Ok',
 			'page' 			=> 'Page',
+			'role'			=> 'Role',
 			'save'			=> 'Save',
 			'upload'		=> 'Start upload',
 			'upload_files'	=> 'Upload files',
@@ -137,6 +143,13 @@ return array(
 			'files_create_title' 	=> 'Create Files',
 			'linked_title' 			=> 'Linked pages',
 			'settings_title' 		=> 'Settings',
+
+		),
+
+		'role' => array(
+
+			'bar_title' => 'User roles',
+			'roles_title' => 'Roles',
 
 		),
 
@@ -212,6 +225,17 @@ return array(
 
 		),
 
+		'role' => array(
+
+			'settings' => array(
+
+				'force_delete'	=> 'Delete all related users?',
+				'name' 			=> 'Role name',
+
+			),
+
+		),
+
 	),
 	
 	'marker' => array(
@@ -241,6 +265,25 @@ return array(
 
 	),
 
+	'menu' => array(
+
+		'access'		=> 'Access',
+		'banners'		=> 'Banners',
+		'blog'			=> 'Blog',
+		'cmslang'		=> 'Interface in',
+		'dashboard'		=> 'Dasboard',
+		'downloads'		=> 'Downloads',
+		'files'			=> 'Files',
+		'galleries'		=> 'Galleries',
+		'menu'			=> 'Menu',
+		'roles'			=> 'Roles',
+		'shop'			=> 'Shop',
+		'tools'			=> 'Tools',
+		'translations'	=> 'Translations',
+		'users'			=> 'Users',
+
+	),
+
 	'modal' => array(
 
 		'title' => array(
@@ -248,6 +291,7 @@ return array(
 			'clone_element'		=> 'Clone this element?',
 			'clone_page'		=> 'Clone this page?',
 			'delete_page' 		=> 'Delete this page?',
+			'delete_role' 		=> 'Delete this role?',
 			'detach_file' 		=> 'Detach file from this page?',
 			'detach_element' 	=> 'Detach element from page?',
 
@@ -269,6 +313,12 @@ return array(
 
 		),
 
+		'role' => array(
+
+			'new'			=> 'New role',
+
+		),
+
 	),
 
 	'validation' => array(
@@ -282,6 +332,8 @@ return array(
 			'file_size'		=> 'The file size exceeds maximum allowed',
 			'not_image'		=> 'This tool is not for images',
 			'required' 		=> 'This field is required',
+			'system_role'	=> 'You can\'t edit a system role',
+			'unique'		=> 'This name is already present',
 			'unique_file' 	=> 'This file name is already present',
 			'unique_name' 	=> 'This name is already present in this language',
 			'unique_slug' 	=> 'This slug is already present in this language',

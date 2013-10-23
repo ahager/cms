@@ -1,6 +1,7 @@
 <?php namespace Pongo\Cms\Classes;
 
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
+use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
 use Asset, HTML, Pongo, Theme, Tool, View;
 
@@ -23,9 +24,10 @@ class Render {
 	/**
 	 * Render constructor
 	 */
-	public function __construct(Page $page)
+	public function __construct(Page $page, Role $role)
 	{
 		$this->page = $page;
+		$this->role = $role;
 	}
 
 	/**
@@ -116,7 +118,7 @@ class Render {
 	{
 		$items = $this->page->getPageElements($page_id);
 
-		$item_view = $this->view('partials.elementform');
+		$item_view = $this->view('partials.items.elementform');
 		$item_view['items'] 	= $items;
 		$item_view['page_id'] 	= $page_id;
 		
@@ -134,7 +136,7 @@ class Render {
 	{
 		$items = $this->page->getPageElements($page_id);
 
-		$item_view = $this->view('partials.elementitem');
+		$item_view = $this->view('partials.items.elementitem');
 		$item_view['items'] 		= $items;
 		$item_view['element_id'] 	= $element_id;
 
@@ -152,7 +154,7 @@ class Render {
 	{
 		$items = $this->page->getPageFiles($page_id);
 
-		$item_view = $this->view('partials.fileitem');
+		$item_view = $this->view('partials.items.fileitem');
 		$item_view['items']		= $items;
 		$item_view['action']	= $action;
 
@@ -207,13 +209,13 @@ class Render {
 	/**
 	 * Create marker list
 	 * 
-	 * @return string      element item view
+	 * @return string
 	 */
 	public function markerList()
 	{
 		$items = Pongo::markers();
 
-		$item_view = $this->view('partials.markeritem');
+		$item_view = $this->view('partials.items.markeritem');
 		$item_view['items'] = $items;
 
 		return $item_view;
@@ -231,7 +233,7 @@ class Render {
 	{
 		$items = $this->page->getPageList($parent_id, $lang);
 
-		$item_view = $this->view('partials.pageform');
+		$item_view = $this->view('partials.items.pageform');
 		$item_view['items'] 	= $items;
 		$item_view['page_id'] 	= $page_id;
 		$item_view['parent_id'] = $parent_id;
@@ -251,13 +253,45 @@ class Render {
 	{
 		$items = $this->page->getPageList($parent_id, $lang);
 
-		$item_view = $this->view('partials.' . $partial);
+		$item_view = $this->view('partials.items.' . $partial);
 		$item_view['items'] 	= $items;
 		$item_view['page_id'] 	= $page_id;
 		$item_view['parent_id'] = $parent_id;
 		$item_view['partial'] 	= $partial;
 
 		return $item_view;
+	}
+
+	/**
+	 * Create role list
+	 * 
+	 * @param  int $role_id
+	 * @return string
+	 */
+	public function roleList($role_id)
+	{
+		$items = $this->role->getRoles();
+
+		$item_view = $this->view('partials.items.roleitem');
+		$item_view['items'] 	= $items;
+		$item_view['role_id'] 	= $role_id;
+
+		return $item_view;
+	}
+
+	/**
+	 * Render PongoCMS main menu
+	 * Based on config/system.php sections array
+	 *
+	 * @param  array $sections
+	 * @return void
+	 */
+	public function sectionMenu($sections = array())
+	{
+		$menu_view = $this->view('partials.items.menuitem');
+		$menu_view['sections'] 	= (!empty($sections)) ? $sections : Pongo::system('sections');
+
+		return $menu_view;
 	}
 
 	/**

@@ -17,30 +17,24 @@
 
 		@include('cms::partials.navbar')
 
-		@yield('subbar')		
-
-		<div id="page" class="layout">
-
-			<div class="row">
-
-				<div id="page-panel" class="col-xs-12">
-
-					<div id="overlay"></div>
-
-					@yield('content')
-
-				</div>
-
-			</div>
+		<div id="page" class="row">
+			
+			@yield('option-bar')
 
 			@yield('element-bar')
 
-			@yield('option-bar')
+			@yield('subbar')
+
+			<div id="page-panel" class="col-xs-12">
+
+				<div id="overlay"></div>
+
+				@yield('content')
+
+			</div>
 
 		</div>
 		
-		<!-- <footer>PongoCMS v2.0.0 &copy; Pongoweb.it</footer> -->
-
 	</div>
 
 @stop

@@ -4,6 +4,11 @@ use Auth, Alert, Input, Redirect, Render, Session, Pongo;
 
 class LoginController extends BaseController {
 	
+	/**
+	 * Class constructor
+	 *
+	 * @return void
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -11,19 +16,27 @@ class LoginController extends BaseController {
 		$this->beforeFilter('pongo.guest');
 	}
 
+	/**
+	 * Login form
+	 * 
+	 * @return void
+	 */
 	public function index()
 	{
-		// Js page repository
-		// Render::assetAdd('footer', 'login', 'scripts/pages/login.js');
-
 		return Render::view('sections.login.login');
 	}
 
+	/**
+	 * Login a user
+	 * 
+	 * @return void
+	 */
 	public function login()
 	{
 		$credentials = array(
-			'username' => Input::get('username'),
-			'password' => Input::get('password')
+			'username' 	=> Input::get('username'),
+			'password' 	=> Input::get('password'),
+			'is_valid'	=> 1
 		);
 
 		if (Auth::attempt($credentials)) {
@@ -44,6 +57,8 @@ class LoginController extends BaseController {
 
 	/**
 	 * Set constants values on login
+	 *
+	 * @return void
 	 */
 	protected function setConstants()
 	{

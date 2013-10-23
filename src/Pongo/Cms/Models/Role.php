@@ -19,6 +19,13 @@ class Role extends Eloquent {
 	public $timestamps = false;
 
 	/**
+	 * Guarded mass-assignment property
+	 * 
+	 * @var array
+	 */
+	protected $guarded = array('id');
+	
+	/**
 	 * Users relationship
 	 * Each role has many users
 	 * 

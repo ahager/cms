@@ -67,7 +67,7 @@ if ( ! function_exists('t'))
 	{
 		$domain = 'messages';
 		
-		$locale = is_null($locale) ? Pongo::settings('language') : $locale;
+		$locale = is_null($locale) ? CMSLANG : $locale;
 
 		$str = "cms::lang.{$id}";
 
@@ -88,7 +88,7 @@ if ( ! function_exists('st'))
 	{
 		$domain = 'messages';
 		
-		$locale = is_null($locale) ? Pongo::settings('language') : $locale;
+		$locale = is_null($locale) ? LANG : $locale;
 
 		$str = "site::lang.{$id}";
 
@@ -227,5 +227,24 @@ if ( ! function_exists('selected'))
 	function selected($var, $fix)
 	{
 		return Tool::isSelected($var, $fix);
+	}
+}
+
+if ( ! function_exists('system_role_class'))
+{
+	/**
+	 * Print class if system role
+	 * 
+	 * @param  integer $level
+	 * @param  string  $class_yes
+	 * @param  string  $class_not
+	 * @return string
+	 */
+	function system_role_class($level, $class_yes, $class_not)
+	{
+		return (LEVEL > $level) ? $class_yes : $class_not;
+
+
+		// return (Pongo::isSystemRole($role_name)) ? $class_yes : $class_not;
 	}
 }

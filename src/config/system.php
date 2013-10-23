@@ -2,6 +2,8 @@
 
 return array(
 
+	'version' => '2.0.0',
+
 	/**
 	 * PongoCMS :: Locales
 	 */
@@ -142,6 +144,7 @@ return array(
 			'repos' => array(
 
 				'Pongo\Cms\Support\Repositories\PageRepositoryEloquent',
+				'Pongo\Cms\Support\Repositories\RoleRepositoryEloquent',
 
 			),
 
@@ -230,6 +233,97 @@ return array(
 			'repository' 	=> 'Pongo\Cms\Support\Repositories\UserRepositoryEloquent',
 
 		),
+
+	),
+	
+	/**
+	 * Admin interface - Sections Menu array
+	 */
+	'sections' => array(
+
+		'dashboard' => array(
+
+			'route' 		=> 'dashboard',
+			'min_access' 	=> 'editor'
+
+		),
+
+		'access' => array(
+			
+			'roles' => array(
+
+				'route' 		=> 'role.settings',
+				'min_access' 	=> 'editor'
+
+			),
+			
+			/*'users' => array(
+				
+				'route' 		=> 'users',
+				'min_access' 	=> 'editor'
+
+			),*/
+		),
+
+		/*'blog' => array(
+
+			'route' 		=> 'posts',
+			'min_access' 	=> 'editor'
+
+		),
+
+		'files' => array(
+
+			'route'			=> 'files',
+			'min_access' 	=> 'editor'
+
+		),
+
+		'shop' => array(
+
+			'route' 		=> 'shop',
+			'min_access' 	=> 'editor'
+
+		),
+
+		'tools' => array(
+
+			'banners' => array(
+
+				'route' 		=> 'banners',
+				'min_access' 	=> 'editor'
+
+			),
+
+			'downloads' => array(
+
+				'route' 		=> 'downloads',
+				'min_access' 	=> 'editor'
+
+			),
+
+			'galleries' => array(
+
+				'route' 		=> 'galleries',
+				'min_access' 	=> 'editor'
+
+			),		
+
+			'menu' => array(
+
+				'route' 		=> 'menu',
+				'min_access' 	=> 'editor'
+
+			),
+
+			'translations' => array(
+
+				'route' 		=> 'translation',
+				'min_access' 	=> 'editor'
+
+			),
+
+		)*/
 
 	),
 

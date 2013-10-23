@@ -12,8 +12,9 @@ class UsersTableSeeder extends Seeder {
 		$admin_account = Config::get('cms::settings.admin_account');
 
 		$admin_settings = 	array(
-								'role_id' => 1,
-								'lang' => Config::get('cms::settings.language')
+								'role_id' 	=> 1,
+								'lang' 		=> Config::get('cms::settings.language'),
+								'is_valid' 	=> 1
 							);
 
 		$admin_user = array_merge($admin_account, $admin_settings);

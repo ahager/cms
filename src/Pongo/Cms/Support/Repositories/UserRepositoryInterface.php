@@ -4,8 +4,8 @@ interface UserRepositoryInterface {
 
 	public function all();
 
-	public function find($id);
+	public function find($user_id);
 
-	public function create($input);
+	public function create($user_arr);
 	
 }

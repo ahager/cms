@@ -78,6 +78,11 @@ class PongoValidator extends LaravelValidator {
 		return Media::isFile($value);
 	}
 
+	public function validateSystemRole($attribute, $value, $parameters)
+	{		
+		return !Pongo::isSystemRole($value);
+	}
+
 	public function validateUniqueFile($attribute, $value, $parameters)
 	{
 		$file_name = Media::formatFileName($value);

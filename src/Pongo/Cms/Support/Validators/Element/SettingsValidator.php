@@ -12,7 +12,7 @@ class SettingsValidator extends BaseValidator {
 		parent::__construct();
 		
 		static::$rules = array(
-			'name'	=> 'required|uniqueName:element,' . $element_id,
+			'name'		=> 'required|uniqueName:element,' . $element_id,
 			'attrib' 	=> 'required|alpha_dash|uniqueName:element,' . $element_id,
 		);
 

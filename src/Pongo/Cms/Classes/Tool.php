@@ -65,6 +65,17 @@ class Tool {
 	}
 
 	/**
+	 * Print icon homepage
+	 * 
+	 * @param  string $is_valid
+	 * @return string
+	 */
+	public function isHome($is_home)
+	{
+		return ($is_home) ? '<i class="icon-home" style="display: visible"></i>' : '<i class="icon-home" style="display: none"></i>';
+	}
+
+	/**
 	 * Print out selected=selected if true
 	 * 
 	 * @param  string $var 
@@ -74,17 +85,6 @@ class Tool {
 	public function isSelected($var, $fix)
 	{
 		return ($var == $fix) ? ' selected="selected"' : '';
-	}
-
-	/**
-	 * Print icon homepage
-	 * 
-	 * @param  string $is_valid
-	 * @return string
-	 */
-	public function isHome($is_home)
-	{
-		return ($is_home) ? '<i class="icon-home" style="display: visible"></i>' : '<i class="icon-home" style="display: none"></i>';
 	}
 
 	/**

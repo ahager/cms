@@ -27,7 +27,7 @@ class Marker {
 	 */
 	public function api($marker)
 	{
-		$view = Render::view('partials.markerapi');
+		$view = Render::view('partials.items.markerapi');
 		$view['apis'] = $this->settings[$marker]['api'];
 
 		return $view;

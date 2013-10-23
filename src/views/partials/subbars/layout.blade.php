@@ -1,4 +1,4 @@
-<div class="row">
+
 	<div class="subbar">
 
 		<div class="box">
@@ -16,4 +16,3 @@
 		</button>
 
 	</div>
-</div>

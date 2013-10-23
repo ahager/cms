@@ -38,6 +38,23 @@ class Pongo {
 	}
 	
 	/**
+	 * Check current user is a editor+ user
+	 * 
+	 * @param  integer $level
+	 * @return bool
+	 */
+	public function allowedCms($level = null)
+	{
+		if(is_null($level)) $level = LEVEL;
+
+		$min_access = $this->system('min_access');
+
+		$min_level = $this->system('roles.' . $min_access);
+
+		return ($level >= $min_level) ? true : false;
+	}
+
+	/**
 	 * Get actual url segments
 	 * -> full, first, last, prev
 	 * 
@@ -78,6 +95,14 @@ class Pongo {
 	 */
 	public function grantEdit($role_level)
 	{
+		if(!is_int($role_level)) {
+
+			$role = $this->system('sections.' . $role_level . '.min_access');
+
+			$role_level = $this->system('roles.' . $role);
+		}
+
+
 		$blocked =  ($role_level > LEVEL) ? true : false;
 
 		if($blocked) {
@@ -89,6 +114,17 @@ class Pongo {
 
 			return $response;
 		} 
+	}
+
+	/**
+	 * Check if a role name is a system role
+	 * 
+	 * @param  string  $role_name
+	 * @return boolean
+	 */
+	public function isSystemRole($role_name)
+	{
+		return (array_key_exists($role_name, $this->system('roles'))) ? true : false;
 	}
 
 	/**
@@ -163,7 +199,6 @@ class Pongo {
 		} else {
 
 			$page_field = $page->$field;
-
 		}
 
 		if($context == 'cms') {
@@ -173,7 +208,6 @@ class Pongo {
 		} else {
 
 			$slug = link_to($page->slug, $page_field);
-
 		}
 
 		if($page->parent_id == 0) {
@@ -185,13 +219,10 @@ class Pongo {
 			if($link and !$url) {
 
 				$str = $this->recursivePageTree($page->parent_id, $field, $separator, $url, $link, $context) . $separator . $slug;
-
 			} else {
 
 				$str = $this->recursivePageTree($page->parent_id, $field, $separator, $url, $link, $context) . $separator . $page_field;
-
 			}
-
 		}
 
 		return $str;				  

@@ -29,6 +29,9 @@ return array(
 			'page_has_subpages'		=> 'Questa pagina contiene ancora sottopagine',
 			'page_lang'				=> 'Impossibile cambiare lingua',
 			'page_order'			=> 'Impossibile salvare l\'ordinamento',
+			'role_created'			=> 'Impossibile creare il ruolo',
+			'role_deleted'			=> 'Impossibile eliminare il ruolo',
+			'role_system'			=> 'Impossibile eliminare un ruolo di sistema',
 			'save'					=> 'Errore di salvataggio',
 			'session_exp'			=> 'Sessione scaduta, esegui login',
 			'unauthorized'			=> 'Accesso non autorizzato, esegui login',
@@ -48,6 +51,8 @@ return array(
 			'page_created'		=> 'Nuova pagina creata',
 			'page_deleted'		=> 'La pagina è stata eliminata',
 			'page_order'		=> 'Ordine di pagina salvato',
+			'role_created'		=> 'Ruolo creato correttamente',
+			'role_deleted'		=> 'Ruolo eliminato correttamente',
 			'save'				=> 'Informazioni salvate',
 			'upload_completed'	=> 'File caricati correttamente',
 			'upload_comp_err'	=> 'File caricati con qualche errore',
@@ -68,6 +73,7 @@ return array(
 			'delete'		=> 'Elimina',
 			'ok'			=> 'Ok',
 			'page' 			=> 'Pagina',
+			'role'			=> 'Ruolo',
 			'save'			=> 'Salva',
 			'upload'		=> 'Avvia caricamento',
 			'upload_files'	=> 'Carica file',
@@ -137,6 +143,13 @@ return array(
 			'files_create_title' 	=> 'Creazione Files',
 			'linked_title' 			=> 'Pagine collegate',
 			'settings_title' 		=> 'Impostazioni',
+
+		),
+
+		'role' => array(
+
+			'bar_title' => 'Ruolo utenti',
+			'roles_title' => 'Ruoli',
 
 		),
 
@@ -212,6 +225,17 @@ return array(
 
 		),
 
+		'role' => array(
+
+			'settings' => array(
+
+				'force_delete'	=> 'Elimina tutti gli utenti associati?',
+				'name' 			=> 'Nome del ruolo',
+
+			),
+
+		),
+
 	),
 	
 	'marker' => array(
@@ -241,6 +265,25 @@ return array(
 
 	),
 
+	'menu' => array(
+
+		'access'		=> 'Accesso',
+		'banners'		=> 'Banner',
+		'blog'			=> 'Blog',
+		'cmslang'		=> 'Interfaccia in',
+		'dashboard'		=> 'Dasboard',
+		'downloads'		=> 'Downloads',
+		'files'			=> 'File',
+		'galleries'		=> 'Gallerie',
+		'menu'			=> 'Menu',
+		'roles'			=> 'Ruoli',
+		'shop'			=> 'Negozio',
+		'tools'			=> 'Strumenti',
+		'translations'	=> 'Traduzioni',
+		'users'			=> 'Utenti',
+
+	),
+
 	'modal' => array(
 
 		'title' => array(
@@ -248,6 +291,7 @@ return array(
 			'clone_element'		=> 'Clonare questo elemento?',
 			'clone_page'		=> 'Clonare questa pagina?',
 			'delete_page' 		=> 'Eliminare questa pagina?',
+			'delete_role' 		=> 'Eliminare questo ruolo?',
 			'detach_file' 		=> 'Dissociare il file dalla pagina?',
 			'remove_element' 	=> 'Rimuovere l\'elemento dalla pagina?',
 
@@ -269,6 +313,12 @@ return array(
 
 		),
 
+		'role' => array(
+
+			'new'			=> 'Nuovo ruolo',
+
+		),
+
 	),
 
 	'validation' => array(
@@ -282,6 +332,8 @@ return array(
 			'file_size'		=> 'Questo file è superiore al limite consentito',
 			'not_image'		=> 'Non puoi inserire immagini',
 			'required' 		=> 'Questo campo è obbligatorio',
+			'system_role'	=> 'Non puoi modificare un ruolo di sistema',
+			'unique'		=> 'Questo nome è già presente',
 			'unique_file' 	=> 'Questo file è già presente nel sistema',
 			'unique_name' 	=> 'Questo nome è già presente per questa lingua',
 			'unique_slug' 	=> 'Questo slug è già presente per questa lingua',
