@@ -36,6 +36,10 @@ return array(
 			'session_exp'			=> 'Sessione scaduta, esegui login',
 			'unauthorized'			=> 'Accesso non autorizzato, esegui login',
 			'upload_completed'		=> 'Impossibile caricare files',
+			'user_admin'			=> 'Impossibile eliminare l\'amministratore',
+			'user_admin_role'		=> 'Impossibile togliere il ruolo all\'amministratore',
+			'user_created'			=> 'Impossibile creare l\'utente',
+			'user_deleted'			=> 'Impossibile eliminare l\'utente',
 
 		),
 
@@ -56,6 +60,8 @@ return array(
 			'save'				=> 'Informazioni salvate',
 			'upload_completed'	=> 'File caricati correttamente',
 			'upload_comp_err'	=> 'File caricati con qualche errore',
+			'user_created'		=> 'Utente creato correttamente',
+			'user_deleted'		=> 'L\'utente è stato eliminato',
 
 		),
 
@@ -77,6 +83,7 @@ return array(
 			'save'			=> 'Salva',
 			'upload'		=> 'Avvia caricamento',
 			'upload_files'	=> 'Carica file',
+			'user'			=> 'Utente',
 
 		),
 
@@ -148,8 +155,18 @@ return array(
 
 		'role' => array(
 
-			'bar_title' => 'Ruolo utenti',
-			'roles_title' => 'Ruoli',
+			'bar_title' 		=> 'Ruolo utenti',
+			'bar_title_single' 	=> 'Ruolo utente',
+			'roles_title' 		=> 'Ruoli',
+
+		),
+
+		'user' => array(
+
+			'bar_title' 		=> 'Utenti',
+			'details_title' 	=> 'Dettagli',
+			'password_title' 	=> 'Password',
+			'users_title' 		=> 'Utenti',
 
 		),
 
@@ -229,8 +246,28 @@ return array(
 
 			'settings' => array(
 
-				'force_delete'	=> 'Elimina tutti gli utenti associati?',
+				'force_delete'	=> 'Eliminare tutti gli utenti associati?',
 				'name' 			=> 'Nome del ruolo',
+
+			),
+
+		),
+
+		'user' => array(
+
+			'settings' => array(
+
+				'editor'		=> 'Text editor di default',
+				'email'			=> 'Indirizzo e-mail',
+				'lang'			=> 'Lingua di default',
+				'name' 			=> 'Nome utente',
+
+			),
+
+			'password' => array(
+
+				'password' => 'Nuova password',
+				'password_confirmation' => 'Conferma password',
 
 			),
 
@@ -292,6 +329,7 @@ return array(
 			'clone_page'		=> 'Clonare questa pagina?',
 			'delete_page' 		=> 'Eliminare questa pagina?',
 			'delete_role' 		=> 'Eliminare questo ruolo?',
+			'delete_user' 		=> 'Eliminare questo utente?',
 			'detach_file' 		=> 'Dissociare il file dalla pagina?',
 			'remove_element' 	=> 'Rimuovere l\'elemento dalla pagina?',
 
@@ -319,6 +357,12 @@ return array(
 
 		),
 
+		'user' => array(
+
+			'new'			=> 'Nuovo utente',
+
+		),
+
 	),
 
 	'validation' => array(
@@ -326,10 +370,14 @@ return array(
 		'errors' => array(
 
 			'alpha_dash'	=> 'Questo campo può contenere solo lettere, numeri e trattini',
+			'confirmed'		=> 'La password confermata non corrisponde',
+			'email'			=> 'Il formato email non è valido',
 			'ext_mimes'		=> 'Il formato del file non è consentito',
+			'file_size'		=> 'Questo file è superiore al limite consentito',
 			'integer'		=> 'Il valore deve essere un numero intero',
 			'is_slug'		=> 'Clicca il tasto per generare uno slug corretto',
-			'file_size'		=> 'Questo file è superiore al limite consentito',
+			'max_username'	=> 'Lo username non può superare :max caratteri',
+			'min_password'	=> 'La password deve avere almeno :min caratteri',
 			'not_image'		=> 'Non puoi inserire immagini',
 			'required' 		=> 'Questo campo è obbligatorio',
 			'system_role'	=> 'Non puoi modificare un ruolo di sistema',

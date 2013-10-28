@@ -14,6 +14,7 @@ class UsersTableSeeder extends Seeder {
 		$admin_settings = 	array(
 								'role_id' 	=> 1,
 								'lang' 		=> Config::get('cms::settings.language'),
+								'editor'	=> 0,
 								'is_valid' 	=> 1
 							);
 

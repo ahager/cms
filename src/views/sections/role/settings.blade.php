@@ -11,6 +11,7 @@
 @section('footer-js')
 	@parent
 	{{Render::asset('scripts/sections/role.js')}}
+	{{Render::asset('scripts/sections/user.js')}}
 	{{Render::asset('scripts/vm/role/settings.js')}}
 @stop
 

@@ -1,7 +1,6 @@
 <?php namespace Pongo\Cms\Classes;
 
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
-use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
 use Asset, HTML, Pongo, Theme, Tool, View;
 
@@ -24,10 +23,9 @@ class Render {
 	/**
 	 * Render constructor
 	 */
-	public function __construct(Page $page, Role $role)
+	public function __construct(Page $page)
 	{
 		$this->page = $page;
-		$this->role = $role;
 	}
 
 	/**
@@ -263,20 +261,84 @@ class Render {
 	}
 
 	/**
-	 * Create role list
+	 * Create a back recursive site structure of pages
 	 * 
-	 * @param  int $role_id
+	 * @param  int     $id        page id
+	 * @param  string  $field     db column to target
+	 * @param  string  $separator optional separator
+	 * @param  boolean $url       create a url string
+	 * @param  boolean $link      make each chunk linkable to its url
+	 * @param  string  $context   site or cms context
 	 * @return string
 	 */
-	public function roleList($role_id)
+	public function pageTree($id, $field = 'slug', $separator = '', $url = false, $link = false, $context = 'cms')
 	{
-		$items = $this->role->getRoles();
+		if($url) {
+			$field = 'slug';
+			$separator = '/';
+		}
 
-		$item_view = $this->view('partials.items.roleitem');
-		$item_view['items'] 	= $items;
-		$item_view['role_id'] 	= $role_id;
+		$str = $this->recursivePageTree($id, $field, $separator, $url, $link, $context);
 
-		return $item_view;
+		$result =  ($url and !$link) ? url($str) : $str;
+
+		return $result;
+
+	}
+	
+	/**
+	 * Recursive process of pageTree method
+	 * 
+	 * @param  int     $id        page id
+	 * @param  string  $field     db column to target
+	 * @param  string  $separator optional separator
+	 * @param  boolean $url       create a url string
+	 * @param  boolean $link      make each chunk linkable to its url
+	 * @param  string  $context   site or cms context
+	 * @return string
+	 */
+	protected function recursivePageTree($id, $field, $separator, $url, $link, $context)
+	{
+		$page = $this->page->getPage($id);
+
+		if($field == 'slug') {
+			
+			$separator = '';
+
+			$slug_arr = explode('/', $page->$field);
+
+			$page_field = '/' . end($slug_arr);
+
+		} else {
+
+			$page_field = $page->$field;
+		}
+
+		if($context == 'cms') {
+
+			$slug = link_to_cms('page/edit/' . $page->id, $page_field);
+
+		} else {
+
+			$slug = link_to($page->slug, $page_field);
+		}
+
+		if($page->parent_id == 0) {
+
+			$str = ($link and !$url) ? $slug : $page_field;
+
+		} else {
+
+			if($link and !$url) {
+
+				$str = $this->recursivePageTree($page->parent_id, $field, $separator, $url, $link, $context) . $separator . $slug;
+			} else {
+
+				$str = $this->recursivePageTree($page->parent_id, $field, $separator, $url, $link, $context) . $separator . $page_field;
+			}
+		}
+
+		return $str;				  
 	}
 
 	/**

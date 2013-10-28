@@ -5,7 +5,7 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Illuminate\Validation\Validator as LaravelValidator;
 
-use Config, Media, Pongo, Str;
+use Access, Config, Media, Pongo, Str;
 
 class PongoValidator extends LaravelValidator {
 
@@ -80,7 +80,9 @@ class PongoValidator extends LaravelValidator {
 
 	public function validateSystemRole($attribute, $value, $parameters)
 	{		
-		return !Pongo::isSystemRole($value);
+		$role_id = $parameters[0];
+
+		return !Access::isSystemRole($role_id);
 	}
 
 	public function validateUniqueFile($attribute, $value, $parameters)

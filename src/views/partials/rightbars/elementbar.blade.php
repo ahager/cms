@@ -19,11 +19,15 @@
 
 				<div class="dl">
 
-					<ol class="dl-list">
+					<form action="{{route('api.element.settings.valid')}}">
 
-						{{Render::elementList($page_id, $element_id)}}
+						<ol class="dl-list valid">
 
-					</ol>
+							{{Render::elementList($page_id, $element_id)}}
+
+						</ol>
+
+					</form>
 
 				</div>
 
@@ -57,7 +61,7 @@
 
 	<footer>
 			
-		<ul class="toolbar">			
+		<ul class="toolbar">
 			<li class="active"><a href="#"><i class="icon-sort-by-attributes"></i></a></li>
 			<li><a href="#"><i class="icon-exchange"></i></a></li>
 		</ul>

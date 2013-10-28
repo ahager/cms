@@ -62,11 +62,15 @@
 
 				<div class="dl">
 
-					<ol class="dl-list">
+					<form action="{{route('api.element.settings.valid')}}">
 
-						{{Render::elementList($page_id, $element_id)}}
+						<ol class="dl-list valid">
 
-					</ol>
+							{{Render::elementList($page_id, $element_id)}}
+
+						</ol>
+
+					</form>
 
 				</div>
 

@@ -43,6 +43,15 @@ return array(
 	),
 
 	/**
+	 * PongoCMS :: available editors
+	 */
+	'editors' => array(
+
+		'TinyMCE',
+
+	),
+
+	/**
 	 * PongoCMS :: Max upload size (in Mb)
 	 */
 	
@@ -78,11 +87,29 @@ return array(
 	
 	'admin_account' => array(
 
+		'id'		=> 1,
+
 		'username' 	=> 'admin',
 
 		'email' 	=> 'admin@admin.tld',
 
 		'password'	=> 'admin'
+
+	),
+
+	/**
+	 * PongoCMS :: Default User account
+	 */
+	
+	'user_account' => array(
+
+		'id'		=> 4,
+		
+		'username' 	=> 'user',
+
+		'email' 	=> 'user@user.tld',
+
+		'password'	=> 'user'
 
 	),
 

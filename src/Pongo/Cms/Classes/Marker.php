@@ -58,7 +58,7 @@ class Marker {
 			$found = $matches[2][$key];
 
 			// Check if marker method is IoCed
-			if ( App::bound($method) ) {
+			if (App::bound($method)) {
 
 				// Clean HTML
 				$found = strip_tags($found);

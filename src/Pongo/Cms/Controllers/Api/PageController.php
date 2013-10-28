@@ -5,7 +5,7 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Pongo\Cms\Support\Validators\Page\SettingsValidator as SettingsValidator;
 
-use Alert, Input, Pongo, Redirect, Render, Session, Str, Tool;
+use Access, Alert, Input, Pongo, Redirect, Render, Session, Str, Tool;
 
 class PageController extends ApiController {
 
@@ -166,7 +166,7 @@ class PageController extends ApiController {
 			$page->order_id = $key + 1;
 			$this->page->savePage($page);
 
-			$page->slug = Pongo::pageTree($page->id, 'slug', '/');
+			$page->slug = Render::pageTree($page->id, 'slug', '/');
 			$this->page->savePage($page);
 
 			// Recursive update
@@ -426,7 +426,7 @@ class PageController extends ApiController {
 			$page = $this->page->getPage($page_id);
 
 			// Author can edit the page
-			if(is_array($unauth = Pongo::grantEdit($page->role_level)))
+			if(is_array($unauth = Access::grantEdit($page->role_level)))
 				return json_encode($unauth);
 
 			$page->template = $template;
@@ -469,7 +469,7 @@ class PageController extends ApiController {
 			$page = $this->page->getPage($page_id);
 
 			// Author can edit the page
-			if(is_array($unauth = Pongo::grantEdit($page->role_level)))
+			if(is_array($unauth = Access::grantEdit($page->role_level)))
 				return json_encode($unauth);
 
 			$page->title 	= $title;
@@ -561,7 +561,7 @@ class PageController extends ApiController {
 			$page = $this->page->getPage($page_id);
 
 			// Author can edit the page
-			if(is_array($unauth = Pongo::grantEdit($page->role_level)))
+			if(is_array($unauth = Access::grantEdit($page->role_level)))
 				return json_encode($unauth);
 			
 			$full_slug = $slug_base . '/' . Str::slug($slug_last);

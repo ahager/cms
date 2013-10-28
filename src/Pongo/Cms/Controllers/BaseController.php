@@ -1,6 +1,6 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Auth, Alert, Controller, Input, Redirect, Render, Response, Session;
+use Auth, Alert, Cookie, Controller, Input, Redirect, Render, Response, Session;
 
 class BaseController extends Controller {
 

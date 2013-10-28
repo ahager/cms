@@ -21,6 +21,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $hidden = array('password');
 
 	/**
+	 * Guarded mass-assignment property
+	 * 
+	 * @var array
+	 */
+	protected $guarded = array('id');
+
+	/**
 	 * Pages relationship
 	 * Each user has many pages
 	 * 

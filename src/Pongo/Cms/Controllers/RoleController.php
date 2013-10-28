@@ -17,17 +17,7 @@ class RoleController extends BaseController {
 
 		$this->beforeFilter('pongo.auth');
 
-		$this->role 	= $role;
-	}
-
-	/**
-	 * Show role deleted
-	 * 
-	 * @return string
-	 */
-	public function deletedRole()
-	{
-		return Render::view('sections.role.deleted');
+		$this->role = $role;
 	}
 
 	/**
@@ -47,8 +37,6 @@ class RoleController extends BaseController {
 		$view['role_id'] 		= $role_id;
 		$view['section_name'] 	= t('menu.roles');		
 		$view['name']			= $role->name;
-
-		$view['level_selected'] = LEVEL;
 
 		return $view;
 	}

@@ -1,22 +1,37 @@
 <?php namespace Pongo\Cms\Support\Repositories;
 
-use User;
+use Pongo\Cms\Models\User as User;
 
 class UserRepositoryEloquent implements UserRepositoryInterface {
 
-	public function all()
+	public function createUser($user_arr)
 	{
-		return User::all();
+		return User::create($user_arr);
 	}
 
-	public function find($user_id)
+	public function deleteUser($user)
+	{
+		return $user->delete();
+	}
+
+	public function getUser($user_id)
 	{
 		return User::find($user_id);
 	}
 
-	public function create($user_arr)
+	public function getUserLevel($user)
 	{
-		return User::create($input);
+		return $user->role->level;
+	}
+
+	public function getUsers()
+	{
+		return User::all();
+	}
+
+	public function saveUser($user)
+	{
+		return $user->save();
 	}
 
 }

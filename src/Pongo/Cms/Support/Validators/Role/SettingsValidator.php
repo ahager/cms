@@ -12,7 +12,7 @@ class SettingsValidator extends BaseValidator {
 		parent::__construct();
 		
 		static::$rules = array(
-			'name'		=> 'required|systemRole|unique:roles,name,' . $role_id,
+			'name'		=> 'required|systemRole:'.$role_id.'|unique:roles,name,' . $role_id,
 		);
 
 		static::$messages = array(

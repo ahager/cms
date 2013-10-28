@@ -36,6 +36,10 @@ return array(
 			'session_exp'			=> 'Session expired, please login',
 			'unauthorized'			=> 'Unauthorized access, please login',
 			'upload_completed'		=> 'Unable to upload files',
+			'user_admin'			=> 'Unable to delete the admin user',
+			'user_admin_role'		=> 'Can\'t detach admin user from its role',
+			'user_created'			=> 'Unable to create user',
+			'user_deleted'			=> 'Unable to delete user',
 			
 		),
 
@@ -56,6 +60,8 @@ return array(
 			'save'				=> 'Successfully saved',
 			'upload_completed'	=> 'Files successfully uploaded',
 			'upload_comp_err'	=> 'Files uploaded with some errors',
+			'user_created'		=> 'User successfully created',
+			'user_deleted'		=> 'The user has been deleted',
 
 		),
 
@@ -77,6 +83,7 @@ return array(
 			'save'			=> 'Save',
 			'upload'		=> 'Start upload',
 			'upload_files'	=> 'Upload files',
+			'user'			=> 'User',
 
 		),
 
@@ -148,8 +155,18 @@ return array(
 
 		'role' => array(
 
-			'bar_title' => 'User roles',
-			'roles_title' => 'Roles',
+			'bar_title' 		=> 'User roles',
+			'bar_title_single' 	=> 'User role',
+			'roles_title' 		=> 'Roles',
+
+		),
+
+		'user' => array(
+
+			'bar_title' 		=> 'Users',
+			'details_title' 	=> 'Details',
+			'password_title' 	=> 'Password',
+			'users_title' 		=> 'Users',
 
 		),
 
@@ -236,6 +253,26 @@ return array(
 
 		),
 
+		'user' => array(
+
+			'settings' => array(
+
+				'editor'		=> 'Default text editor',
+				'email'			=> 'E-mail address',
+				'lang'			=> 'Default language',
+				'name' 			=> 'User name',
+
+			),
+
+			'password' => array(
+
+				'password' => 'New Password',
+				'password_confirmation' => 'Password confirmation',
+
+			),
+
+		),
+
 	),
 	
 	'marker' => array(
@@ -292,6 +329,7 @@ return array(
 			'clone_page'		=> 'Clone this page?',
 			'delete_page' 		=> 'Delete this page?',
 			'delete_role' 		=> 'Delete this role?',
+			'delete_user' 		=> 'Delete this user?',
 			'detach_file' 		=> 'Detach file from this page?',
 			'detach_element' 	=> 'Detach element from page?',
 
@@ -319,6 +357,12 @@ return array(
 
 		),
 
+		'user' => array(
+
+			'new'			=> 'New user',
+
+		),
+
 	),
 
 	'validation' => array(
@@ -326,10 +370,14 @@ return array(
 		'errors' => array(
 
 			'alpha_dash'	=> 'This field may only contain letters, numbers, and dashes',
+			'confirmed'		=> 'Confirmed password doesn\'t match',
+			'email'			=> 'The email format is invalid',
 			'ext_mimes'		=> 'This file extension is not allowed',
+			'file_size'		=> 'The file size exceeds maximum allowed',
 			'integer'		=> 'This value must be an integer',
 			'is_slug'		=> 'Click the button to generate a correct slug',
-			'file_size'		=> 'The file size exceeds maximum allowed',
+			'max_username'	=> 'Username can\'t exceed :max chars',
+			'min_password'	=> 'Password must be at least :min chars',
 			'not_image'		=> 'This tool is not for images',
 			'required' 		=> 'This field is required',
 			'system_role'	=> 'You can\'t edit a system role',

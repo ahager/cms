@@ -2,10 +2,16 @@
 
 interface UserRepositoryInterface {
 
-	public function all();
+	public function createUser($user_arr);
 
-	public function find($user_id);
+	public function deleteUser($user);
 
-	public function create($user_arr);
+	public function getUser($user_id);
+
+	public function getUserLevel($user);
+
+	public function getUsers();
+
+	public function saveUser($user);
 	
 }

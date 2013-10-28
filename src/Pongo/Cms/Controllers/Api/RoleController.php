@@ -4,7 +4,7 @@ use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
 use Pongo\Cms\Support\Validators\Role\SettingsValidator as SettingsValidator;
 
-use Alert, Input, Pongo, Redirect;
+use Access, Alert, Input, Pongo, Redirect;
 
 class RoleController extends ApiController {
 
@@ -82,7 +82,7 @@ class RoleController extends ApiController {
 
 			$role_name = Input::get('name');
 
-			if( ! Pongo::isSystemRole($role_name)) {
+			if( ! Access::isSystemRole($role_name)) {
 
 				$role = $this->role->getRole($role_id);
 
@@ -133,7 +133,7 @@ class RoleController extends ApiController {
 				$role = $this->role->getRole($role_id);
 
 				// Author can edit the page
-				if(is_array($unauth = Pongo::grantEdit('access.roles')))
+				if(is_array($unauth = Access::grantEdit('access.roles')))
 					return json_encode($unauth);
 				
 				$role->name = $name;
@@ -143,7 +143,7 @@ class RoleController extends ApiController {
 				$response = array(
 					'status' 	=> 'success',
 					'msg'		=> t('alert.success.save'),
-					'element'	=> array(
+					'role'	=> array(
 
 						'id' 		=> $role_id,
 						'name'		=> $name
@@ -185,7 +185,7 @@ class RoleController extends ApiController {
 				$role = $this->role->getRole($role_arr['id']);
 
 				// Process non sys roles only
-				if( ! Pongo::isSystemRole($role->name)) {
+				if( ! Access::isSystemRole($role->name)) {
 					
 					if(array_key_exists($key-1, $mod_roles)) {
 

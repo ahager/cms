@@ -42,6 +42,11 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	// ROLE
 	Route::get('role/settings/{role_id?}', array('uses' => $pongoControllers.'RoleController@settingsRole', 'as' => 'role.settings'));
 
+	// USER
+	Route::get('user/settings/{user_id?}', array('uses' => $pongoControllers.'UserController@settingsUser', 'as' => 'user.settings'));
+	Route::get('user/password/{user_id?}', array('uses' => $pongoControllers.'UserController@passwordUser', 'as' => 'user.password'));
+	Route::get('user/details/{user_id?}', array('uses' => $pongoControllers.'UserController@detailsUser', 'as' => 'user.details'));
+
 });
 
 // API calls
@@ -85,6 +90,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 		Route::any('element/settings/save', array('uses' => $apiControllers.'ElementController@elementSettingsSave', 'as' => 'api.element.settings.save'));
 		Route::any('element/settings/clone', array('uses' => $apiControllers.'ElementController@elementSettingsClone', 'as' => 'api.element.settings.clone'));
 		Route::any('element/settings/delete', array('uses' => $apiControllers.'ElementController@elementSettingsDelete', 'as' => 'api.element.settings.delete'));
+		Route::any('element/settings/valid', array('uses' => $apiControllers.'ElementController@elementSettingsValid', 'as' => 'api.element.settings.valid'));
 	
 		// CONTENT
 		Route::any('element/content/save', array('uses' => $apiControllers.'ElementController@elementContentSave', 'as' => 'api.element.content.save'));
@@ -96,6 +102,17 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 		// SETTINGS
 		Route::any('role/settings/save', array('uses' => $apiControllers.'RoleController@roleSettingsSave', 'as' => 'api.role.settings.save'));
 		Route::any('role/settings/delete', array('uses' => $apiControllers.'RoleController@roleSettingsDelete', 'as' => 'api.role.settings.delete'));
+
+	// USER
+	Route::any('user/order', array('uses' => $apiControllers.'UserController@orderUser', 'as' => 'api.user.order'));
+	Route::any('user/create', array('uses' => $apiControllers.'UserController@createUser', 'as' => 'api.user.create'));
+	
+		// SETTINGS
+		Route::any('user/settings/save', array('uses' => $apiControllers.'UserController@userSettingsSave', 'as' => 'api.user.settings.save'));
+		Route::any('user/settings/delete', array('uses' => $apiControllers.'UserController@userSettingsDelete', 'as' => 'api.user.settings.delete'));
+		Route::any('user/settings/valid', array('uses' => $apiControllers.'UserController@userSettingsValid', 'as' => 'api.user.settings.valid'));
+		Route::any('user/settings/link', array('uses' => $apiControllers.'UserController@userSettingsLink', 'as' => 'api.user.settings.link'));
+		Route::any('user/password/save', array('uses' => $apiControllers.'UserController@userPasswordSave', 'as' => 'api.user.password.save'));
 
 });
 

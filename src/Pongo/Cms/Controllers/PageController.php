@@ -3,7 +3,7 @@
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
-use Pongo, Theme, Tool, Render, View;
+use Access, Pongo, Theme, Tool, Render, View;
 
 class PageController extends BaseController {
 
@@ -116,7 +116,7 @@ class PageController extends BaseController {
 		$roles = $this->role->orderBy('level', 'asc');
 
 		// Role admin array
-		$admin_roles = Pongo::adminRoles($roles);
+		$admin_roles = Access::adminRoles($roles);
 
 		// Count element per page
 		$n_elements = $this->page->countPageElements($page);

@@ -5,7 +5,7 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Pongo\Cms\Support\Validators\Element\SettingsValidator as SettingsValidator;
 
-use Alert, Input, Pongo, Redirect;
+use Access, Alert, Input, Pongo, Redirect;
 
 class ElementController extends ApiController {
 
@@ -241,7 +241,7 @@ class ElementController extends ApiController {
 				$page = $this->page->getPage($page_id);
 
 				// Author can edit the page
-				if(is_array($unauth = Pongo::grantEdit($page->role_level)))
+				if(is_array($unauth = Access::grantEdit($page->role_level)))
 					return json_encode($unauth);
 
 				$element = $this->element->getElement($element_id);
@@ -251,7 +251,6 @@ class ElementController extends ApiController {
 				$element->attrib 	= $attrib;
 				$element->name 		= $name;
 				$element->zone 		= $zone;
-				$element->is_valid 	= $valid;
 
 				$this->element->saveElement($element);
 
@@ -283,6 +282,38 @@ class ElementController extends ApiController {
 		}
 
 		return json_encode($response);	
+	}
+
+	/**
+	 * Save valid status
+	 * 
+	 * @return json object
+	 */
+	public function elementSettingsValid()
+	{
+		if(Input::has('item_id') and Input::has('action')) {
+
+			$element_id 	= Input::get('item_id');
+			$valid 			= Input::get('action');
+
+			$element = $this->element->getElement($element_id);
+
+			$element->is_valid = $valid;
+
+			$this->element->saveElement($element);
+
+			$response = array(
+				'status' 	=> 'success'
+			);
+
+		} else {
+
+			$response = array(
+				'status' 	=> 'error'
+			);
+		}
+
+		return json_encode($response);
 	}
 
 	/**

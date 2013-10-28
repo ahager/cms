@@ -47,17 +47,6 @@
 				@endforeach
 			</select>
 		</div>
-
-		<div class="form-group">
-			<div class="checkbox">
-				<label class="control-label">
-					<input type="checkbox" name="is_valid" value="1"{{checked($is_valid, 1)}} data-bind="checked: elementState">
-					<span class="label" data-bind="css: elementStatus">
-						<span data-bind="text: elementStatusLabel"></span>
-					</span>
-				</label>
-			</div>
-		</div>
 		<div class="form-buttons">
 			{{link_to_route('api.element.settings.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}
 			<a href="#clone-modal" class="btn btn-primary btn-block confirm">{{t('form.button.clone')}}</a>

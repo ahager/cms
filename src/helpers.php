@@ -243,8 +243,5 @@ if ( ! function_exists('system_role_class'))
 	function system_role_class($level, $class_yes, $class_not)
 	{
 		return (LEVEL > $level) ? $class_yes : $class_not;
-
-
-		// return (Pongo::isSystemRole($role_name)) ? $class_yes : $class_not;
 	}
 }

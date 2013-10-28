@@ -101,9 +101,18 @@ return array(
 
 			'class'	=> 'Pongo\Cms\Classes\Pongo',
 			'alias'	=> 'Pongo\Cms\Support\Facades\Pongo',
+			'repos' => '',
+
+		),
+
+		'Access' => array(
+
+			'class' => 'Pongo\Cms\Classes\Access',
+			'alias' => 'Pongo\Cms\Support\Facades\Access',
 			'repos' => array(
 
-				'Pongo\Cms\Support\Repositories\PageRepositoryEloquent',
+				'Pongo\Cms\Support\Repositories\RoleRepositoryEloquent',
+				'Pongo\Cms\Support\Repositories\UserRepositoryEloquent',
 
 			),
 
@@ -144,7 +153,6 @@ return array(
 			'repos' => array(
 
 				'Pongo\Cms\Support\Repositories\PageRepositoryEloquent',
-				'Pongo\Cms\Support\Repositories\RoleRepositoryEloquent',
 
 			),
 
@@ -253,16 +261,16 @@ return array(
 			'roles' => array(
 
 				'route' 		=> 'role.settings',
-				'min_access' 	=> 'editor'
+				'min_access' 	=> 'manager'
 
 			),
 			
-			/*'users' => array(
+			'users' => array(
 				
-				'route' 		=> 'users',
-				'min_access' 	=> 'editor'
+				'route' 		=> 'user.settings',
+				'min_access' 	=> 'manager'
 
-			),*/
+			),
 		),
 
 		/*'blog' => array(
