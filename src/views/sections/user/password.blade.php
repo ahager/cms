@@ -23,7 +23,7 @@
 	
 	<h3>{{t('heading.user.'.$section.'_title')}}</h3>
 
-	<form role="form" id="role-settings-form">
+	<form role="form" id="user-password-form">
 		<input type="hidden" name="user_id" value="{{$user_id}}">
 		<input type="hidden" name="name" id="name" value="{{$name}}" data-bind="value: itemName">
 		<div class="form-group" rel="password">

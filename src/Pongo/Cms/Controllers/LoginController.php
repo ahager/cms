@@ -1,6 +1,6 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Auth, Alert, Input, Redirect, Render, Session, Pongo;
+use Access, Auth, Alert, Input, Redirect, Render, Session;
 
 class LoginController extends BaseController {
 	
@@ -41,11 +41,22 @@ class LoginController extends BaseController {
 
 		if (Auth::attempt($credentials)) {
 
-			$this->setConstants();
+			if(Access::allowedCms(Auth::user()->role->level)) {
 
-			Alert::info(t('alert.info.welcome', array('user' => Input::get('username'))))->flash();
+				$this->setConstants();
 
-			return Redirect::route('dashboard');
+				Alert::info(t('alert.info.welcome', array('user' => Input::get('username'))))->flash();
+
+				return Redirect::route('dashboard');
+
+			} else {
+
+				Auth::logout();
+
+				Alert::error(t('alert.error.unauthorized'))->flash();
+
+				return Redirect::route('login.index');
+			}
 
 		} else {
 

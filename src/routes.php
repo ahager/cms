@@ -37,6 +37,7 @@ Route::group(Config::get('cms::routes.cms_group_routes'), function() use ($pongo
 	Route::get('element/deleted', array('uses' => $pongoControllers.'ElementController@deletedElement', 'as' => 'element.deleted'));
 
 	// FILE
+	Route::get('file/upload', array('uses' => $pongoControllers.'FileController@uploadFile', 'as' => 'file.upload'));
 	Route::get('file/edit/{file_id}', array('uses' => $pongoControllers.'FileController@editFile', 'as' => 'file.edit'));
 
 	// ROLE
@@ -106,6 +107,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 	// USER
 	Route::any('user/order', array('uses' => $apiControllers.'UserController@orderUser', 'as' => 'api.user.order'));
 	Route::any('user/create', array('uses' => $apiControllers.'UserController@createUser', 'as' => 'api.user.create'));
+	Route::any('user/search', array('uses' => $apiControllers.'UserController@searchUser', 'as' => 'api.user.search'));
 	
 		// SETTINGS
 		Route::any('user/settings/save', array('uses' => $apiControllers.'UserController@userSettingsSave', 'as' => 'api.user.settings.save'));
@@ -113,6 +115,7 @@ Route::group(Config::get('cms::routes.api_group_routes'), function() use ($apiCo
 		Route::any('user/settings/valid', array('uses' => $apiControllers.'UserController@userSettingsValid', 'as' => 'api.user.settings.valid'));
 		Route::any('user/settings/link', array('uses' => $apiControllers.'UserController@userSettingsLink', 'as' => 'api.user.settings.link'));
 		Route::any('user/password/save', array('uses' => $apiControllers.'UserController@userPasswordSave', 'as' => 'api.user.password.save'));
+		Route::any('user/details/save', array('uses' => $apiControllers.'UserController@userDetailsSave', 'as' => 'api.user.details.save'));
 
 });
 

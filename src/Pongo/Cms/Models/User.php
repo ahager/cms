@@ -50,6 +50,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	/**
+	 * Details relationship
+	 * Each user has one details
+	 * 
+	 * @return mixed
+	 */
+	public function details()
+	{
+		return $this->hasOne('Pongo\Cms\Models\UserDetail', 'user_id');
+	}
+
+	/**
 	 * Get the unique identifier for the user.
 	 *
 	 * @return mixed

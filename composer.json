@@ -18,7 +18,8 @@
         "illuminate/support": "4.0.x",
         "sybio/image-workshop": "dev-master",
         "teepluss/asset": "dev-master",
-        "prologue/alerts": "dev-master"
+        "prologue/alerts": "dev-master",
+        "jasonlewis/expressive-date": "1.0.*"
     },
     "autoload": {
         "classmap": [

@@ -36,17 +36,22 @@
 
 					<h2>{{t('heading.user.bar_title')}}</h2>
 
+					<a href="#" id="search-toggle">
+						<i class="icon-search"></i></a>
+
 					<button id="create-user" class="btn btn-primary loading">
 						<i class="icon-plus-sign"></i> {{t('form.button.user')}}
 					</button>
 
 				</header>
 
-				<div class="linked-pages user-list">
+				{{Form::input('search', 'search', null, array('class' => 'form-control', 'placeholder' => t('form.placeholder.search'), 'data-item' => 'user'))}}
+
+				<div class="linked-pages user-list paginate">
 
 					<form action="{{route('api.user.settings.valid')}}">
 
-						<ol class="dd-list">
+						<ol class="dd-list valid">
 
 							{{Access::userList($user_id)}}
 

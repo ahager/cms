@@ -50,11 +50,11 @@
 	{{Render::asset('scripts/plugins/detectmobilebrowser.js')}}
 	{{Render::asset('scripts/plugins/nestable.js')}}
 	{{Render::asset('scripts/pongo.js')}}
+	{{Render::scripts('footer')}}
 	@section('footer-js')
 	{{Render::asset('scripts/main.js')}}
 	{{Render::asset('scripts/vm/pongovm.js')}}
-	@show
-	{{Render::scripts('footer')}}
+	@show	
 	{{Render::asset('bower_components/bootstrap/js/affix.js')}}
 	{{Render::asset('bower_components/bootstrap/js/alert.js')}}
 	{{Render::asset('bower_components/bootstrap/js/dropdown.js')}}

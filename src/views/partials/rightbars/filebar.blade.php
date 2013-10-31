@@ -1,3 +1,5 @@
+{{-- */ if(!isset($page_id)) $page_id = 0; /* --}}
+
 <div class="right-bar">
 
 	<div class="right-body">
@@ -8,11 +10,11 @@
 
 		</header>
 
-		<div class="dn">
+		<div class="dn paginate">
 
 			<ol class="dn-list list">
 
-				{{Render::fileList($page_id)}}
+				{{Load::fileList($page_id)}}
 
 			</ol>
 

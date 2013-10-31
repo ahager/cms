@@ -12,6 +12,8 @@ interface RoleRepositoryInterface {
 
 	public function getRoles();
 
+	public function getRolesByLevel();
+
 	public function orderBy($field, $order);
 
 	public function saveRole($role);

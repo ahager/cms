@@ -31,7 +31,9 @@ class Access {
 		$admin_roles = array();
 
 		foreach ($roles as $role) {
+			
 			if($role->level >= $role_access) {
+
 				$admin_roles[$role->name] = $role->level;	
 			}			
 		}
@@ -71,7 +73,7 @@ class Access {
 			$role_level = Pongo::system('roles.' . $role);
 		}
 
-		$blocked =  ($role_level > LEVEL) ? true : false;
+		$blocked = ($role_level > LEVEL) ? true : false;
 
 		if($blocked) {
 
@@ -112,7 +114,7 @@ class Access {
 	 */
 	public function roleList($role_id, $partial = 'roleitem')
 	{
-		$items = $this->role->getRoles();
+		$items = $this->role->getRolesByLevel();
 
 		$item_view = Render::view('partials.items.' . $partial);
 		$item_view['items'] 	= $items;
@@ -139,7 +141,9 @@ class Access {
 	 */
 	public function userList($user_id)
 	{
-		$items = $this->user->getUsers();
+		Render::assetAdd('footer', 'paginator', 'scripts/plugins/paginator.js');
+
+		$items = $this->user->getUsersWithRoles(pag());
 
 		$item_view = Render::view('partials.items.useritem');
 		$item_view['items'] 	= $items;

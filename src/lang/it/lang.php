@@ -31,13 +31,13 @@ return array(
 			'page_order'			=> 'Impossibile salvare l\'ordinamento',
 			'role_created'			=> 'Impossibile creare il ruolo',
 			'role_deleted'			=> 'Impossibile eliminare il ruolo',
-			'role_system'			=> 'Impossibile eliminare un ruolo di sistema',
+			'role_system'			=> 'Impossibile eliminare ruolo di sistema',
 			'save'					=> 'Errore di salvataggio',
 			'session_exp'			=> 'Sessione scaduta, esegui login',
 			'unauthorized'			=> 'Accesso non autorizzato, esegui login',
 			'upload_completed'		=> 'Impossibile caricare files',
-			'user_admin'			=> 'Impossibile eliminare l\'amministratore',
-			'user_admin_role'		=> 'Impossibile togliere il ruolo all\'amministratore',
+			'user_admin'			=> 'Impossibile eliminare amministratore',
+			'user_admin_role'		=> 'Ruolo di amministratore',
 			'user_created'			=> 'Impossibile creare l\'utente',
 			'user_deleted'			=> 'Impossibile eliminare l\'utente',
 
@@ -67,6 +67,33 @@ return array(
 
 	),
 
+	'datetime' => array(
+
+		'label' => array(
+
+			'at' => 'alle',
+
+		),
+
+		'month' => array(
+
+			'1' 	=> 'Gennaio',
+			'2' 	=> 'Febbraio',
+			'3' 	=> 'Marzo',
+			'4' 	=> 'Aprile',
+			'5' 	=> 'Maggio',
+			'6' 	=> 'Giugno',
+			'7' 	=> 'Luglio',
+			'8' 	=> 'Agosto',
+			'9' 	=> 'Settembre',
+			'10' 	=> 'Ottobre',
+			'11' 	=> 'Novembre',
+			'12' 	=> 'Dicembre',
+
+		),
+
+	),
+
 	'form' => array(
 
 		'button' => array(
@@ -90,6 +117,12 @@ return array(
 		'infos' => array(
 
 			'create_file' => 'Rinomina questo file in ":rename" e caricalo via FTP nella cartella ":upload"'
+
+		),
+
+		'placeholder' => array(
+
+			'search' => 'Cerca nei risultati',
 
 		),
 
@@ -271,6 +304,16 @@ return array(
 
 			),
 
+			'details' => array(
+
+				'bio'			=> 'Dati biografici',
+				'birth_date'	=> 'Data di nascita',
+				'city'			=> 'Città',
+				'name' 			=> 'Nome',
+				'surname' 		=> 'Cognome',
+
+			),
+
 		),
 
 	),
@@ -335,7 +378,7 @@ return array(
 
 		),
 
-	),
+	),	
 
 	'template' => array(
 

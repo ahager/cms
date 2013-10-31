@@ -13,7 +13,7 @@
 
 	<h1>Dashboard</h1>
 
-	{{Access::roleMaxLevel()}}
+	{{LEVEL}}
 
 	{{MARKER('[$IMAGE[{"file":"test.jpg", "value":"1"}]]')}}
 

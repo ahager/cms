@@ -20,7 +20,7 @@
 
 					<ol class="dn-list list">
 
-						{{Render::fileList($page_id, 'action')}}
+						{{Load::fileList($page_id, 'action')}}
 
 					</ol>
 
@@ -38,9 +38,9 @@
 
 				<div class="dn">
 
-					<ol class="dn-list list">
+					<ol class="dn-list">
 
-						{{Render::markerList()}}
+						{{Load::markerList()}}
 
 					</ol>
 
@@ -66,7 +66,7 @@
 
 						<ol class="dl-list valid">
 
-							{{Render::elementList($page_id, $element_id)}}
+							{{Load::elementList($page_id, $element_id)}}
 
 						</ol>
 

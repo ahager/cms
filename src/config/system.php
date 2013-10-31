@@ -86,6 +86,7 @@ return array(
 
 		'Teepluss\Asset\AssetServiceProvider',
 		'Prologue\Alerts\AlertsServiceProvider',
+		'ExpressiveDateServiceProvider',
 
 	),
 
@@ -118,6 +119,14 @@ return array(
 
 		),
 
+		'Build' => array(
+
+			'class'	=> 'Pongo\Cms\Classes\Build',
+			'alias'	=> 'Pongo\Cms\Support\Facades\Build',
+			'repos' => '',
+
+		),
+
 		'Image' => array(
 
 			'class'	=> 'Pongo\Cms\Classes\Image',
@@ -125,6 +134,19 @@ return array(
 			'repos' => array(
 				
 				'PHPImageWorkshop\ImageWorkshop',
+
+			),
+
+		),
+
+		'Load' => array(
+
+			'class' => 'Pongo\Cms\Classes\Load',
+			'alias' => 'Pongo\Cms\Support\Facades\Load',
+			'repos' => array(
+
+				'Pongo\Cms\Support\Repositories\FileRepositoryEloquent',
+				'Pongo\Cms\Support\Repositories\PageRepositoryEloquent',
 
 			),
 
@@ -150,11 +172,7 @@ return array(
 
 			'class' => 'Pongo\Cms\Classes\Render',
 			'alias' => 'Pongo\Cms\Support\Facades\Render',
-			'repos' => array(
-
-				'Pongo\Cms\Support\Repositories\PageRepositoryEloquent',
-
-			),
+			'repos' => '',
 
 		),
 
@@ -278,16 +296,16 @@ return array(
 			'route' 		=> 'posts',
 			'min_access' 	=> 'editor'
 
-		),
+		),*/
 
 		'files' => array(
 
-			'route'			=> 'files',
+			'route'			=> 'file.upload',
 			'min_access' 	=> 'editor'
 
 		),
 
-		'shop' => array(
+		/*'shop' => array(
 
 			'route' 		=> 'shop',
 			'min_access' 	=> 'editor'
@@ -346,6 +364,52 @@ return array(
 		'pongo:import_asset' 		=> 'Pongo\Cms\Commands\ImportAssetCommand',
 		'pongo:change_auth_model' 	=> 'Pongo\Cms\Commands\ChangeAuthModelCommand',
 		'pongo:create_migration'	=> 'Pongo\Cms\Commands\CreateMigrationCommand',
+
+	),
+
+	/**
+	 * Build user details db fields and form
+	 */
+	'user_details' => array(
+
+		'name' => array(
+
+			'form' => 'text',		// FORM method
+			'type' => 'string',		// Schema builder method
+			'len'  => 255
+
+		),
+
+		'surname' => array(
+
+			'form' => 'text',
+			'type' => 'string',
+			'len'  => 255
+
+		),
+
+		'city' => array(
+
+			'form' => 'text',
+			'type' => 'string',
+			'len'  => 255
+
+		),
+
+		'bio' => array(
+
+			'form' => 'textarea',
+			'type' => 'text',
+			'len'  => null
+		),
+
+		'birth_date' => array(
+
+			'form' => 'date',
+			'type' => 'date',
+			'len'  => null
+
+		),
 
 	),
 

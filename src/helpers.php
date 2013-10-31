@@ -215,6 +215,19 @@ if ( ! function_exists('link_to_cms'))
 	}
 }
 
+if ( ! function_exists('pag'))
+{
+	/**
+	 * Get pagination limit
+	 * 
+	 * @return integer
+	 */
+	function pag()
+	{
+		return Pongo::settings('pag');
+	}
+}
+
 if ( ! function_exists('selected'))
 {
 	/**

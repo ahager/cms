@@ -1,4 +1,7 @@
 @foreach($items as $user)
+	
+	@if($user->role->level <= LEVEL)
+
 	<li class="dd-item" data-id="{{$user->id}}">
 		
 		<a href="{{route('user.settings', array('user_id' => $user->id))}}"{{active($user->id, $user_id)}}>
@@ -16,4 +19,9 @@
 		</div>
 
 	</li>
+
+	@endif
+
 @endforeach
+
+{{$items->links()}}

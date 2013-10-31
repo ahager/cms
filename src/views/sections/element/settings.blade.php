@@ -84,7 +84,7 @@
 				<label class="control-label">{{t('label.element.settings.page_target')}}:</label>
 				<div class="cloning">
 					<ol class="first">
-						{{Render::pageForm(0, LANG, $page_id)}}
+						{{Load::pageForm(0, LANG, $page_id)}}
 					</ol>
 				</div>
 			</div>

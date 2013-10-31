@@ -1,12 +1,18 @@
 <?php namespace Pongo\Cms\Support\Repositories;
 
 use Pongo\Cms\Models\User as User;
+use Pongo\Cms\Models\UserDetail as UserDetail;
 
 class UserRepositoryEloquent implements UserRepositoryInterface {
 
 	public function createUser($user_arr)
 	{
 		return User::create($user_arr);
+	}
+
+	public function createUserDetails($user_id)
+	{
+		return UserDetail::create(array('user_id' => $user_id));
 	}
 
 	public function deleteUser($user)
@@ -24,14 +30,39 @@ class UserRepositoryEloquent implements UserRepositoryInterface {
 		return $user->role->level;
 	}
 
+	public function getUserDetails($user)
+	{
+		return $user->details;
+	}
+
 	public function getUsers()
 	{
 		return User::all();
 	}
 
+	public function getUsersWithRoles($limit)
+	{
+		return User::with('role')
+				   ->orderBy('username')
+				   ->paginate($limit);
+	}
+
 	public function saveUser($user)
 	{
 		return $user->save();
+	}
+
+	public function saveUserDetails($user_details)
+	{
+		return $user_details->save();
+	}
+
+	public function searchUser($input)
+	{
+		return User::where('username', 'like', $input . '%')
+				   ->orWhere('email', 'like', $input . '%')
+				   ->take(10)
+				   ->get();
 	}
 
 }

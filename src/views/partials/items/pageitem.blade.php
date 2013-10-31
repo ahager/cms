@@ -24,7 +24,7 @@
 
 		@if($item->id > 0)
 
-			{{Render::pageList($item->id, $item->lang, $page_id, $partial)}}
+			{{Load::pageList($item->id, $item->lang, $page_id, $partial)}}
 
 		@endif
 

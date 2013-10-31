@@ -30,7 +30,7 @@
 			
 			<ol class="dd-list">
 
-				{{Render::pageList(0, $lang_key, $page_id)}}
+				{{Load::pageList(0, $lang_key, $page_id)}}
 
 			</ol>
 

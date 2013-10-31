@@ -2,7 +2,7 @@
 
 use Pongo\Cms\Support\Repositories\UserRepositoryInterface as User;
 
-use HTML, Pongo, Theme, Tool, Render;
+use Pongo, Render;
 
 class UserController extends BaseController {
 
@@ -18,6 +18,25 @@ class UserController extends BaseController {
 		$this->beforeFilter('pongo.auth');
 
 		$this->user	= $user;
+	}
+
+	public function detailsUser($user_id = null)
+	{
+		if(is_null($user_id)) $user_id = USERID;
+
+		$user = $this->user->getUser($user_id);
+		$user_details = $this->user->getUserDetails($user);
+
+		$view = Render::view('sections.user.details');
+		$view['section'] 		= 'details';
+		$view['role_id']		= $user->role_id;
+		$view['user_id'] 		= $user_id;
+		$view['section_name'] 	= t('menu.users');		
+		$view['name']			= $user->username;
+		$view['form_details']	= Pongo::system('user_details');
+		$view['user_details']	= $user_details;
+
+		return $view;
 	}
 
 	/**
@@ -36,7 +55,7 @@ class UserController extends BaseController {
 		$view['section'] 		= 'password';
 		$view['role_id']		= $user->role_id;
 		$view['user_id'] 		= $user_id;
-		$view['section_name'] 	= t('menu.users');		
+		$view['section_name'] 	= t('menu.users');
 		$view['name']			= $user->username;
 
 		return $view;

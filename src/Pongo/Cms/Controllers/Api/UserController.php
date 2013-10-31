@@ -6,7 +6,7 @@ use Pongo\Cms\Support\Validators\User\SettingsValidator as SettingsValidator;
 use Pongo\Cms\Support\Validators\User\PasswordValidator as PasswordValidator;
 use Pongo\Cms\Support\Validators\User\DetailsValidator as DetailsValidator;
 
-use Access, Alert, Hash, Input, Pongo, Redirect, Session;
+use Access, Alert, ExpressiveDate, Hash, Input, Pongo, Redirect, Session;
 
 class UserController extends ApiController {
 
@@ -45,6 +45,8 @@ class UserController extends ApiController {
 
 			$new_user = $this->user->createUser($user_arr);
 
+			$this->user->createUserDetails($new_user->id);
+
 			$response = array(
 				'status' 	=> 'success',
 				'msg'		=> t('alert.success.user_created'),
@@ -66,6 +68,61 @@ class UserController extends ApiController {
 		return json_encode($response);
 	}
 
+	/**
+	 * Save user details
+	 * 
+	 * @return json object
+	 */
+	public function userDetailsSave()
+	{
+		if(Input::has('user_id')) {
+
+			$input = Input::all();
+
+			extract($input);
+
+			$user = $this->user->getUser($user_id);
+
+			if(is_array($unauth = Access::grantEdit('access.users')))
+					return json_encode($unauth);
+
+			$user_details = $this->user->getUserDetails($user);
+
+			foreach (Pongo::system('user_details') as $name => $value) {
+				
+				if($value['form'] == 'date') {
+					
+					$user_details->$name = ExpressiveDate::makeFromDate($year, $month, $day);
+
+				} elseif($value['form'] == 'datetime') {
+
+					$user_details->$name = ExpressiveDate::makeFromDateTime($year, $month, $day, $hh, $mm);
+
+				} else {
+
+					$user_details->$name = $$name;
+
+				}
+			}
+
+			$this->user->saveUserDetails($user_details);
+
+			$response = array(
+				'status' 	=> 'success',
+				'msg'		=> t('alert.success.save')
+			);
+
+		} else {
+
+			$response = array(
+				'status' 	=> 'error',
+				'msg'		=> t('alert.error.save')
+			);
+
+		}
+
+		return json_encode($response);
+	}
 
 	/**
 	 * Delete a user
@@ -124,10 +181,11 @@ class UserController extends ApiController {
 	 */
 	public function userSettingsLink()
 	{
-		if(Input::has('user_id') and Input::has('role_id')) {
+		if(Input::has('user_id') and Input::has('role_id') and Input::has('level')) {
 
 			$user_id 	= Input::get('user_id');
 			$role_id 	= Input::get('role_id');
+			$level 		= Input::get('level');
 
 			if(Pongo::settings('admin_account.id') == $user_id) {
 
@@ -143,6 +201,8 @@ class UserController extends ApiController {
 				$user->role_id = $role_id;
 
 				$this->user->saveUser($user);
+
+				if($user_id == USERID) Session::put('LEVEL', $level);
 
 				$response = array(
 					'status' 	=> 'success'
@@ -178,7 +238,6 @@ class UserController extends ApiController {
 
 				$user = $this->user->getUser($user_id);
 
-				// Author can edit the page
 				if(is_array($unauth = Access::grantEdit('access.users')))
 					return json_encode($unauth);
 				
@@ -271,7 +330,6 @@ class UserController extends ApiController {
 
 				$user = $this->user->getUser($user_id);
 
-				// Author can edit the page
 				if(is_array($unauth = Access::grantEdit('access.users')))
 					return json_encode($unauth);
 				
@@ -306,6 +364,40 @@ class UserController extends ApiController {
 		}
 
 		return json_encode($response);
+	}
+
+	/**
+	 * Search a user
+	 * 
+	 * @return json object
+	 */
+	public function searchUser()
+	{
+		if(Input::has('input')) {
+
+			$input = Input::get('input');
+
+			$users = $this->user->searchUser($input);
+
+			$response = array();
+
+			foreach ($users as $user) {
+				
+				$user_obj = array(
+					'id' => $user->id,
+					'cls' => 'new',
+					'name' => $user->username,
+					'url' => route('user.settings', array('user_id' => $user->id)),
+					'checked' => ($user->is_valid) ? ' checked="checked"' : ''
+				);
+
+				$response[] = $user_obj;
+
+			}
+
+			return json_encode($response);
+		}
+
 	}
 
 }

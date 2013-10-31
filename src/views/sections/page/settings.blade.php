@@ -125,7 +125,7 @@
 			<div class="form-group cloning">
 				<div class="cloning page">
 					<ol class="second">
-						{{Render::elementForm($page_id)}}
+						{{Load::elementForm($page_id)}}
 					</ol>
 				</div>
 			</div>

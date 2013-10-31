@@ -67,6 +67,33 @@ return array(
 
 	),
 
+	'datetime' => array(
+
+		'label' => array(
+
+			'at' => 'at',
+
+		),
+
+		'month' => array(
+
+			'1' 	=> 'January',
+			'2' 	=> 'February',
+			'3' 	=> 'March',
+			'4' 	=> 'April',
+			'5' 	=> 'May',
+			'6' 	=> 'June',
+			'7' 	=> 'July',
+			'8' 	=> 'August',
+			'9' 	=> 'September',
+			'10' 	=> 'October',
+			'11' 	=> 'November',
+			'12' 	=> 'December',
+
+		),
+
+	),
+
 	'form' => array(
 
 		'button' => array(
@@ -90,6 +117,12 @@ return array(
 		'infos' => array(
 
 			'create_file' => 'Please rename this file to ":rename" and upload it to ":upload" using a FTP connection'
+
+		),
+
+		'placeholder' => array(
+
+			'search' => 'Search an item',
 
 		),
 
@@ -271,6 +304,16 @@ return array(
 
 			),
 
+			'details' => array(
+
+				'bio'			=> 'Bio details',
+				'birth_date'	=> 'Birth date',
+				'city'			=> 'City',
+				'name' 			=> 'Name',
+				'surname' 		=> 'Surname',
+
+			),
+
 		),
 
 	),
@@ -335,7 +378,7 @@ return array(
 
 		),
 
-	),
+	),	
 
 	'template' => array(
 

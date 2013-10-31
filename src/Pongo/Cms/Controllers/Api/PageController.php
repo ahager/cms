@@ -5,7 +5,7 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Pongo\Cms\Support\Validators\Page\SettingsValidator as SettingsValidator;
 
-use Access, Alert, Input, Pongo, Redirect, Render, Session, Str, Tool;
+use Access, Alert, Input, Load, Pongo, Redirect, Render, Session, Str, Tool;
 
 class PageController extends ApiController {
 
@@ -166,7 +166,7 @@ class PageController extends ApiController {
 			$page->order_id = $key + 1;
 			$this->page->savePage($page);
 
-			$page->slug = Render::pageTree($page->id, 'slug', '/');
+			$page->slug = Load::pageTree($page->id, 'slug', '/');
 			$this->page->savePage($page);
 
 			// Recursive update

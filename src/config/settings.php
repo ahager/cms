@@ -43,6 +43,11 @@ return array(
 	),
 
 	/**
+	 * PongoCMS :: pagination items per page
+	 */
+	'pag' => 20,
+
+	/**
 	 * PongoCMS :: available editors
 	 */
 	'editors' => array(

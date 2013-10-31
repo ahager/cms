@@ -36,6 +36,15 @@ class Tool {
 	}
 
 	/**
+	 * Lead zero to number
+	 * @param int $number
+	 */
+	public function addZero($number)
+	{
+		return ($number < 10) ? '0' . $number : $number;
+	}
+
+	/**
 	 * Print out class=active if true
 	 * 
 	 * @param  string $var 

@@ -32,6 +32,15 @@ class RoleRepositoryEloquent implements RoleRepositoryInterface {
 				   ->get();
 	}
 
+	public function getRolesByLevel()
+	{
+		return Role::where('level', '>', 0)
+				   ->where('level', '<=', LEVEL)
+				   ->orderBy('level', 'desc')
+				   ->orderBy('id', 'asc')
+				   ->get();
+	}
+
 	public function orderBy($field, $order)
 	{
 		return Role::orderBy($field, $order)->get();

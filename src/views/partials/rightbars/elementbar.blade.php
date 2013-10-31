@@ -23,7 +23,7 @@
 
 						<ol class="dl-list valid">
 
-							{{Render::elementList($page_id, $element_id)}}
+							{{Load::elementList($page_id, $element_id)}}
 
 						</ol>
 
@@ -46,7 +46,7 @@
 
 						<ol class="dd-list">
 
-							{{Render::pageList(0, LANG, $page_id, 'pagerel')}}
+							{{Load::pageList(0, LANG, $page_id, 'pagerel')}}
 
 						</ol>
 

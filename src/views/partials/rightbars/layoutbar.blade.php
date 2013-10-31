@@ -38,7 +38,7 @@
 
 						<ol class="dl-list valid">
 
-							{{Render::elementList($page_id, $element_id)}}
+							{{Load::elementList($page_id, $element_id)}}
 
 						</ol>
 

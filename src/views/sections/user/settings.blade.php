@@ -23,7 +23,7 @@
 	
 	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
 
-	<form role="form" id="role-settings-form">
+	<form role="form" id="user-settings-form">
 		<input type="hidden" name="user_id" value="{{$user_id}}">
 		<div class="form-group" rel="name">
 			<label for="name" class="control-label">{{t('label.user.settings.name')}} <span class="counter" data-bind="text: nameLen"></span></label>

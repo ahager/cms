@@ -3,6 +3,7 @@
 Route::filter('pongo.guest', function() {
 
 	if (Auth::check())	{
+
 		return Redirect::route('dashboard');
 	}
 
@@ -28,6 +29,7 @@ Route::filter('pongo.auth.api', function() {
 		Alert::error($msg)->flash();
 
 		return json_encode(
+			
 			array(
 				'status' => 'error',
 				'type' => 'expired'

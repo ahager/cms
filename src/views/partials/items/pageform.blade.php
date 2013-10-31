@@ -21,7 +21,7 @@
 			</div>
 
 			@if($page->id > 0)
-				{{Render::pageForm($page->id, $page->lang, $page_id)}}
+				{{Load::pageForm($page->id, $page->lang, $page_id)}}
 			@endif
 		</li>
 
