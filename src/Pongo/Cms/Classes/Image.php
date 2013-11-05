@@ -2,8 +2,6 @@
 
 use PHPImageWorkshop\ImageWorkshop as ImageWorkshop;
 
-use Media, Pongo, Theme;
-
 class Image {
 
 	/**
@@ -34,12 +32,15 @@ class Image {
 	 */
 	public function __construct(ImageWorkshop $imageWorkshop)
 	{
-		Pongo::memoryLimitOff();
+		\Pongo::memoryLimitOff();
 		
 		$this->ImageWorkshop = $imageWorkshop;
-		$this->image_quality = Pongo::settings('image_quality');
-		$this->upload_path = public_path(Pongo::settings('upload_path').'img');
-		$this->thumb = Theme::config('thumb');
+
+		$this->image_quality = \Pongo::settings('image_quality');
+
+		$this->upload_path = public_path(\Pongo::settings('upload_path').'img');
+
+		$this->thumb = \Theme::config('thumb');
 	}
 
 	/**
@@ -53,12 +54,14 @@ class Image {
 	public function createThumb($image, $file_name, $thumb = 'cms')
 	{
 		$w = $this->thumb[$thumb]['width'];
+
 		$h = $this->thumb[$thumb]['height'];
 
 		$image->cropMaximumInPixel(0, 0, "MM");
+
 		$image->resizeInPixel($w, $h);
 
-		$thumb_name = Media::formatFileThumb($file_name);
+		$thumb_name = \Media::formatFileThumb($file_name);
 
 		$this->save($image, $thumb_name);
 	}
@@ -97,18 +100,20 @@ class Image {
 	public function showThumb($img_path, $thumb = 'cms', $alt = '')
 	{
 		$path_arr = explode('/', $img_path);
+		
 		$file_name = end($path_arr);
 
-		if(Media::isImage($file_name)) {
+		if(\Media::isImage($file_name)) {
 
-			$thumb_name = Media::formatFileThumb($file_name, $thumb);
+			$thumb_name = \Media::formatFileThumb($file_name, $thumb);
+
 			$thumb_path = str_replace($file_name, $thumb_name, $img_path);
 
 			return \HTML::image($thumb_path, $alt, array('class' => 'cms-thumb', 'width' => $this->thumb[$thumb]['width'], 'height' => $this->thumb[$thumb]['height']));
 
 		} else {
 
-			$ext = Media::fileExtension($file_name);
+			$ext = \Media::fileExtension($file_name);
 
 			return '<span class="cms-thumb">'.$ext.'</span>';
 

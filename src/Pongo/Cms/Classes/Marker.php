@@ -1,23 +1,6 @@
 <?php namespace Pongo\Cms\Classes;
 
-use App, Pongo, Render;
-
 class Marker {
-
-	/**
-	 * Marker settings
-	 * 
-	 * @var string
-	 */
-	public $settings;
-
-	/**
-	 * Class constructor
-	 */
-	public function __construct()
-	{		
-		$this->settings = Pongo::markers();
-	}
 
 	/**
 	 * Print marker api
@@ -27,8 +10,9 @@ class Marker {
 	 */
 	public function api($marker)
 	{
-		$view = Render::view('partials.items.markerapi');
-		$view['apis'] = $this->settings[$marker]['api'];
+		$view = \Render::view('partials.items.markerapi');
+
+		$view['apis'] = \Pongo::markers($marker . '.api');
 
 		return $view;
 	}
@@ -58,10 +42,11 @@ class Marker {
 			$found = $matches[2][$key];
 
 			// Check if marker method is IoCed
-			if (App::bound($method)) {
+			if (\App::bound($method)) {
 
 				// Clean HTML
 				$found = strip_tags($found);
+
 				$found = html_entity_decode($found);
 
 				// Try to decode Json $found
@@ -93,7 +78,7 @@ class Marker {
 	 */
 	public function defaults($marker)
 	{
-		return $this->settings[$marker]['default'];
+		return \Pongo::markers($marker . '.default');
 	}
 
 	/**
@@ -105,28 +90,6 @@ class Marker {
 	public function description($marker)
 	{
 		return t('marker.' . strtolower($marker) . '.description');
-	}
-
-	/**
-	 * Marker magic method
-	 * 
-	 * @param  string $name      Marker tag
-	 * @param  array $arguments  Marker arguments
-	 * @return string            Marker's decoded blade view
-	 */
-	protected function __call($name, $arguments)
-	{		
-		// Instantiate marker class
-		$marker = App::make($name);
-
-		// Pass tag name
-		$marker->name = $name;
-
-		// Pass arguments as parameters
-		$marker->parameters = $arguments;
-
-		// Run instance
-		return $marker->run();
 	}
 
 	/**
@@ -146,6 +109,7 @@ class Marker {
 			$values = explode(':', $variable);
 
 			$name 	= $values[0];
+			
 			$value 	= $values[1];
 				
 			$format[$name] = $value;
@@ -173,6 +137,28 @@ class Marker {
 	public function className()
 	{
 		return get_class($this);
+	}
+
+	/**
+	 * Marker magic method
+	 * 
+	 * @param  string $name      Marker tag
+	 * @param  array $arguments  Marker arguments
+	 * @return string            Marker's decoded blade view
+	 */
+	public function __call($name, $arguments)
+	{		
+		// Instantiate marker class
+		$marker = \App::make($name);
+
+		// Pass tag name
+		$marker->name = $name;
+
+		// Pass arguments as parameters
+		$marker->parameters = $arguments;
+
+		// Run instance
+		return $marker->run();
 	}
 
 }

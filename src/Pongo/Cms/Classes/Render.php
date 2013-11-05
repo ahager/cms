@@ -1,7 +1,5 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Asset, HTML, Pongo, Theme, Tool, View;
-
 class Render {
 	
 	/**
@@ -41,7 +39,7 @@ class Render {
 
 			$path = env('local') ? $this->development_path : $this->asset_path;
 
-			return HTML::$type($path . $source, $attributes);
+			return \HTML::$type($path . $source, $attributes);
 		} 
 	}
 
@@ -58,7 +56,7 @@ class Render {
 	{
 		$path = env('local')  ? $this->development_path : $this->asset_path;
 
-		return Asset::container($container)->add($name, $path . $source, $dependency);
+		return \Asset::container($container)->add($name, $path . $source, $dependency);
 	}
 
 	/**
@@ -69,7 +67,7 @@ class Render {
 	 */
 	public function bootJs($source)
 	{
-		return HTML::script($source);
+		return \HTML::script($source);
 	}
 
 	/**
@@ -80,7 +78,7 @@ class Render {
 	 */
 	public function scripts($name = 'default')
 	{
-		return Asset::container($name)->scripts();
+		return \Asset::container($name)->scripts();
 	}
 
 	/**
@@ -91,7 +89,7 @@ class Render {
 	 */
 	public function styles($name = 'default')
 	{
-		return Asset::container($name)->styles();
+		return \Asset::container($name)->styles();
 	}
 
 	/**
@@ -114,9 +112,9 @@ class Render {
 	 */
 	public function layoutPreview($header, $layout, $footer)
 	{
-		$layout_view = Theme::view('layouts.' . $layout);
+		$layout_view = \Theme::view('layouts.' . $layout);
 
-		$layout_zones = Theme::layout($layout);
+		$layout_zones = \Theme::layout($layout);
 
 		foreach ($layout_zones as $zone => $name) {
 
@@ -129,7 +127,7 @@ class Render {
 
 		foreach ($attrib_to_remove as $attrib) {
 			
-			$attrib_values = Tool::getAllAttributes($attrib, $layout_view);
+			$attrib_values = \Tool::getAllAttributes($attrib, $layout_view);
 
 			if(!empty($attrib_values)) {
 
@@ -142,9 +140,12 @@ class Render {
 		}
 
 		$view = $this->view('partials.previews.layout');
-		$view['header'] = st('settings.header.' . $header, Theme::config('header.' . $header));
+
+		$view['header'] = st('settings.header.' . $header, \Theme::config('header.' . $header));
+
 		$view['layout'] = $layout_view;
-		$view['footer'] = st('settings.footer.' . $footer, Theme::config('footer.' . $footer));
+
+		$view['footer'] = st('settings.footer.' . $footer, \Theme::config('footer.' . $footer));
 
 		return $view;
 	}
@@ -159,13 +160,14 @@ class Render {
 	public function sectionMenu($sections = array())
 	{
 		$menu_view = $this->view('partials.items.menuitem');
-		$menu_view['sections'] 	= (!empty($sections)) ? $sections : Pongo::system('sections');
+
+		$menu_view['sections'] 	= (!empty($sections)) ? $sections : \Pongo::system('sections');
 
 		return $menu_view;
 	}
 
 	/**
-	 * View::make a Pongo view
+	 * \View::make a Pongo view
 	 * 
 	 * @param  string $name View location
 	 * @param  array  $data Array of data
@@ -177,13 +179,14 @@ class Render {
 		$view_name = 'cms::' . $name;
 
 		// Set to 'default' view if view not found
-		if ( ! View::exists($view_name)) {
+		if ( ! \View::exists($view_name)) {
 
 			$view_name_arr = explode('.', $view_name);
+			
 			$view_name = str_replace(end($view_name_arr), 'default', $view_name);
 		}
 
-		return View::make($view_name, $data);
+		return \View::make($view_name, $data);
 	}
 	
 }

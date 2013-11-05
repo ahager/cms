@@ -1,22 +1,13 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Config, Pongo, View;
-
 class Theme {
-
-	/**
-	 * Default theme name
-	 * 
-	 * @var string
-	 */
-	public $name = 'default';
 
 	/**
 	 * Class constructor
 	 */
 	public function __construct()
-	{		
-		$this->name = Pongo::settings('theme');
+	{
+		// $this->name = \Pongo::settings('theme');
 	}
 
 	/**
@@ -27,7 +18,7 @@ class Theme {
 	 */
 	public function config($key)
 	{
-		return Config::get('site::theme.'.$key);
+		return \Config::get('site::theme.'.$key);
 	}
 
 	/**
@@ -49,15 +40,17 @@ class Theme {
 	 */
 	public function view($name, array $data = array())
 	{
-		$view_name = 'site::' . $this->name . '.' . $name;
+		$view_name = 'site::' . \Pongo::settings('theme') . '.' . $name;
 
 		// Set to 'default' view if view not found
-		if ( ! View::exists($view_name)) {
+		if ( ! \View::exists($view_name)) {
+
 			$view_name_arr = explode('.', $view_name);
+
 			$view_name = str_replace(end($view_name_arr), 'default', $view_name);
 		}
 
-		return View::make($view_name, $data);
+		return \View::make($view_name, $data);
 	}
 
 	/**
@@ -79,9 +72,9 @@ class Theme {
 	 * 
 	 * @return string Name of the theme
 	 */
-	public function className()
+	/*public function className()
 	{
 		return $this->name;
-	}
+	}*/
 	
 }

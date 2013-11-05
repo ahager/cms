@@ -3,8 +3,6 @@
 use Pongo\Cms\Support\Repositories\FileRepositoryInterface as File;
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 
-use Pongo, Render;
-
 class Load {
 
 	/**
@@ -26,7 +24,7 @@ class Load {
 	{
 		$items = $this->page->getPageElements($page_id);
 
-		$item_view = Render::view('partials.items.elementform');
+		$item_view = \Render::view('partials.items.elementform');
 		$item_view['items'] 	= $items;
 		$item_view['page_id'] 	= $page_id;
 		
@@ -44,7 +42,7 @@ class Load {
 	{
 		$items = $this->page->getPageElements($page_id);
 
-		$item_view = Render::view('partials.items.elementitem');
+		$item_view = \Render::view('partials.items.elementitem');
 		$item_view['items'] 		= $items;
 		$item_view['element_id'] 	= $element_id;
 
@@ -65,7 +63,7 @@ class Load {
 
 		$items = ($page_id == 0) ? $file->getFiles() : $page->getPageFiles($page_id);
 
-		$item_view = Render::view('partials.items.fileitem');
+		$item_view = \Render::view('partials.items.fileitem');
 		$item_view['items']		= $items;
 		$item_view['action']	= $action;
 
@@ -79,9 +77,9 @@ class Load {
 	 */
 	public function markerList()
 	{
-		$items = Pongo::markers();
+		$items = \Pongo::markers();
 
-		$item_view = Render::view('partials.items.markeritem');
+		$item_view = \Render::view('partials.items.markeritem');
 		$item_view['items'] = $items;
 
 		return $item_view;
@@ -99,7 +97,7 @@ class Load {
 	{
 		$items = $this->page->getPageList($parent_id, $lang);
 
-		$item_view = Render::view('partials.items.pageform');
+		$item_view = \Render::view('partials.items.pageform');
 		$item_view['items'] 	= $items;
 		$item_view['page_id'] 	= $page_id;
 		$item_view['parent_id'] = $parent_id;
@@ -119,7 +117,7 @@ class Load {
 	{
 		$items = $this->page->getPageList($parent_id, $lang);
 
-		$item_view = Render::view('partials.items.' . $partial);
+		$item_view = \Render::view('partials.items.' . $partial);
 		$item_view['items'] 	= $items;
 		$item_view['page_id'] 	= $page_id;
 		$item_view['parent_id'] = $parent_id;

@@ -1,8 +1,8 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Pongo\Cms\Classes\Pongo;
+use Pongo\Cms\Classes\Pongo as Pongo;
+
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
-use Config, Render, Theme;
 
 class SiteController extends BaseController {
 	
@@ -35,7 +35,7 @@ class SiteController extends BaseController {
 
 		$page = $this->page->getPageBySlug($this->slug_full);
 
-		$view = Theme::view('partials.test');
+		$view = \Theme::view('partials.test');
 		$view['uri_first'] = $this->slug_first;
 		$view['uri_full'] = $this->slug_full;
 		$view['uri_last'] = $this->slug_last;

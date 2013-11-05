@@ -1,7 +1,5 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Alert, Config, View;
-
 class Pongo {
 
 	/**
@@ -47,12 +45,13 @@ class Pongo {
 
 	/**
 	 * Get markers from config markers
-	 * 
+	 *
+	 * @param $key string
 	 * @return array
 	 */
-	public function markers()
+	public function markers($key = null)
 	{
-		return Config::get('cms::markers');
+		return (is_null($key)) ? \Config::get('cms::markers') : \Config::get('cms::markers.' . $key);
 	}
 
 	/**
@@ -73,7 +72,7 @@ class Pongo {
 	 */
 	public function settings($key)
 	{
-		return Config::get('cms::settings.' . $key);
+		return \Config::get('cms::settings.' . $key);
 	}
 
 	/**
@@ -84,7 +83,7 @@ class Pongo {
 	 */
 	public function system($key)
 	{
-		return Config::get('cms::system.' . $key);
+		return \Config::get('cms::system.' . $key);
 	}
 
 	/**
@@ -96,7 +95,7 @@ class Pongo {
 	{
 		$format = $this->system('alert_tpl');
 
-		foreach (Alert::all($format) as $alert) {
+		foreach (\Alert::all($format) as $alert) {
 			return $alert;
 		}
 	}
@@ -110,7 +109,7 @@ class Pongo {
 	 */
 	public function viewShare($var, $value)
 	{
-		return View::share($var, $value);
+		return \View::share($var, $value);
 	}
 
 	/**

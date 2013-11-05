@@ -1,7 +1,5 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Config;
-
 class Tool {	
 
 	/**

@@ -1,33 +1,6 @@
 <?php namespace Pongo\Cms\Classes;
 
-use Pongo, Str, Theme;
-
 class Media {
-
-	/**
-	 * Theme's thumb settings
-	 * 
-	 * @var array
-	 */
-	private $thumb = array();
-
-	/**
-	 * Upload path
-	 * 
-	 * @var string
-	 */
-	private $upload_path;
-
-	/**
-	 * Class constructor
-	 * 
-	 * @param File $file
-	 */
-	public function __construct()
-	{
-		$this->upload_path = Pongo::settings('upload_path');
-		$this->thumb = Theme::config('thumb');
-	}
 
 	/**
 	 * Convert a number to Kb or Mb size
@@ -69,7 +42,7 @@ class Media {
 
 		if($this->isImage($file_name)) {
 
-			foreach ($this->thumb as $key => $value) {
+			foreach (\Theme::config('thumb') as $key => $value) {
 
 				$thumb_name = $this->formatFileThumb($file_name, $key);
 
@@ -107,10 +80,12 @@ class Media {
 	public function formatFileName($file_name, $add_ext = true)
 	{
 		$temp = explode('.', $file_name);
+
 		$extension = strtolower(end($temp));
+
 		$temp_name = $temp[0];
 
-		$temp_name = Str::slug($temp_name, '_');
+		$temp_name = \Str::slug($temp_name, '_');
 
 		return  ($add_ext) ? $temp_name . '.' . $extension : $temp_name;
 	}
@@ -127,10 +102,12 @@ class Media {
 	public function formatFileThumb($file_name, $thumb = 'cms')
 	{
 		$temp = explode('.', $file_name);
+
 		$extension = end($temp);
+
 		$temp_name = $temp[0];
 
-		return Str::slug($temp_name, '_') . '_' . $thumb . '.' . $extension;
+		return \Str::slug($temp_name, '_') . '_' . $thumb . '.' . $extension;
 	}
 
 	/**
@@ -143,8 +120,10 @@ class Media {
 	public function formatFileSize($bytes, $precision = 2) { 
 		$units = array('Bytes', 'Kb', 'Mb', 'Gb', 'Tb'); 
 
-		$bytes = max($bytes, 0); 
+		$bytes = max($bytes, 0);
+
 		$pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
+		
 		$pow = min($pow, count($units) - 1); 
 
 		$bytes /= pow(1024, $pow);
@@ -171,7 +150,7 @@ class Media {
 	 */
 	public function getFilePath($file_name)
 	{
-		return public_path($this->upload_path . $this->getFolderName($file_name) . $file_name);
+		return public_path(\Pongo::settings('upload_path') . $this->getFolderName($file_name) . $file_name);
 	}
 
 	/**

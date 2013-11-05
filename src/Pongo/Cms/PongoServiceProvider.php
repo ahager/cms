@@ -1,7 +1,7 @@
 <?php namespace Pongo\Cms;
 
-use Config;
 use Illuminate\Support\ServiceProvider;
+
 use Illuminate\Foundation\AliasLoader as AliasLoader;
 
 class PongoServiceProvider extends ServiceProvider {
@@ -76,7 +76,7 @@ class PongoServiceProvider extends ServiceProvider {
 	{		
 		$app = $this->app;
 
-		$repositories = Config::get('cms::system.repositories');
+		$repositories = \Config::get('cms::system.repositories');
 
 		foreach ($repositories as $repo) {
 			
@@ -93,7 +93,7 @@ class PongoServiceProvider extends ServiceProvider {
 	{
 		$app = $this->app;
 
-		$facades = Config::get('cms::system.facades');
+		$facades = \Config::get('cms::system.facades');
 
 		foreach ($facades as $facade => $path) {
 
@@ -131,7 +131,7 @@ class PongoServiceProvider extends ServiceProvider {
 	{
 		$app = $this->app;
 
-		$providers = Config::get('cms::system.providers');
+		$providers = \Config::get('cms::system.providers');
 
 		$provider_path = 'Pongo\Cms\Support\Providers\\';		
 
@@ -154,7 +154,7 @@ class PongoServiceProvider extends ServiceProvider {
 	{
 		$app = $this->app;
 
-		$commands = Config::get('cms::system.commands');
+		$commands = \Config::get('cms::system.commands');
 
 		foreach ($commands as $command => $class) {
 			

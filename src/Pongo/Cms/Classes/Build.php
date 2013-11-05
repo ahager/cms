@@ -1,6 +1,6 @@
 <?php namespace Pongo\Cms\Classes;
 
-use ExpressiveDate, Form, Render;
+use ExpressiveDate;
 
 class Build {
 
@@ -49,7 +49,7 @@ class Build {
 	 */
 	public function dateField($name, $attributes = array(), $year_past = 99, $year_future = 1)
 	{
-		$item_view = Render::view('partials.dates.date');
+		$item_view = \Render::view('partials.dates.date');
 		$item_view['name']			= $name;
 		$item_view['date']			= new ExpressiveDate;
 		$item_view['day_name']		= 'day';
@@ -72,7 +72,7 @@ class Build {
 	 */
 	public function dateTimeField($name, $attributes = array(), $year_past = 99, $year_future = 1)
 	{
-		$item_view = Render::view('partials.dates.datetime');
+		$item_view = \Render::view('partials.dates.datetime');
 		$item_view['name']			= $name;
 		$item_view['date']			= new ExpressiveDate;
 		$item_view['day_name']		= 'day';
@@ -95,7 +95,7 @@ class Build {
 	{
 		if(method_exists(app('form'), $form)) {
 
-			return Form::$form($name, $value, $attributes);
+			return \Form::$form($name, $value, $attributes);
 
 		} else {
 

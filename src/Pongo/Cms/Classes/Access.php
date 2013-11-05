@@ -3,8 +3,6 @@
 use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 use Pongo\Cms\Support\Repositories\UserRepositoryInterface as User;
 
-use Pongo, Render;
-
 class Access {
 
 	/**
@@ -13,6 +11,7 @@ class Access {
 	public function __construct(Role $role, User $user)
 	{
 		$this->role = $role;
+
 		$this->user = $user;
 	}
 
@@ -25,8 +24,9 @@ class Access {
 	 */
 	public function adminRoles($roles, $reverse = false)
 	{
-		$min_access = Pongo::system('min_access');
-		$role_access = Pongo::system('roles.'.$min_access);
+		$min_access = \Pongo::system('min_access');
+
+		$role_access = \Pongo::system('roles.'.$min_access);
 
 		$admin_roles = array();
 
@@ -35,7 +35,7 @@ class Access {
 			if($role->level >= $role_access) {
 
 				$admin_roles[$role->name] = $role->level;	
-			}			
+			}
 		}
 
 		return $reverse ? array_reverse($admin_roles) : $admin_roles;
@@ -51,9 +51,9 @@ class Access {
 	{
 		if(is_null($level)) $level = LEVEL;
 
-		$min_access = Pongo::system('min_access');
+		$min_access = \Pongo::system('min_access');
 
-		$min_level = Pongo::system('roles.' . $min_access);
+		$min_level = \Pongo::system('roles.' . $min_access);
 
 		return ($level >= $min_level) ? true : false;
 	}
@@ -68,9 +68,9 @@ class Access {
 	{
 		if(!is_numeric($role_level)) {
 
-			$role = Pongo::system('sections.' . $role_level . '.min_access');
+			$role = \Pongo::system('sections.' . $role_level . '.min_access');
 
-			$role_level = Pongo::system('roles.' . $role);
+			$role_level = \Pongo::system('roles.' . $role);
 		}
 
 		$blocked = ($role_level > LEVEL) ? true : false;
@@ -103,7 +103,7 @@ class Access {
 			$role_name = $role->name;
 		}
 
-		return (array_key_exists($role_name, Pongo::system('roles'))) ? true : false;
+		return (array_key_exists($role_name, \Pongo::system('roles'))) ? true : false;
 	}
 
 	/**
@@ -116,8 +116,10 @@ class Access {
 	{
 		$items = $this->role->getRolesByLevel();
 
-		$item_view = Render::view('partials.items.' . $partial);
+		$item_view = \Render::view('partials.items.' . $partial);
+
 		$item_view['items'] 	= $items;
+
 		$item_view['role_id'] 	= $role_id;
 
 		return $item_view;
@@ -130,7 +132,7 @@ class Access {
 	 */
 	public function roleMaxLevel()
 	{
-		return max(Pongo::system('roles'));
+		return max(\Pongo::system('roles'));
 	}
 
 	/**
@@ -141,12 +143,14 @@ class Access {
 	 */
 	public function userList($user_id)
 	{
-		Render::assetAdd('footer', 'paginator', 'scripts/plugins/paginator.js');
+		\Render::assetAdd('footer', 'paginator', 'scripts/plugins/paginator.js');
 
 		$items = $this->user->getUsersWithRoles(pag());
 
-		$item_view = Render::view('partials.items.useritem');
+		$item_view = \Render::view('partials.items.useritem');
+
 		$item_view['items'] 	= $items;
+		
 		$item_view['user_id'] 	= $user_id;
 
 		return $item_view;
