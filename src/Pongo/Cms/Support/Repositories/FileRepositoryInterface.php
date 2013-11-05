@@ -10,6 +10,8 @@ interface FileRepositoryInterface {
 
 	public function getFile($file_id);
 
+	public function getFiles();
+
 	public function saveFile($file);
 	
 }

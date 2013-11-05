@@ -38,7 +38,6 @@ class UsersTableSeeder extends Seeder {
 			$random = Str::random();
 
 			$user_settings = 	array(
-									'role_id' 	=> 4,
 									'username'	=> $random,
 									'lang' 		=> Config::get('cms::settings.language'),
 									'editor'	=> 0,

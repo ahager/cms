@@ -21,7 +21,7 @@
 	@parent
 	{{Render::asset('scripts/plugins/magnific-popup.js')}}
 	{{Render::asset('scripts/plugins/jquery.uploadfile.js')}}
-	{{Render::asset('scripts/vm/page/files.js')}}
+	{{Render::asset('scripts/sections/file.js')}}
 @stop
 
 @section('content')

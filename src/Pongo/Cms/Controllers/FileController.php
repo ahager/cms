@@ -17,12 +17,8 @@ class FileController extends BaseController {
 	public function uploadFile()
 	{
 		$view = Render::view('sections.file.upload');
-		$view['section']	= 'files';
-		$view['page_id'] 	= $page_id;
-		$view['name'] 		= $page->name;
-
-		$view['n_files'] 	= $n_files;
-		$view['page_link'] 	= '';
+		$view['section']	= 'upload';
+		$view['page_id'] 	= 0;
 
 		return $view;
 	}

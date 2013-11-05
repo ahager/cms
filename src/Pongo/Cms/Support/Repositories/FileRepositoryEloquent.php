@@ -24,6 +24,11 @@ class FileRepositoryEloquent implements FileRepositoryInterface {
 		return File::find($file_id);
 	}
 
+	public function getFiles()
+	{
+		return File::all();
+	}
+
 	public function saveFile($file)
 	{
 		return $file->save();

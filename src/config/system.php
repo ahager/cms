@@ -98,14 +98,6 @@ return array(
 
 	'facades' => array(
 
-		'Pongo' => array(
-
-			'class'	=> 'Pongo\Cms\Classes\Pongo',
-			'alias'	=> 'Pongo\Cms\Support\Facades\Pongo',
-			'repos' => '',
-
-		),
-
 		'Access' => array(
 
 			'class' => 'Pongo\Cms\Classes\Access',
@@ -164,6 +156,14 @@ return array(
 
 			'class'	=> 'Pongo\Cms\Classes\Media',
 			'alias'	=> 'Pongo\Cms\Support\Facades\Media',
+			'repos' => '',
+
+		),
+
+		'Pongo' => array(
+
+			'class'	=> 'Pongo\Cms\Classes\Pongo',
+			'alias'	=> 'Pongo\Cms\Support\Facades\Pongo',
 			'repos' => '',
 
 		),

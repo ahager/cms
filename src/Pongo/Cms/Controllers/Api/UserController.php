@@ -34,7 +34,7 @@ class UserController extends ApiController {
 			$user_account = Pongo::settings('user_account');
 
 			$user_arr = array(
-				'role_id'	=> $user_account['id'],
+				'role_id'	=> $user_account['role_id'],
 				'username' 	=> $user_account['username'],
 				'email'		=> $user_account['email'],
 				'password'	=> Hash::make($user_account['password']),
@@ -88,19 +88,19 @@ class UserController extends ApiController {
 
 			$user_details = $this->user->getUserDetails($user);
 
-			foreach (Pongo::system('user_details') as $name => $value) {
+			foreach (Pongo::system('user_details') as $field => $value) {
 				
 				if($value['form'] == 'date') {
 					
-					$user_details->$name = ExpressiveDate::makeFromDate($year, $month, $day);
+					$user_details->$field = ExpressiveDate::makeFromDate($year, $month, $day);
 
 				} elseif($value['form'] == 'datetime') {
 
-					$user_details->$name = ExpressiveDate::makeFromDateTime($year, $month, $day, $hh, $mm);
+					$user_details->$field = ExpressiveDate::makeFromDateTime($year, $month, $day, $hh, $mm);
 
 				} else {
 
-					$user_details->$name = $$name;
+					$user_details->$field = $$field;
 
 				}
 			}

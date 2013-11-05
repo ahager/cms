@@ -108,7 +108,7 @@ return array(
 	
 	'user_account' => array(
 
-		'id'		=> 4,
+		'role_id'	=> 4,
 		
 		'username' 	=> 'user',
 

@@ -4,12 +4,8 @@
 	@include('cms::partials.rightbars.filebar')
 @stop
 
-@section('option-bar')
-	@include('cms::partials.options.page')
-@stop
-
 @section('subbar')
-	@include('cms::partials.subbars.file')
+	@include('cms::partials.subbars.upload')
 @stop
 
 @section('header-js')
@@ -21,12 +17,12 @@
 	@parent
 	{{Render::asset('scripts/plugins/magnific-popup.js')}}
 	{{Render::asset('scripts/plugins/jquery.uploadfile.js')}}
-	{{Render::asset('scripts/vm/page/files.js')}}
+	{{Render::asset('scripts/sections/file.js')}}
 @stop
 
 @section('content')
 	
-	<h3>{{t('heading.page.'.$section.'_title')}}</h3>
+	<h3>{{t('heading.page.files_title')}}</h3>
 
 	<ul class="info-list">
 		<li>{{t('label.page.files.mimes')}}: {{Pongo::settings('mimes')}}</li>
@@ -36,7 +32,7 @@
 	
 	<div id="fileuploader">{{t('form.button.choose')}}</div>
 
-	<h3>{{t('heading.page.'.$section.'_create_title')}}</h3>
+	<h3>{{t('heading.page.files_create_title')}}</h3>
 
 	<ul class="info-list">
 		<li>{{t('label.page.files.custom_upload')}}</li>
