@@ -2,7 +2,7 @@
 	<li class="dl-item" data-id="{{$element->id}}">
 		
 		<a href="{{route('element.settings', array('page_id' => $page_id, 'element_id' => $element->id))}}"{{active($element->id, $element_id)}}>
-			<i class="icon-chevron-left"></i>
+			<i class="fa fa-chevron-left"></i>
 		</a>
 
 		<div class="dl-handle">

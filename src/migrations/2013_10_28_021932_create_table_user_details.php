@@ -17,7 +17,7 @@ class CreateTableUserDetails extends Migration {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
 
-			foreach (Pongo::system('user_details') as $name => $config) {
+			foreach (Pongo::forms('user_details') as $name => $config) {
 
 				$options = array($name);
 				if(is_numeric($config['len'])) array_push($options, $config['len']); 

@@ -19,3 +19,4 @@ Pongo.locale = '{{Pongo::settings('languages.'.CMSLANG.'.locale')}}';
 Pongo.directionality = '{{Pongo::settings('languages.'.CMSLANG.'.dir')}}';
 Pongo.cancel = '{{t('form.button.cancel')}}';
 Pongo.upload = '{{t('form.button.upload')}}';
+Pongo.load = '{{t('form.button.load')}}';

@@ -33,7 +33,7 @@ class UserController extends BaseController {
 		$view['user_id'] 		= $user_id;
 		$view['section_name'] 	= t('menu.users');		
 		$view['name']			= $user->username;
-		$view['form_details']	= Pongo::system('user_details');
+		$view['input_form']		= Pongo::forms('user_details');
 		$view['user_details']	= $user_details;
 
 		return $view;

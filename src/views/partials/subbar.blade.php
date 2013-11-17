@@ -10,14 +10,14 @@
 		</div>
 
 		<button type="button" class="subbar-toggle options-toggle">
-			<i class="icon-cogs"></i>
+			<i class="fa fa-cogs"></i>
 		</button>
 
 		<button type="button" class="subbar-toggle element-toggle">			
 			@if($n_elements > 0)
 			<span class="label label-primary">{{$n_elements}}</span>
 			@endif
-			<i class="icon-sort-by-attributes"></i>
+			<i class="fa fa-sort-amount-asc"></i>
 		</button>
 
 	</div>

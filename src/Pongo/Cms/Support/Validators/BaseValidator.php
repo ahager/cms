@@ -107,7 +107,7 @@ abstract class BaseValidator {
 
 		return array(
 			'status' 	=> 'error',
-			'icon'		=> 'icon-remove error',
+			'icon'		=> 'fa fa-times error',
 			'errors'	=> $error_msg
 		);
 	}

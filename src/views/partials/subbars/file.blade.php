@@ -8,14 +8,14 @@
 		</div>
 
 		<button type="button" class="subbar-toggle options-toggle">
-			<i class="icon-cogs"></i>
+			<i class="fa fa-cogs"></i>
 		</button>
 
 		<button type="button" class="subbar-toggle right-toggle file-toggle">
 			@if($n_files > 0)
 			<span class="label label-primary counter">{{$n_files}}</span>
 			@endif
-			<i class="icon-picture"></i>
+			<i class="fa fa-picture-o"></i>
 		</button>
 
 	</div>

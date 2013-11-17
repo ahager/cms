@@ -7,7 +7,7 @@
 	</div>
 
 	<button type="button" class="subbar-toggle right-toggle role-toggle">
-		<i class="icon-group"></i>
+		<i class="fa fa-users"></i>
 	</button>
 
 </div>

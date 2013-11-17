@@ -1,10 +1,10 @@
 <div class="row">
 	<nav class="navbar navbar-inverse" role="navigation">
 		<button type="button" class="toggle page-toggle">
-			<i class="icon-file-text"></i>
+			<i class="fa fa-file-text"></i>
 		</button>
 		<button type="button" class="toggle menu-toggle" data-toggle="collapse" data-target=".menu-collapse">
-			<i class="icon-reorder"></i>
+			<i class="fa fa-bars"></i>
 		</button>
 		<div class="navbar-header">
 			<a class="navbar-brand" href="{{route('dashboard')}}">Pongo<span>CMS</span> <small>v2</small></a>	
@@ -18,7 +18,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<i class="icon-user"></i>
+						<i class="fa fa-user"></i>
 						{{USERNAME}} <b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">

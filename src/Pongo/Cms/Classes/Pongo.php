@@ -41,7 +41,18 @@ class Pongo {
 		$url_arr['prev'] = str_replace($url_arr['last'], '', $full_url);
 
 		return $url_arr;
-	}	
+	}
+
+	/**
+	 * Get config form values
+	 * 
+	 * @param  string $key
+	 * @return array
+	 */
+	public function forms($key)
+	{
+		return \Config::get('cms::forms.' . $key);
+	}
 
 	/**
 	 * Get markers from config markers

@@ -26,12 +26,7 @@
 	{{Form::model($user_details, array('id' => 'user-details-form'))}}
 		<input type="hidden" name="user_id" value="{{$user_id}}">
 		
-		@foreach($form_details as $name => $item)
-		<div class="form-group" rel="{{$name}}">
-			<label for="password" class="control-label">{{t('label.user.details.' . $name)}}</label>
-			{{Build::inputField($item['form'], $name, array('class' => 'form-control', 'id' => $name))}}
-		</div>
-		@endforeach
+		{{Build::formFields($input_form, 'user.details')}}
 
 		<div class="form-buttons">
 			{{link_to_route('api.user.details.save', t('form.button.save'), null, array('class' => 'btn btn-success btn-block api'))}}

@@ -14,7 +14,7 @@
 					<h2>{{t('heading.role.bar_title')}}</h2>
 
 					<button id="create-role" class="btn btn-primary loading">
-						<i class="icon-plus-sign"></i> {{t('form.button.role')}}
+						<i class="fa fa-plus-circle"></i> {{t('form.button.role')}}
 					</button>
 
 				</header>
@@ -37,10 +37,10 @@
 					<h2>{{t('heading.user.bar_title')}}</h2>
 
 					<a href="#" id="search-toggle">
-						<i class="icon-search"></i></a>
+						<i class="fa fa-search"></i></a>
 
 					<button id="create-user" class="btn btn-primary loading">
-						<i class="icon-plus-sign"></i> {{t('form.button.user')}}
+						<i class="fa fa-plus-circle"></i> {{t('form.button.user')}}
 					</button>
 
 				</header>
@@ -70,8 +70,8 @@
 	<footer>
 			
 		<ul class="toolbar">
-			<li class="active"><a href="#"><i class="icon-group"></i></a></li>
-			<li><a href="#"><i class="icon-user"></i></a></li>
+			<li class="active"><a href="#"><i class="fa fa-users"></i></a></li>
+			<li><a href="#"><i class="fa fa-user"></i></a></li>
 		</ul>
 
 	</footer>

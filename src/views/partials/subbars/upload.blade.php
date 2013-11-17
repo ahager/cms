@@ -7,7 +7,7 @@
 	</div>
 
 	<button type="button" class="subbar-toggle right-toggle file-toggle">
-		<i class="icon-picture"></i>
+		<i class="fa fa-picture-o"></i>
 	</button>
 
 </div>

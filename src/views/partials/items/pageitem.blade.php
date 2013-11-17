@@ -1,6 +1,8 @@
+{{-- */ $count = count($items); /* --}}
+
 @foreach($items as $key => $item)
 
-	@if($parent_id > 0)
+	@if($parent_id > 0 and $key == 0)
 	<ol class="dd-list">
 	@endif
 
@@ -18,7 +20,7 @@
 		
 		<a href="{{route('page.settings', array('page_id' => $item->id))}}"{{active($item->id, $page_id)}}>
 			
-			<i class="icon-chevron-right"></i>
+			<i class="fa fa-chevron-right"></i>
 
 		</a>
 
@@ -30,7 +32,7 @@
 
 	</li>
 
-	@if($parent_id > 0)
+	@if($parent_id > 0 and $key == $count-1)
 	</ol>
 	@endif
 

@@ -216,7 +216,7 @@ class UploadController extends ApiController {
 					$file_page = $this->page->savePageFile($page, $new_file);
 
 					$response[$key]['status'] = 'success';
-					$response[$key]['icon'] = 'icon-ok success';
+					$response[$key]['icon'] = 'fa fa-check success';
 
 					$is_image = Media::isImage($new_file->name);
 

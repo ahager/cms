@@ -79,7 +79,7 @@ class Tool {
 	 */
 	public function isHome($is_home)
 	{
-		return ($is_home) ? '<i class="icon-home" style="display: visible"></i>' : '<i class="icon-home" style="display: none"></i>';
+		return ($is_home) ? '<i class="fa fa-home" style="display: visible"></i>' : '<i class="fa fa-home" style="display: none"></i>';
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Tool {
 	 */
 	public function unChecked($is_valid)
 	{
-		return ($is_valid) ? '<i class="icon-check check"></i>' : '<i class="icon-unchecked check"></i>';
+		return ($is_valid) ? '<i class="fa fa-check-square-o check"></i>' : '<i class="fa fa-unchecked check"></i>';
 	}
 
 	/**

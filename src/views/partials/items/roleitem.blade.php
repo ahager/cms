@@ -16,7 +16,7 @@
 		</div>
 
 		<a href="{{route('role.settings', array('role_id' => $role->id))}}"{{active($role->id, $role_id)}}>
-			<i class="icon-chevron-left"></i>
+			<i class="fa fa-chevron-left"></i>
 		</a>
 
 	</li>

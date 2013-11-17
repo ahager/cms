@@ -76,10 +76,12 @@ class UserController extends ApiController {
 	public function userDetailsSave()
 	{
 		if(Input::has('user_id')) {
+			
+			$validation = \Build::validForm();
 
-			$input = Input::all();
+			if(!is_array($validation)) return $validation;
 
-			extract($input);
+			extract($validation);
 
 			$user = $this->user->getUser($user_id);
 
@@ -88,7 +90,7 @@ class UserController extends ApiController {
 
 			$user_details = $this->user->getUserDetails($user);
 
-			foreach (Pongo::system('user_details') as $field => $value) {
+			foreach (Pongo::forms('user_details') as $field => $value) {
 				
 				if($value['form'] == 'date') {
 					

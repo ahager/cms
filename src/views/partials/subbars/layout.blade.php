@@ -7,11 +7,11 @@
 	</div>
 
 	<button type="button" class="subbar-toggle options-toggle">
-		<i class="icon-cogs"></i>
+		<i class="fa fa-cogs"></i>
 	</button>
 
 	<button type="button" class="subbar-toggle right-toggle file-toggle">
-		<i class="icon-desktop"></i>
+		<i class="fa fa-desktop"></i>
 	</button>
 
 </div>

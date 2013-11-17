@@ -9,8 +9,8 @@
 			<h2>{{t('heading.page.bar_title')}}</h2>
 
 			<div class="page-controls">
-				<i class="icon-plus-sign-alt" data-action="expand-all"></i>
-				<i class="icon-minus-sign-alt" data-action="collapse-all"></i>
+				<i class="fa fa-plus-square" data-action="expand-all"></i>
+				<i class="fa fa-minus-square" data-action="collapse-all"></i>
 			</div>
 
 			<select id="change-lang" class="form-control">
@@ -20,7 +20,7 @@
 			</select>
 
 			<button id="create-page" class="btn btn-primary loading">
-				<i class="icon-plus-sign"></i> {{t('form.button.page')}}
+				<i class="fa fa-plus-circle"></i> {{t('form.button.page')}}
 			</button>
 			
 		</header>

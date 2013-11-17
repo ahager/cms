@@ -12,7 +12,7 @@
 					<h2>{{t('heading.element.bar_title')}}</h2>
 
 					<button id="create-element" class="btn btn-primary loading">
-						<i class="icon-plus-sign"></i> {{t('form.button.element')}}
+						<i class="fa fa-plus-circle"></i> {{t('form.button.element')}}
 					</button>
 
 				</header>
@@ -62,8 +62,8 @@
 	<footer>
 			
 		<ul class="toolbar">
-			<li class="active"><a href="#"><i class="icon-sort-by-attributes"></i></a></li>
-			<li><a href="#"><i class="icon-exchange"></i></a></li>
+			<li class="active"><a href="#"><i class="fa fa-sort-amount-asc"></i></a></li>
+			<li><a href="#"><i class="fa fa-exchange"></i></a></li>
 		</ul>
 
 	</footer>

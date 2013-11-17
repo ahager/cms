@@ -2,15 +2,9 @@
 
 use ExpressiveDate;
 
+use Pongo\Cms\Support\Validators\GenericValidator as GenericValidator;
+
 class Build {
-
-	/**
-	 * Render constructor
-	 */
-	public function __construct()
-	{
-
-	}
 
 	/**
 	 * Manage custom fields
@@ -49,7 +43,7 @@ class Build {
 	 */
 	public function dateField($name, $attributes = array(), $year_past = 99, $year_future = 1)
 	{
-		$item_view = \Render::view('partials.dates.date');
+		$item_view = \Render::view('partials.forms.dates.date');
 		$item_view['name']			= $name;
 		$item_view['date']			= new ExpressiveDate;
 		$item_view['day_name']		= 'day';
@@ -72,7 +66,7 @@ class Build {
 	 */
 	public function dateTimeField($name, $attributes = array(), $year_past = 99, $year_future = 1)
 	{
-		$item_view = \Render::view('partials.dates.datetime');
+		$item_view = \Render::view('partials.forms.dates.datetime');
 		$item_view['name']			= $name;
 		$item_view['date']			= new ExpressiveDate;
 		$item_view['day_name']		= 'day';
@@ -84,6 +78,31 @@ class Build {
 		$item_view['year_future'] 	= $year_future;
 
 		return $item_view;
+	}
+
+	/**
+	 * Build an input fields list to put inside a form
+	 * 
+	 * @param  array $input_form
+	 * @param  string $label_ns
+	 * @return blade view
+	 */
+	public function formFields($input_form, $label_ns)
+	{
+		$form_view = '';
+
+		foreach ($input_form as $name => $option) {
+			$field_view = \Render::view('partials.forms.fielditem');
+
+			$field_view['name'] 	= $name;
+			$field_view['form'] 	= $option['form'];
+			$field_view['label'] 	= array_key_exists('label', $option) ? $option['label'] : $label_ns . '.' . $name;
+			$field_view['validate'] = array_key_exists('validate', $option) ? $option['validate'] : null;
+
+			$form_view .= $field_view . "\n";
+		}
+
+		return $form_view;
 	}
 
 	/**
@@ -101,6 +120,40 @@ class Build {
 
 			return $this->customField($form, $name, $attributes, $value);
 		}
+	}
+
+	/**
+	 * Write validdations rules hidden field
+	 * 
+	 * @param  string $name
+	 * @param  string $validation_rules
+	 * @return string
+	 */
+	public function validateField($name, $validation_rules = null)
+	{
+		if(!is_null($validation_rules)) {
+
+			return \Form::hidden("valid[$name]", $validation_rules) . "\n";
+		}
+	}
+
+	/**
+	 * Validate an auto-build form
+	 * 
+	 * @return array variables 
+	 */
+	public function validForm()
+	{
+		$input = \Input::all();
+
+		if(is_array($input['valid'])) {
+
+			$v = new GenericValidator($input['valid']);
+
+			if(! $v->passes()) return json_encode($v->formatErrors());
+		}
+
+		return $input;
 	}
 
 	/**

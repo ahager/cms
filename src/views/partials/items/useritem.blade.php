@@ -5,7 +5,7 @@
 	<li class="dd-item" data-id="{{$user->id}}">
 		
 		<a href="{{route('user.settings', array('user_id' => $user->id))}}"{{active($user->id, $user_id)}}>
-			<i class="icon-chevron-left"></i>
+			<i class="fa fa-chevron-left"></i>
 		</a>
 
 		<div class="dd-handle">

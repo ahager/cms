@@ -38,7 +38,7 @@
 
 				<div class="dn">
 
-					<ol class="dn-list">
+					<ol class="dn-list list">
 
 						{{Load::markerList()}}
 
@@ -55,7 +55,7 @@
 					<h2>{{t('heading.element.bar_title')}}</h2>
 
 					<button id="create-element" class="btn btn-primary loading">
-						<i class="icon-plus-sign"></i> {{t('form.button.element')}}
+						<i class="fa fa-plus-circle"></i> {{t('form.button.element')}}
 					</button>
 
 				</header>
@@ -83,9 +83,9 @@
 	<footer>
 			
 		<ul class="toolbar">
-			<li class="active"><a href="#"><i class="icon-picture"></i></a></li>
-			<li><a href="#"><i class="icon-rocket"></i></a></li>
-			<li><a href="#"><i class="icon-sort-by-attributes"></i></a></li>
+			<li class="active"><a href="#"><i class="fa fa-picture-o"></i></a></li>
+			<li><a href="#"><i class="fa fa-rocket"></i></a></li>
+			<li><a href="#"><i class="fa fa-sort-amount-asc"></i></a></li>
 			
 			
 		</ul>

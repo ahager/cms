@@ -11,7 +11,7 @@
 		</div>
 		
 		<a href="#marker" class="edit insert" data-default="{{Marker::defaults($name)}}">
-			<i class="icon-chevron-left"></i></a>
+			<i class="fa fa-chevron-left"></i></a>
 
 	</li>
 @endforeach
