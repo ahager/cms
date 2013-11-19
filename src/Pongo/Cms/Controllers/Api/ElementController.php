@@ -5,8 +5,6 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Pongo\Cms\Support\Validators\Element\SettingsValidator as SettingsValidator;
 
-use Access, Alert, Input, Pongo, Redirect;
-
 class ElementController extends ApiController {
 
 	/**
@@ -28,7 +26,7 @@ class ElementController extends ApiController {
 		$this->page = $page;
 		$this->element = $element;
 
-		$this->default_order = Pongo::system('default_order');
+		$this->default_order = \Pongo::system('default_order');
 	}
 
 	/**
@@ -38,11 +36,11 @@ class ElementController extends ApiController {
 	 */
 	public function createElement()
 	{
-		if(Input::has('lang') and Input::has('page_id')) {
+		if(\Input::has('lang') and \Input::has('page_id')) {
 
-			$page_id = Input::get('page_id');
+			$page_id = \Input::get('page_id');
 
-			$lang = Input::get('lang');
+			$lang = \Input::get('lang');
 
 			$attrib = t('template.element.new', array(), $lang);
 
@@ -91,11 +89,11 @@ class ElementController extends ApiController {
 	 */
 	public function elementContentSave()
 	{
-		if(Input::has('element_id') and Input::has('page_id')) {
+		if(\Input::has('element_id') and \Input::has('page_id')) {
 
-			$page_id 	= Input::get('page_id');
-			$element_id = Input::get('element_id');			
-			$text 		= Input::get('text');
+			$page_id 	= \Input::get('page_id');
+			$element_id = \Input::get('element_id');			
+			$text 		= \Input::get('text');
 
 			$element = $this->element->getElement($element_id);
 
@@ -127,13 +125,13 @@ class ElementController extends ApiController {
 	 */
 	public function elementSettingsClone()
 	{
-		if(Input::has('pages') and Input::has('element_id')) {
+		if(\Input::has('pages') and \Input::has('element_id')) {
 
-			$pages = Input::get('pages');
+			$pages = \Input::get('pages');
 
-			$self_elements = Input::get('self_elements');
+			$self_elements = \Input::get('self_elements');
 
-			$element_id = Input::get('element_id');
+			$element_id = \Input::get('element_id');
 
 			$element = $this->element->getElement($element_id);
 
@@ -166,15 +164,15 @@ class ElementController extends ApiController {
 
 			}
 
-			Alert::success(t('alert.success.element_cloned'))->flash();
+			\Alert::success(t('alert.success.element_cloned'))->flash();
 
-			return Redirect::back();
+			return \Redirect::back();
 
 		} else {
 
-			Alert::error(t('alert.error.clone_element'))->flash();
+			\Alert::error(t('alert.error.clone_element'))->flash();
 
-			return Redirect::back();
+			return \Redirect::back();
 		}
 
 	}
@@ -187,11 +185,11 @@ class ElementController extends ApiController {
 	 */
 	public function elementSettingsDelete()
 	{
-		if(Input::has('page_id') and Input::has('element_id')) {
+		if(\Input::has('page_id') and \Input::has('element_id')) {
 
-			$page_id 	= Input::get('page_id');
+			$page_id 	= \Input::get('page_id');
 
-			$element_id = Input::get('element_id');
+			$element_id = \Input::get('element_id');
 
 			$page = $this->page->getPage($page_id);
 
@@ -201,22 +199,22 @@ class ElementController extends ApiController {
 
 			$count_elements = $this->element->countElementPages($element);
 
-			Alert::success(t('alert.success.element_deleted'))->flash();
+			\Alert::success(t('alert.success.element_deleted'))->flash();
 
 			if($count_elements == 0) {
 
 				$this->element->deleteElement($element);
 
-				return Redirect::route('element.deleted');
+				return \Redirect::route('element.deleted');
 			}			
 
-			return Redirect::route('page.settings', array('page_id' => $page_id));
+			return \Redirect::route('page.settings', array('page_id' => $page_id));
 
 		} else {
 
-			Alert::error(t('alert.error.delete_item'))->flash();
+			\Alert::error(t('alert.error.delete_item'))->flash();
 
-			return Redirect::back();
+			return \Redirect::back();
 		}
 
 	}
@@ -228,9 +226,9 @@ class ElementController extends ApiController {
 	 */
 	public function elementSettingsSave()
 	{
-		if(Input::has('element_id') and Input::has('page_id')) {
+		if(\Input::has('element_id') and \Input::has('page_id')) {
 
-			$input = Input::all();
+			$input = \Input::all();
 
 			$v = new SettingsValidator($input['element_id']);
 
@@ -241,7 +239,7 @@ class ElementController extends ApiController {
 				$page = $this->page->getPage($page_id);
 
 				// Author can edit the page
-				if(is_array($unauth = Access::grantEdit($page->role_level)))
+				if(is_array($unauth = \Access::grantEdit($page->role_level)))
 					return json_encode($unauth);
 
 				$element = $this->element->getElement($element_id);
@@ -291,10 +289,10 @@ class ElementController extends ApiController {
 	 */
 	public function elementSettingsValid()
 	{
-		if(Input::has('item_id') and Input::has('action')) {
+		if(\Input::has('item_id') and \Input::has('action')) {
 
-			$element_id 	= Input::get('item_id');
-			$valid 			= Input::get('action');
+			$element_id 	= \Input::get('item_id');
+			$valid 			= \Input::get('action');
 
 			$element = $this->element->getElement($element_id);
 
@@ -323,11 +321,11 @@ class ElementController extends ApiController {
 	 */
 	public function orderElements()
 	{
-		if(Input::has('elements') and Input::has('page_id')) {
+		if(\Input::has('elements') and \Input::has('page_id')) {
 
-			$mod_elements = json_decode(Input::get('elements'), true);
+			$mod_elements = json_decode(\Input::get('elements'), true);
 
-			$page_id = Input::get('page_id');
+			$page_id = \Input::get('page_id');
 
 			$elements = $this->page->getPageElements($page_id);
 

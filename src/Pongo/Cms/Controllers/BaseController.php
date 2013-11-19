@@ -1,6 +1,6 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Auth, Alert, Cookie, Controller, Input, Redirect, Render, Response, Session;
+use Controller;
 
 class BaseController extends Controller {
 
@@ -19,9 +19,9 @@ class BaseController extends Controller {
 	 */
 	public function bootstrap()
 	{
-		$contents = Render::view('partials.bootstrap');
+		$contents = \Render::view('partials.bootstrap');
 
-		$response = Response::make($contents, 200);
+		$response = \Response::make($contents, 200);
 
 		$response->header('Content-Type', 'application/javascript');
 
@@ -37,10 +37,10 @@ class BaseController extends Controller {
 	{
 		if(isset($lang)) {
 
-			Session::put('CMSLANG', $lang);
+			\Session::put('CMSLANG', $lang);
 		}
 
-		return Redirect::back();
+		return \Redirect::back();
 	}
 
 	/**
@@ -50,11 +50,11 @@ class BaseController extends Controller {
 	 */
 	public function logout()
 	{
-		Auth::logout();
+		\Auth::logout();
 
-		Alert::info(t('alert.info.logout'))->flash();
+		\Alert::info(t('alert.info.logout'))->flash();
 
-		return Redirect::route('login.index');
+		return \Redirect::route('login.index');
 	}
 
 }

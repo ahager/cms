@@ -1,7 +1,5 @@
 <?php namespace Pongo\Cms\Controllers\Api;
 
-use Auth, Alert, Controller, Pongo, Redirect;
-
 class SaveController extends ApiController {
 
 	public function __construct()
@@ -38,11 +36,11 @@ class SaveController extends ApiController {
 
 	public function expire()
 	{
-		Auth::logout();
+		\Auth::logout();
 		
 		$msg = t('alert.error.session_exp');
 
-		Alert::error($msg)->flash();
+		\Alert::error($msg)->flash();
 
 		return json_encode(
 			array(

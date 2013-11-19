@@ -5,8 +5,6 @@ use Pongo\Cms\Support\Repositories\ElementRepositoryInterface as Element;
 
 use Pongo\Cms\Support\Validators\Page\SettingsValidator as SettingsValidator;
 
-use Access, Alert, Input, Load, Pongo, Redirect, Render, Session, Str, Tool;
-
 class PageController extends ApiController {
 
 	/**
@@ -28,7 +26,7 @@ class PageController extends ApiController {
 		$this->page = $page;
 		$this->element = $element;
 
-		$this->default_order = Pongo::system('default_order');
+		$this->default_order = \Pongo::system('default_order');
 	}
 
 	/**
@@ -38,12 +36,12 @@ class PageController extends ApiController {
 	 */
 	public function changeLang()
 	{
-		if(Input::has('lang')) {
+		if(\Input::has('lang')) {
 
-			$lang = Input::get('lang');
-			$label = Pongo::settings('languages.' . $lang . '.lang');
+			$lang = \Input::get('lang');
+			$label = \Pongo::settings('languages.' . $lang . '.lang');
 
-			Session::put('LANG', $lang);
+			\Session::put('LANG', $lang);
 
 			$response = array(
 				'status' 	=> 'info',
@@ -69,16 +67,16 @@ class PageController extends ApiController {
 	 */
 	public function createPage()
 	{
-		if(Input::has('lang')) {
+		if(\Input::has('lang')) {
 
-			$lang = Input::get('lang');
+			$lang = \Input::get('lang');
 			$name = t('template.page.new', array(), $lang);
 
 			$page_arr = array(
 				'parent_id' 	=> 0,
 				'lang' 			=> $lang,
 				'name' 			=> $name,
-				'slug' 			=> '/' . Str::slug($name),
+				'slug' 			=> '/' . \Str::slug($name),
 				'title' 		=> $name,
 				'template'		=> 'default',
 				'header'		=> 'default',
@@ -122,9 +120,9 @@ class PageController extends ApiController {
 	 */
 	public function orderPages()
 	{
-		if(Input::has('pages')) {
+		if(\Input::has('pages')) {
 
-			$pages = json_decode(Input::get('pages'), true);
+			$pages = json_decode(\Input::get('pages'), true);
 
 			// Recursive update
 			$this->updateOrderRecursivePage($pages, 0);
@@ -166,7 +164,7 @@ class PageController extends ApiController {
 			$page->order_id = $key + 1;
 			$this->page->savePage($page);
 
-			$page->slug = Load::pageTree($page->id, 'slug', '/');
+			$page->slug = \Load::pageTree($page->id, 'slug', '/');
 			$this->page->savePage($page);
 
 			// Recursive update
@@ -184,15 +182,15 @@ class PageController extends ApiController {
 	 */
 	public function pageSettingsClone()
 	{
-		if(Input::has('elements') and Input::has('page_id')) {
+		if(\Input::has('elements') and \Input::has('page_id')) {
 
-			$elements = Input::get('elements');
+			$elements = \Input::get('elements');
 
-			$self_elements = Input::get('self_elements');
+			$self_elements = \Input::get('self_elements');
 
-			$page_id = Input::get('page_id');
+			$page_id = \Input::get('page_id');
 
-			$lang = Input::get('lang');
+			$lang = \Input::get('lang');
 
 			$page = $this->page->getPage($page_id);
 
@@ -244,7 +242,7 @@ class PageController extends ApiController {
 			}
 
 			// Clone media
-			if(Input::has('media_all')) {
+			if(\Input::has('media_all')) {
 
 				foreach ($page->files as $file) {
 
@@ -253,17 +251,17 @@ class PageController extends ApiController {
 
 			}
 
-			Session::put('LANG', $lang);
+			\Session::put('LANG', $lang);
 
-			Alert::success(t('alert.success.page_cloned'))->flash();
+			\Alert::success(t('alert.success.page_cloned'))->flash();
 
-			return Redirect::route('page.settings', array('page_id' => $new_page->id));
+			return \Redirect::route('page.settings', array('page_id' => $new_page->id));
 
 		} else {
 
-			Alert::error(t('alert.error.clone_page'))->flash();
+			\Alert::error(t('alert.error.clone_page'))->flash();
 
-			return Redirect::back();
+			return \Redirect::back();
 		}
 	}
 
@@ -274,9 +272,9 @@ class PageController extends ApiController {
 	 */
 	public function pageSettingsDelete()
 	{
-		if(Input::has('page_id')) {
+		if(\Input::has('page_id')) {
 
-			$page_id = Input::get('page_id');
+			$page_id = \Input::get('page_id');
 
 			$elements = $this->page->getPageElements($page_id);
 
@@ -284,23 +282,23 @@ class PageController extends ApiController {
 
 			// Check if NOT force delete page
 
-			if(!Input::has('force_delete')) {
+			if(!\Input::has('force_delete')) {
 
 				// Has elements
 
 				if(!is_empty($elements)) {
 
-					Alert::error(t('alert.error.page_has_elements'))->flash();
+					\Alert::error(t('alert.error.page_has_elements'))->flash();
 
-					return Redirect::route('page.settings', array('id' => $page_id));
+					return \Redirect::route('page.settings', array('id' => $page_id));
 
 				// Has subpages
 
 				} elseif(!is_empty($subpages)) {
 
-					Alert::error(t('alert.error.page_has_subpages'))->flash();
+					\Alert::error(t('alert.error.page_has_subpages'))->flash();
 
-					return Redirect::route('page.settings', array('id' => $page_id));
+					return \Redirect::route('page.settings', array('id' => $page_id));
 
 				// It's OK, ready to delete
 
@@ -308,9 +306,9 @@ class PageController extends ApiController {
 
 					if($this->deletePage($page_id)) {
 
-						Alert::success(t('alert.success.page_deleted'))->flash();
+						\Alert::success(t('alert.success.page_deleted'))->flash();
 
-						return Redirect::route('page.deleted');
+						return \Redirect::route('page.deleted');
 					}
 
 				}
@@ -323,9 +321,9 @@ class PageController extends ApiController {
 
 				if(!is_empty($subpages)) {
 
-					Alert::error(t('alert.error.page_has_subpages'))->flash();
+					\Alert::error(t('alert.error.page_has_subpages'))->flash();
 
-					return Redirect::route('page.settings', array('id' => $page_id));
+					return \Redirect::route('page.settings', array('id' => $page_id));
 
 				// It's OK, ready to delete
 
@@ -353,9 +351,9 @@ class PageController extends ApiController {
 
 					if($this->deletePage($page_id)) {
 
-						Alert::success(t('alert.success.page_deleted'))->flash();
+						\Alert::success(t('alert.success.page_deleted'))->flash();
 
-						return Redirect::route('page.deleted');
+						return \Redirect::route('page.deleted');
 					}
 
 				}
@@ -364,9 +362,9 @@ class PageController extends ApiController {
 
 		} else {
 
-			Alert::error(t('alert.error.page_cant_delete'))->flash();
+			\Alert::error(t('alert.error.page_cant_delete'))->flash();
 
-			return Redirect::route('page.settings', array('id', $page_id));	
+			return \Redirect::route('page.settings', array('id', $page_id));	
 		}
 
 	}
@@ -406,18 +404,18 @@ class PageController extends ApiController {
 	 */
 	public function pageLayoutChange()
 	{
-		$input = Input::all();
+		$input = \Input::all();
 
 		if(!is_empty($input)) {
 
-			return Render::layoutPreview($input['header'], $input['layout'], $input['footer']);
+			return \Render::layoutPreview($input['header'], $input['layout'], $input['footer']);
 
 		}
 	}
 
 	public function pageLayoutSave()
 	{
-		$input = Input::all();
+		$input = \Input::all();
 
 		if(!is_empty($input)) {
 
@@ -426,7 +424,7 @@ class PageController extends ApiController {
 			$page = $this->page->getPage($page_id);
 
 			// Author can edit the page
-			if(is_array($unauth = Access::grantEdit($page->role_level)))
+			if(is_array($unauth = \Access::grantEdit($page->role_level)))
 				return json_encode($unauth);
 
 			$page->template = $template;
@@ -460,7 +458,7 @@ class PageController extends ApiController {
 	 */
 	public function pageSeoSave()
 	{
-		$input = Input::all();
+		$input = \Input::all();
 
 		if(!is_empty($input)) {
 
@@ -469,7 +467,7 @@ class PageController extends ApiController {
 			$page = $this->page->getPage($page_id);
 
 			// Author can edit the page
-			if(is_array($unauth = Access::grantEdit($page->role_level)))
+			if(is_array($unauth = \Access::grantEdit($page->role_level)))
 				return json_encode($unauth);
 
 			$page->title 	= $title;
@@ -502,9 +500,9 @@ class PageController extends ApiController {
 	 */
 	public function pageSettingsLink()
 	{
-		if(Input::has('rel_id')) {
+		if(\Input::has('rel_id')) {
 
-			$input = Input::all();
+			$input = \Input::all();
 
 			extract($input);
 
@@ -550,7 +548,7 @@ class PageController extends ApiController {
 	 */
 	public function pageSettingsSave()
 	{
-		$input = Input::all();
+		$input = \Input::all();
 
 		$v = new SettingsValidator($input['page_id']);
 
@@ -561,10 +559,10 @@ class PageController extends ApiController {
 			$page = $this->page->getPage($page_id);
 
 			// Author can edit the page
-			if(is_array($unauth = Access::grantEdit($page->role_level)))
+			if(is_array($unauth = \Access::grantEdit($page->role_level)))
 				return json_encode($unauth);
 			
-			$full_slug = $slug_base . '/' . Str::slug($slug_last);
+			$full_slug = $slug_base . '/' . \Str::slug($slug_last);
 			$home = isset($is_home) ? 1 : 0;
 			$valid = isset($is_valid) ? 1 : 0;
 

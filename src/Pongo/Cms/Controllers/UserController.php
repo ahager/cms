@@ -2,8 +2,6 @@
 
 use Pongo\Cms\Support\Repositories\UserRepositoryInterface as User;
 
-use Pongo, Render;
-
 class UserController extends BaseController {
 
 	/**
@@ -27,13 +25,13 @@ class UserController extends BaseController {
 		$user = $this->user->getUser($user_id);
 		$user_details = $this->user->getUserDetails($user);
 
-		$view = Render::view('sections.user.details');
+		$view = \Render::view('sections.user.details');
 		$view['section'] 		= 'details';
 		$view['role_id']		= $user->role_id;
 		$view['user_id'] 		= $user_id;
 		$view['section_name'] 	= t('menu.users');		
 		$view['name']			= $user->username;
-		$view['input_form']		= Pongo::forms('user_details');
+		$view['input_form']		= \Pongo::forms('user_details');
 		$view['user_details']	= $user_details;
 
 		return $view;
@@ -51,7 +49,7 @@ class UserController extends BaseController {
 
 		$user = $this->user->getUser($user_id);
 
-		$view = Render::view('sections.user.password');
+		$view = \Render::view('sections.user.password');
 		$view['section'] 		= 'password';
 		$view['role_id']		= $user->role_id;
 		$view['user_id'] 		= $user_id;
@@ -73,16 +71,16 @@ class UserController extends BaseController {
 
 		$user = $this->user->getUser($user_id);
 
-		$view = Render::view('sections.user.settings');
+		$view = \Render::view('sections.user.settings');
 		$view['section'] 		 = 'settings';
 		$view['role_id']		 = $user->role_id;
 		$view['user_id'] 		 = $user_id;
 		$view['section_name'] 	 = t('menu.users');		
 		$view['name']			 = $user->username;
 		$view['email']			 = $user->email;
-		$view['langs']			 = Pongo::settings('languages');
+		$view['langs']			 = \Pongo::settings('languages');
 		$view['lang_selected']	 = $user->lang;
-		$view['editors']		 = Pongo::settings('editors');
+		$view['editors']		 = \Pongo::settings('editors');
 		$view['editor_selected'] = $user->editor;
 
 		return $view;

@@ -1,7 +1,5 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Access, Auth, Alert, Input, Redirect, Render, Session;
-
 class LoginController extends BaseController {
 	
 	/**
@@ -23,7 +21,7 @@ class LoginController extends BaseController {
 	 */
 	public function index()
 	{
-		return Render::view('sections.login.login');
+		return \Render::view('sections.login.login');
 	}
 
 	/**
@@ -34,35 +32,35 @@ class LoginController extends BaseController {
 	public function login()
 	{
 		$credentials = array(
-			'username' 	=> Input::get('username'),
-			'password' 	=> Input::get('password'),
+			'username' 	=> \Input::get('username'),
+			'password' 	=> \Input::get('password'),
 			'is_valid'	=> 1
 		);
 
-		if (Auth::attempt($credentials)) {
+		if (\Auth::attempt($credentials)) {
 
-			if(Access::allowedCms(Auth::user()->role->level)) {
+			if(\Access::allowedCms(\Auth::user()->role->level)) {
 
 				$this->setConstants();
 
-				Alert::info(t('alert.info.welcome', array('user' => Input::get('username'))))->flash();
+				\Alert::info(t('alert.info.welcome', array('user' => \Input::get('username'))))->flash();
 
-				return Redirect::route('dashboard');
+				return \Redirect::route('dashboard');
 
 			} else {
 
-				Auth::logout();
+				\Auth::logout();
 
-				Alert::error(t('alert.error.unauthorized'))->flash();
+				\Alert::error(t('alert.error.unauthorized'))->flash();
 
-				return Redirect::route('login.index');
+				return \Redirect::route('login.index');
 			}
 
 		} else {
 
-			Alert::error(t('alert.error.login'))->flash();
+			\Alert::error(t('alert.error.login'))->flash();
 
-			return Redirect::route('login.index');
+			return \Redirect::route('login.index');
 		}
 	}
 
@@ -73,15 +71,15 @@ class LoginController extends BaseController {
 	 */
 	protected function setConstants()
 	{
-		Session::put('USERID', Auth::user()->id);
-		Session::put('USERNAME', Auth::user()->username);
-		Session::put('EMAIL', Auth::user()->email);
-		Session::put('ROLEID', Auth::user()->role->id);
-		Session::put('ROLENAME', Auth::user()->role->name);
-		Session::put('LEVEL', Auth::user()->role->level);
-		Session::put('LANG', Auth::user()->lang);
-		Session::put('CMSLANG', Auth::user()->lang);
-		Session::put('EDITOR', Auth::user()->editor);
+		Session::put('USERID', \Auth::user()->id);
+		Session::put('USERNAME', \Auth::user()->username);
+		Session::put('EMAIL', \Auth::user()->email);
+		Session::put('ROLEID', \Auth::user()->role->id);
+		Session::put('ROLENAME', \Auth::user()->role->name);
+		Session::put('LEVEL', \Auth::user()->role->level);
+		Session::put('LANG', \Auth::user()->lang);
+		Session::put('CMSLANG', \Auth::user()->lang);
+		Session::put('EDITOR', \Auth::user()->editor);
 	}
 
 }

@@ -6,8 +6,6 @@ use Pongo\Cms\Support\Validators\User\SettingsValidator as SettingsValidator;
 use Pongo\Cms\Support\Validators\User\PasswordValidator as PasswordValidator;
 use Pongo\Cms\Support\Validators\User\DetailsValidator as DetailsValidator;
 
-use Access, Alert, ExpressiveDate, Hash, Input, Pongo, Redirect, Session;
-
 class UserController extends ApiController {
 
 	/**
@@ -29,15 +27,15 @@ class UserController extends ApiController {
 	 */
 	public function createUser()
 	{
-		if(Input::has('create')) {
+		if(\Input::has('create')) {
 
-			$user_account = Pongo::settings('user_account');
+			$user_account = \Pongo::settings('user_account');
 
 			$user_arr = array(
 				'role_id'	=> $user_account['role_id'],
 				'username' 	=> $user_account['username'],
 				'email'		=> $user_account['email'],
-				'password'	=> Hash::make($user_account['password']),
+				'password'	=> \Hash::make($user_account['password']),
 				'lang'		=> CMSLANG,
 				'editor'	=> 0,
 				'is_valid' 	=> 0
@@ -75,7 +73,7 @@ class UserController extends ApiController {
 	 */
 	public function userDetailsSave()
 	{
-		if(Input::has('user_id')) {
+		if(\Input::has('user_id')) {
 			
 			$validation = \Build::validForm();
 
@@ -85,20 +83,20 @@ class UserController extends ApiController {
 
 			$user = $this->user->getUser($user_id);
 
-			if(is_array($unauth = Access::grantEdit('access.users')))
+			if(is_array($unauth = \Access::grantEdit('access.users')))
 					return json_encode($unauth);
 
 			$user_details = $this->user->getUserDetails($user);
 
-			foreach (Pongo::forms('user_details') as $field => $value) {
+			foreach (\Pongo::forms('user_details') as $field => $value) {
 				
 				if($value['form'] == 'date') {
 					
-					$user_details->$field = ExpressiveDate::makeFromDate($year, $month, $day);
+					$user_details->$field = \ExpressiveDate::makeFromDate($year, $month, $day);
 
 				} elseif($value['form'] == 'datetime') {
 
-					$user_details->$field = ExpressiveDate::makeFromDateTime($year, $month, $day, $hh, $mm);
+					$user_details->$field = \ExpressiveDate::makeFromDateTime($year, $month, $day, $hh, $mm);
 
 				} else {
 
@@ -133,20 +131,20 @@ class UserController extends ApiController {
 	 */
 	public function userSettingsDelete()
 	{
-		if(Input::has('user_id')) {
+		if(\Input::has('user_id')) {
 
-			$user_id = Input::get('user_id');
+			$user_id = \Input::get('user_id');
 
 			$user = $this->user->getUser($user_id);
 
 			$user_level = $this->user->getUserLevel($user);
 
 			// Check if deleting last admin user
-			if($user->id == 1 and $user_level == Access::roleMaxLevel()) {
+			if($user->id == 1 and $user_level == \Access::roleMaxLevel()) {
 
-				Alert::error(t('alert.error.user_admin'))->flash();
+				\Alert::error(t('alert.error.user_admin'))->flash();
 
-				return Redirect::back();
+				return \Redirect::back();
 
 			} else {
 
@@ -155,23 +153,23 @@ class UserController extends ApiController {
 					
 					$this->user->deleteUser($user);
 
-					Alert::success(t('alert.success.user_deleted'))->flash();
+					\Alert::success(t('alert.success.user_deleted'))->flash();
 
-					return Redirect::route('user.settings');
+					return \Redirect::route('user.settings');
 
 				} else {
 
-					Alert::error(t('alert.error.user_deleted'))->flash();
+					\Alert::error(t('alert.error.user_deleted'))->flash();
 
-					return Redirect::back();
+					return \Redirect::back();
 				}				
 			}
 
 		} else {
 
-			Alert::error(t('alert.error.user_deleted'))->flash();
+			\Alert::error(t('alert.error.user_deleted'))->flash();
 
-			return Redirect::back();
+			return \Redirect::back();
 		}
 
 	}
@@ -183,13 +181,13 @@ class UserController extends ApiController {
 	 */
 	public function userSettingsLink()
 	{
-		if(Input::has('user_id') and Input::has('role_id') and Input::has('level')) {
+		if(\Input::has('user_id') and \Input::has('role_id') and \Input::has('level')) {
 
-			$user_id 	= Input::get('user_id');
-			$role_id 	= Input::get('role_id');
-			$level 		= Input::get('level');
+			$user_id 	= \Input::get('user_id');
+			$role_id 	= \Input::get('role_id');
+			$level 		= \Input::get('level');
 
-			if(Pongo::settings('admin_account.id') == $user_id) {
+			if(\Pongo::settings('admin_account.id') == $user_id) {
 
 				$response = array(
 					'status' 	=> 'error',
@@ -204,7 +202,7 @@ class UserController extends ApiController {
 
 				$this->user->saveUser($user);
 
-				if($user_id == USERID) Session::put('LEVEL', $level);
+				if($user_id == USERID) \Session::put('LEVEL', $level);
 
 				$response = array(
 					'status' 	=> 'success'
@@ -228,9 +226,9 @@ class UserController extends ApiController {
 	 */
 	public function userSettingsSave()
 	{
-		if(Input::has('user_id')) {
+		if(\Input::has('user_id')) {
 
-			$input = Input::all();
+			$input = \Input::all();
 
 			$v = new SettingsValidator($input['user_id']);
 
@@ -240,7 +238,7 @@ class UserController extends ApiController {
 
 				$user = $this->user->getUser($user_id);
 
-				if(is_array($unauth = Access::grantEdit('access.users')))
+				if(is_array($unauth = \Access::grantEdit('access.users')))
 					return json_encode($unauth);
 				
 				$user->username = $name;
@@ -248,7 +246,7 @@ class UserController extends ApiController {
 				$user->lang 	= $lang;
 				$user->editor 	= $editor;
 
-				if($user_id == USERID) Session::put('USERNAME', $name);
+				if($user_id == USERID) \Session::put('USERNAME', $name);
 
 				$this->user->saveUser($user);
 
@@ -288,10 +286,10 @@ class UserController extends ApiController {
 	 */
 	public function userSettingsValid()
 	{
-		if(Input::has('item_id') and Input::has('action')) {
+		if(\Input::has('item_id') and \Input::has('action')) {
 
-			$user_id 	= Input::get('item_id');
-			$valid 		= Input::get('action');
+			$user_id 	= \Input::get('item_id');
+			$valid 		= \Input::get('action');
 
 			$user = $this->user->getUser($user_id);
 
@@ -320,9 +318,9 @@ class UserController extends ApiController {
 	 */
 	public function userPasswordSave()
 	{
-		if(Input::has('user_id')) {
+		if(\Input::has('user_id')) {
 
-			$input = Input::all();
+			$input = \Input::all();
 
 			$v = new PasswordValidator($input['user_id']);
 
@@ -332,10 +330,10 @@ class UserController extends ApiController {
 
 				$user = $this->user->getUser($user_id);
 
-				if(is_array($unauth = Access::grantEdit('access.users')))
+				if(is_array($unauth = \Access::grantEdit('access.users')))
 					return json_encode($unauth);
 				
-				$user->password = Hash::make($password);
+				$user->password = \Hash::make($password);
 
 				$this->user->saveUser($user);
 
@@ -375,9 +373,9 @@ class UserController extends ApiController {
 	 */
 	public function searchUser()
 	{
-		if(Input::has('input')) {
+		if(\Input::has('input')) {
 
-			$input = Input::get('input');
+			$input = \Input::get('input');
 
 			$users = $this->user->searchUser($input);
 

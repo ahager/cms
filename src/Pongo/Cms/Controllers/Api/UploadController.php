@@ -6,8 +6,6 @@ use Pongo\Cms\Support\Repositories\FileRepositoryInterface as File;
 use Pongo\Cms\Support\Validators\FileCreateValidator as FileCreateValidator;
 use Pongo\Cms\Support\Validators\FileUploadValidator as FileUploadValidator;
 
-use Image, Input, Media, Pongo;
-
 class UploadController extends ApiController {
 
 	/**
@@ -28,12 +26,12 @@ class UploadController extends ApiController {
 
 		$this->page = $page;
 		$this->file = $file;
-		$this->upload_path = Pongo::settings('upload_path');
+		$this->upload_path = \Pongo::settings('upload_path');
 	}
 
 	public function pageFilesCreate()
 	{
-		$input = Input::all();
+		$input = \Input::all();
 
 		$page_id = $input['page_id'];
 
@@ -48,15 +46,15 @@ class UploadController extends ApiController {
 
 			if($v->passes()) {
 
-				$folder_name = Media::getFolderName($file_name);
+				$folder_name = \Media::getFolderName($file_name);
 
-				$format_name = Media::formatFileName($file_name);
+				$format_name = \Media::formatFileName($file_name);
 
-				$file_ext = Media::fileExtension($file_name);
+				$file_ext = \Media::fileExtension($file_name);
 
-				$file_size = Media::convertFileSize($file_size, $size_type);
+				$file_size = \Media::convertFileSize($file_size, $size_type);
 
-				$http_path = Media::getFolderPublic($this->upload_path . $folder_name . $format_name);
+				$http_path = \Media::getFolderPublic($this->upload_path . $folder_name . $format_name);
 
 				$file_arr = array(
 					'name' 		=> $format_name,
@@ -96,12 +94,12 @@ class UploadController extends ApiController {
 
 						'action'		=> 'edit',
 						'file_id' 		=> $new_file->id,
-						'file_name' 	=> Media::formatFileName($file_arr['name'], false),
-						'thumb' 		=> Image::showThumb($new_file->path),
+						'file_name' 	=> \Media::formatFileName($file_arr['name'], false),
+						'thumb' 		=> \Image::showThumb($new_file->path),
 						'thumb_url' 	=> route('file.edit', array('file_id' => $new_file->id)),
 						'thumb_class'	=> '',
 						'ext' 			=> $file_arr['ext'],
-						'size'			=> Media::formatFileSize($file_arr['size']),
+						'size'			=> \Media::formatFileSize($file_arr['size']),
 						'edit_url'		=> route('file.edit', array('file_id' => $new_file->id)),
 						'delete_url'	=> route('api.page.files.delete', array('file_id' => $new_file->id)),
 						'edit_class'	=> 'edit',
@@ -136,11 +134,11 @@ class UploadController extends ApiController {
 	public function pageFilesDelete($file_id)
 	{
 
-		$input = Input::all();
+		$input = \Input::all();
 
 		$page_id = $input['page_id'];
 
-		$force_delete = (Input::has('force_delete')) ? true : false;
+		$force_delete = (\Input::has('force_delete')) ? true : false;
 
 		if(isset($page_id)) {
 
@@ -154,7 +152,7 @@ class UploadController extends ApiController {
 
 			if($count_pages == 0 and $force_delete) {
 
-				Media::deleteFile($file->name);
+				\Media::deleteFile($file->name);
 
 				$this->file->deleteFile($file);
 			}
@@ -184,7 +182,7 @@ class UploadController extends ApiController {
 	 */
 	public function pageFilesUpload()
 	{
-		$input = Input::all();
+		$input = \Input::all();
 
 		$response = array();
 
@@ -218,17 +216,17 @@ class UploadController extends ApiController {
 					$response[$key]['status'] = 'success';
 					$response[$key]['icon'] = 'fa fa-check success';
 
-					$is_image = Media::isImage($new_file->name);
+					$is_image = \Media::isImage($new_file->name);
 
 					// Fill json data for each list element
 					$response[$key]['item']['action'] = $action;
 					$response[$key]['item']['file_id'] = $new_file->id;
-					$response[$key]['item']['file_name'] = Media::formatFileName($file_arr['name'], false);
-					$response[$key]['item']['thumb'] = Image::showThumb($new_file->path);
-					$response[$key]['item']['thumb_url'] = ($is_image) ? $new_file->path : route('file.edit', array('file_id' => $new_file->id));;
+					$response[$key]['item']['file_name'] = \Media::formatFileName($file_arr['name'], false);
+					$response[$key]['item']['thumb'] = \Image::showThumb($new_file->path);
+					$response[$key]['item']['thumb_url'] = ($is_image) ? $new_file->path : route('file.edit', array('file_id' => $new_file->id));
 					$response[$key]['item']['thumb_class'] = ($is_image) ? 'popup' : '';
 					$response[$key]['item']['ext'] = $file_arr['ext'];
-					$response[$key]['item']['size'] = Media::getFileInfo($new_file);
+					$response[$key]['item']['size'] = \Media::getFileInfo($new_file);
 					$response[$key]['item']['edit_url'] = route('file.edit', array('file_id' => $new_file->id));
 					$response[$key]['item']['delete_url'] = route('api.page.files.delete', array('file_id' => $new_file->id));
 					$response[$key]['item']['edit_class'] = 'edit';
@@ -286,12 +284,12 @@ class UploadController extends ApiController {
 		// file extension
 		$file_ext 	= $file->getClientOriginalExtension();
 		// dir type
-		$folder_name = Media::getFolderName($file_name);
+		$folder_name = \Media::getFolderName($file_name);
 		// upload path
 		$upload_path = public_path($this->upload_path . $folder_name);
 
 		// Format file name
-		$format_name = Media::formatFileName($file_name);
+		$format_name = \Media::formatFileName($file_name);
 		
 		// Save to disk
 		$file->move($upload_path, $format_name);
@@ -302,14 +300,14 @@ class UploadController extends ApiController {
 		// http path
 		$http_path = '/' . $this->upload_path . $folder_name . $format_name;
 		
-		if(Media::isImage($format_name)) {
-			$image 		= Image::get($file_path);
+		if(\Media::isImage($format_name)) {
+			$image 		= \Image::get($file_path);
 			$image_w 	= $image->getWidth();
 			$image_h 	= $image->getHeight();
 			$is_image 	= 1;
 
 			// Create thumb?
-			if($create_thumb) Image::createThumb($image, $format_name, 'cms');
+			if($create_thumb) \Image::createThumb($image, $format_name, 'cms');
 
 		} else {
 			$image_w 	= 0;

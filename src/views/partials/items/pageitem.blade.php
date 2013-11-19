@@ -8,11 +8,11 @@
 
 	<li class="dd-item" data-id="{{$item->id}}">
 		
-		<div class="dd-handle">
+		<div class="dd-handle{{Tool::isValid($item->is_valid)}}">
 
 			{{Tool::isHome($item->is_home)}}
 			
-			{{Tool::unChecked($item->is_valid)}}
+			{{--Tool::unChecked($item->is_valid)--}}
 
 			<span>{{$item->name}}</span>
 

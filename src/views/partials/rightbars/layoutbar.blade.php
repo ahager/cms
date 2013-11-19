@@ -15,7 +15,9 @@
 				</header>
 
 				<div id="template-wrapper">
+
 					{{Render::layoutPreview($header_selected, $layout_selected, $footer_selected)}}
+					
 				</div>
 
 			</li>
@@ -27,7 +29,7 @@
 					<h2>{{t('heading.element.bar_title')}}</h2>
 
 					<button id="create-element" class="btn btn-primary loading">
-						<i class="fa fa-plus-sign"></i> {{t('form.button.element')}}
+						<i class="fa fa-plus-circle"></i> {{t('form.button.element')}}
 					</button>
 
 				</header>

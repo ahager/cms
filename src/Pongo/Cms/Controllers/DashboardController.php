@@ -1,7 +1,5 @@
 <?php namespace Pongo\Cms\Controllers;
 
-use Input, Redirect, Render;
-
 class DashboardController extends BaseController {
 
 	public function __construct()
@@ -13,7 +11,7 @@ class DashboardController extends BaseController {
 
 	public function showDashboard()
 	{
-		return Render::view('sections.dashboard.dashboard');
+		return \Render::view('sections.dashboard.dashboard');
 	}
 
 }

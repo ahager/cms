@@ -4,8 +4,6 @@ use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
 use Pongo\Cms\Support\Validators\Role\SettingsValidator as SettingsValidator;
 
-use Access, Alert, Input, Pongo, Redirect;
-
 class RoleController extends ApiController {
 
 	/**
@@ -26,7 +24,7 @@ class RoleController extends ApiController {
 
 		$this->role = $role;
 
-		$this->system_roles = Pongo::system('roles');
+		$this->system_roles = \Pongo::system('roles');
 	}
 
 	/**
@@ -36,7 +34,7 @@ class RoleController extends ApiController {
 	 */
 	public function createRole()
 	{
-		if(Input::has('create')) {
+		if(\Input::has('create')) {
 
 			$role_name = t('template.role.new');
 
@@ -76,39 +74,39 @@ class RoleController extends ApiController {
 	 */
 	public function roleSettingsDelete()
 	{
-		if(Input::has('role_id') and Input::has('name')) {
+		if(\Input::has('role_id') and \Input::has('name')) {
 
-			$role_id = Input::get('role_id');
+			$role_id = \Input::get('role_id');
 
-			$role_name = Input::get('name');
+			$role_name = \Input::get('name');
 
-			if( ! Access::isSystemRole($role_name)) {
+			if( ! \Access::isSystemRole($role_name)) {
 
 				$role = $this->role->getRole($role_id);
 
-				if(Input::has('force_delete')) {
+				if(\Input::has('force_delete')) {
 
 					$this->role->deleteRoleUsers($role);
 				}
 
 				$this->role->deleteRole($role);
 
-				Alert::success(t('alert.success.role_deleted'))->flash();
+				\Alert::success(t('alert.success.role_deleted'))->flash();
 
-				return Redirect::route('role.settings');
+				return \Redirect::route('role.settings');
 
 			} else {
 
-				Alert::error(t('alert.error.role_system'))->flash();
+				\Alert::error(t('alert.error.role_system'))->flash();
 
-				return Redirect::back();
+				return \Redirect::back();
 			}
 
 		} else {
 
-			Alert::error(t('alert.error.role_deleted'))->flash();
+			\Alert::error(t('alert.error.role_deleted'))->flash();
 
-			return Redirect::back();
+			return \Redirect::back();
 		}
 
 	}
@@ -120,9 +118,9 @@ class RoleController extends ApiController {
 	 */
 	public function roleSettingsSave()
 	{
-		if(Input::has('role_id')) {
+		if(\Input::has('role_id')) {
 
-			$input = Input::all();
+			$input = \Input::all();
 
 			$v = new SettingsValidator($input['role_id']);
 
@@ -133,7 +131,7 @@ class RoleController extends ApiController {
 				$role = $this->role->getRole($role_id);
 
 				// Author can edit the page
-				if(is_array($unauth = Access::grantEdit('access.roles')))
+				if(is_array($unauth = \Access::grantEdit('access.roles')))
 					return json_encode($unauth);
 				
 				$role->name = $name;
@@ -176,16 +174,16 @@ class RoleController extends ApiController {
 	 */
 	public function orderRoles()
 	{
-		if(Input::has('roles')) {
+		if(\Input::has('roles')) {
 
-			$mod_roles = json_decode(Input::get('roles'), true);
+			$mod_roles = json_decode(\Input::get('roles'), true);
 
 			foreach ($mod_roles as $key => $role_arr) {
 
 				$role = $this->role->getRole($role_arr['id']);
 
 				// Process non sys roles only
-				if( ! Access::isSystemRole($role->name)) {
+				if( ! \Access::isSystemRole($role->name)) {
 					
 					if(array_key_exists($key-1, $mod_roles)) {
 

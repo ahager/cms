@@ -3,8 +3,6 @@
 use Pongo\Cms\Support\Repositories\PageRepositoryInterface as Page;
 use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
-use Access, Pongo, Theme, Tool, Render, View;
-
 class PageController extends BaseController {
 
 	public function __construct(Page $page, Role $role)
@@ -24,20 +22,20 @@ class PageController extends BaseController {
 
 	public function layoutPage($page_id)
 	{
-		Pongo::viewShare('page_id', $page_id);
+		\Pongo::viewShare('page_id', $page_id);
 
 		$page = $this->page->getPage($page_id);
 
 		$n_elements = $this->page->countPageElements($page);
 
-		$view = Render::view('sections.page.layout');
+		$view = \Render::view('sections.page.layout');
 		$view['section']	= 'layout';
 		$view['page_id'] 	= $page_id;
 		$view['name'] 		= $page->name;
-		$view['templates']	= Theme::config('template');
-		$view['headers']	= Theme::config('header');
-		$view['layouts']	= Theme::config('layout');
-		$view['footers']	= Theme::config('footer');
+		$view['templates']	= \Theme::config('template');
+		$view['headers']	= \Theme::config('header');
+		$view['layouts']	= \Theme::config('layout');
+		$view['footers']	= \Theme::config('footer');
 
 		$view['n_elements'] = $n_elements;
 		$view['page_link'] 	= '';
@@ -57,13 +55,13 @@ class PageController extends BaseController {
 
 	public function filesPage($page_id)
 	{
-		Pongo::viewShare('page_id', $page_id);
+		\Pongo::viewShare('page_id', $page_id);
 
 		$page = $this->page->getPage($page_id);
 
 		$n_files = $this->page->countPageFiles($page);
 
-		$view = Render::view('sections.page.files');
+		$view = \Render::view('sections.page.files');
 		$view['section']	= 'files';
 		$view['page_id'] 	= $page_id;
 		$view['name'] 		= $page->name;
@@ -76,15 +74,15 @@ class PageController extends BaseController {
 
 	public function seoPage($page_id)
 	{
-		Pongo::viewShare('page_id', $page_id);
+		\Pongo::viewShare('page_id', $page_id);
 
 		$page = $this->page->getPage($page_id);
 
-		Pongo::viewShare('page_rels', array_fetch($this->page->getPageRels($page, true), 'id'));
+		\Pongo::viewShare('page_rels', array_fetch($this->page->getPageRels($page, true), 'id'));
 
 		$n_elements = $this->page->countPageElements($page);
 
-		$view = Render::view('sections.page.seo');
+		$view = \Render::view('sections.page.seo');
 		$view['section']	= 'seo';
 		$view['page_id'] 	= $page_id;
 		$view['name'] 		= $page->name;
@@ -106,27 +104,27 @@ class PageController extends BaseController {
 	 */
 	public function settingsPage($page_id)
 	{
-		Pongo::viewShare('page_id', $page_id);
+		\Pongo::viewShare('page_id', $page_id);
 
 		$page = $this->page->getPage($page_id);
 
-		Pongo::viewShare('page_rels', array_fetch($this->page->getPageRels($page, true), 'id'));
+		\Pongo::viewShare('page_rels', array_fetch($this->page->getPageRels($page, true), 'id'));
 
 		// Available roles
 		$roles = $this->role->orderBy('level', 'asc');
 
 		// Role admin array
-		$admin_roles = Access::adminRoles($roles);
+		$admin_roles = \Access::adminRoles($roles);
 
 		// Count element per page
 		$n_elements = $this->page->countPageElements($page);
 
-		$view = Render::view('sections.page.settings');
+		$view = \Render::view('sections.page.settings');
 		$view['section']		= 'settings';
 		$view['page_id'] 		= $page_id;
 		$view['name'] 			= $page->name;
-		$view['slug_last'] 		= Tool::slugSlice($page->slug, 1);
-		$view['slug_base'] 		= Tool::slugBack($page->slug, 1);
+		$view['slug_last'] 		= \Tool::slugSlice($page->slug, 1);
+		$view['slug_base'] 		= \Tool::slugBack($page->slug, 1);
 		$view['slug'] 			= $page->slug;
 		$view['is_home'] 		= $page->is_home;
 		$view['is_valid'] 		= $page->is_valid;
@@ -137,12 +135,12 @@ class PageController extends BaseController {
 		
 		$view['roles']			= $roles;
 		$view['admin_roles'] 	= $admin_roles;
-		$view['wrappers']		= Pongo::system('wrappers');
+		$view['wrappers']		= \Pongo::system('wrappers');
 		
 		$view['n_elements'] 	= $n_elements;
 		$view['page_link'] 	= '';
 
-		$view['languages']	= Pongo::settings('languages');
+		$view['languages']	= \Pongo::settings('languages');
 
 		return $view;
 	}

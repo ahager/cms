@@ -95,6 +95,17 @@ class Tool {
 	}
 
 	/**
+	 * Print class invalid if not valid
+	 * 
+	 * @param  string $is_valid
+	 * @return string
+	 */
+	public function isValid($is_valid)
+	{
+		return (!$is_valid) ? ' invalid' : '';
+	}
+
+	/**
 	 * Print icon checked/unchecked
 	 * 
 	 * @param  string $is_valid

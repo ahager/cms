@@ -2,8 +2,6 @@
 
 use Pongo\Cms\Support\Repositories\RoleRepositoryInterface as Role;
 
-use HTML, Pongo, Theme, Tool, Render;
-
 class RoleController extends BaseController {
 
 	/**
@@ -32,7 +30,7 @@ class RoleController extends BaseController {
 
 		$role = $this->role->getRole($role_id);
 
-		$view = Render::view('sections.role.settings');
+		$view = \Render::view('sections.role.settings');
 		$view['section'] 		= 'roles';
 		$view['role_id'] 		= $role_id;
 		$view['section_name'] 	= t('menu.roles');		
