@@ -17,7 +17,7 @@ class PageController extends BaseController {
 
 	public function deletedPage()
 	{
-		return Render::view('sections.page.deleted');
+		return \Render::view('sections.page.deleted');
 	}
 
 	public function layoutPage($page_id)
